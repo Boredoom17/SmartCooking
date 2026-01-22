@@ -1,55 +1,50 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+// App.tsx – final stable version
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
-import LoginScreen from './Screens/Login';
-import Header from './components/Header';
-import ContactForm from './Screens/ContactUsPage';
-import ContactConfirmation from './Screens/ContactUsConfirmationPage';
-import WavyHighlightFooter from './components/Footer';
-import EditProfile from './Screens/EditProfilePage';
-import ProfilePage from './Screens/ProfileDetails';
-import HomePage from './Screens/HomePage';
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+import LandingScreen from './Screens/LandingScreen';
+import MainTabs from './Screens/MainTabs';
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  const [hasSeenOnboarding, setHasSeenOnboarding] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AsyncStorage.getItem('hasSeenOnboarding')
+      .then(value => {
+        setHasSeenOnboarding(value === 'true');
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) {
+    return null; // or a simple splash screen
+  }
 
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {!hasSeenOnboarding && (
+            <Stack.Screen 
+              name="Landing" 
+              component={LandingScreen} 
+            />
+          )}
+          <Stack.Screen 
+            name="Main" 
+            component={MainTabs} 
+            options={{ gestureEnabled: false }} // optional: disable swipe-back to landing
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      {/* <ContactConfirmation />
-       */}
-      <Header title="Home" />
-
-      <HomePage />
-      <WavyHighlightFooter />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;

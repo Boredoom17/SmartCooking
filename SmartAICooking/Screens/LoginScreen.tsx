@@ -10,7 +10,6 @@ import {
   SafeAreaView,
   Alert,
 } from 'react-native';
-import Header from '../components/Header';
 // import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const LoginScreen: React.FC = () => {
@@ -28,7 +27,6 @@ const LoginScreen: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Login" />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.innerContainer}
