@@ -43,6 +43,7 @@ export default function App() {
             component={MainTabs} 
             options={{ gestureEnabled: false }} // optional: disable swipe-back to landing
           />
+          
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

@@ -28,7 +28,7 @@ export default function LandingScreen() {
 
         <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
           <Text style={styles.buttonText}>Get Started</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>   
       </View>
 
       {/* Your floating items – already good */}
