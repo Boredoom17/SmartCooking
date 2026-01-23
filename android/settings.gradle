@@ -1,0 +1,20 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+    includeBuild("../node_modules/@react-native/gradle-plugin")
+}
+
+plugins {
+    id("com.facebook.react.settings")
+}
+
+rootProject.name = "SmartAICooking"
+
+extensions.configure(com.facebook.react.ReactSettingsExtension.class) { settings ->
+    settings.autolinkLibrariesFromCommand()
+}
+
+include ':app'

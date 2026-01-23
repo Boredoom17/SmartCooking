@@ -1,0 +1,811 @@
+Initialized native services in: C:\Users\aadar\.gradle\native
+Initialized jansi services in: C:\Users\aadar\.gradle\native
+Received JVM installation metadata from 'C:\Program Files\Java\jdk-17': {JAVA_HOME=C:\Program Files\Java\jdk-17, JAVA_VERSION=17.0.12, JAVA_VENDOR=Oracle Corporation, RUNTIME_NAME=Java(TM) SE Runtime Environment, RUNTIME_VERSION=17.0.12+8-LTS-286, VM_NAME=Java HotSpot(TM) 64-Bit Server VM, VM_VERSION=17.0.12+8-LTS-286, VM_VENDOR=Oracle Corporation, OS_ARCH=amd64}
+Found daemon DaemonInfo{pid=6292, address=[ba80e52e-2906-4941-8c90-40a62a3a560c port:57738, addresses:[/127.0.0.1]], state=Idle, lastBusy=1716872062780, context=DefaultDaemonContext[uid=3433fef7-6c24-4319-8716-69d59118b047,javaHome=C:\Program Files\Android\Android Studio\jbr,daemonRegistryDir=C:\Users\aadar\.gradle\daemon,pid=6292,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xmx2048m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+Java home is different.
+Wanted: DefaultDaemonContext[uid=null,javaHome=C:\Program Files\Java\jdk-17,daemonRegistryDir=C:\Users\aadar\.gradle\daemon,pid=5064,idleTimeout=null,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=-XX:MaxMetaspaceSize=512m,--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xmx2048m,-Dfile.encoding=windows-1252,-Duser.country=US,-Duser.language=en,-Duser.variant]
+Actual: DefaultDaemonContext[uid=3433fef7-6c24-4319-8716-69d59118b047,javaHome=C:\Program Files\Android\Android Studio\jbr,daemonRegistryDir=C:\Users\aadar\.gradle\daemon,pid=6292,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xmx2048m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+Found daemon DaemonInfo{pid=224, address=[ea9813ed-aecd-4b7b-a4d9-b4f085117db9 port:55459, addresses:[/127.0.0.1]], state=Idle, lastBusy=1716978902021, context=DefaultDaemonContext[uid=cdb04219-7cb9-4dab-bdda-91b9f3b29ad4,javaHome=C:\Program Files\Microsoft\jdk-17.0.11.9-hotspot,daemonRegistryDir=C:\Users\aadar\.gradle\daemon,pid=224,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=-XX:MaxMetaspaceSize=512m,--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xmx2048m,-Dfile.encoding=windows-1252,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+Java home is different.
+Wanted: DefaultDaemonContext[uid=null,javaHome=C:\Program Files\Java\jdk-17,daemonRegistryDir=C:\Users\aadar\.gradle\daemon,pid=5064,idleTimeout=null,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=-XX:MaxMetaspaceSize=512m,--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xmx2048m,-Dfile.encoding=windows-1252,-Duser.country=US,-Duser.language=en,-Duser.variant]
+Actual: DefaultDaemonContext[uid=cdb04219-7cb9-4dab-bdda-91b9f3b29ad4,javaHome=C:\Program Files\Microsoft\jdk-17.0.11.9-hotspot,daemonRegistryDir=C:\Users\aadar\.gradle\daemon,pid=224,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,daemonOpts=-XX:MaxMetaspaceSize=512m,--add-opens=java.base/java.util=ALL-UNNAMED,--add-opens=java.base/java.lang=ALL-UNNAMED,--add-opens=java.base/java.lang.invoke=ALL-UNNAMED,--add-opens=java.prefs/java.util.prefs=ALL-UNNAMED,--add-opens=java.base/java.nio.charset=ALL-UNNAMED,--add-opens=java.base/java.net=ALL-UNNAMED,--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED,-Xmx2048m,-Dfile.encoding=windows-1252,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+The client will now receive all logging from the daemon (pid: 15576). The daemon log file: C:\Users\aadar\.gradle\daemon\8.6\daemon-15576.out.log
+Starting 15th build in daemon [uptime: 1 hrs 10 mins 28.881 secs, performance: 99%, GC rate: 0.00/s, heap usage: 3% of 2 GiB, non-heap usage: 38% of 512 MiB]
+Using 4 worker leases.
+Now considering [D:\CODS\APP\SmartCooking\SmartAICooking\android, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Now considering [D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin, D:\CODS\APP\SmartCooking\SmartAICooking\android] as hierarchies to watch
+Transforming foojay-resolver-0.5.0.jar (org.gradle.toolchains:foojay-resolver:0.5.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gson-2.9.1.jar (com.google.code.gson:gson:2.9.1) with ExternalDependencyInstrumentingArtifactTransform
+
+> Configure project :gradle-plugin
+Evaluating project ':gradle-plugin' using build file 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\build.gradle.kts'.
+Transforming plugin-0.22.0.jar (com.ncorti.ktfmt.gradle:plugin:0.22.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-stdlib-1.9.20.jar (org.jetbrains.kotlin:kotlin-stdlib:1.9.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming annotations-13.0.jar (org.jetbrains:annotations:13.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-api-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming fus-statistics-gradle-plugin-2.1.20-gradle85.jar (org.jetbrains.kotlin:fus-statistics-gradle-plugin:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-model-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-api-2.1.20-gradle85.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-idea-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-2.1.20-gradle85.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-klib-commonizer-api-2.1.20.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-idea-proto-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea-proto:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-klib-metadata-2.1.20.jar (org.jetbrains.kotlin:kotlin-util-klib-metadata:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming java-diff-utils-4.15.jar (io.github.java-diff-utils:java-diff-utils:4.15) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-build-statistics-2.1.20.jar (org.jetbrains.kotlin:kotlin-build-statistics:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-annotations-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-annotations:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-compiler-runner-2.1.20.jar (org.jetbrains.kotlin:kotlin-compiler-runner:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-tooling-core-2.1.20.jar (org.jetbrains.kotlin:kotlin-tooling-core:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-native-utils-2.1.20.jar (org.jetbrains.kotlin:kotlin-native-utils:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gson-2.11.0.jar (com.google.code.gson:gson:2.11.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-build-tools-api-2.1.20.jar (org.jetbrains.kotlin:kotlin-build-tools-api:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-daemon-client-2.1.20.jar (org.jetbrains.kotlin:kotlin-daemon-client:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlinx-coroutines-core-jvm-1.8.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.8.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-io-2.1.20.jar (org.jetbrains.kotlin:kotlin-util-io:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-klib-2.1.20.jar (org.jetbrains.kotlin:kotlin-util-klib:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming error_prone_annotations-2.27.0.jar (com.google.errorprone:error_prone_annotations:2.27.0) with ExternalDependencyInstrumentingArtifactTransform
+
+> Configure project :gradle-plugin:react-native-gradle-plugin
+Evaluating project ':gradle-plugin:react-native-gradle-plugin' using build file 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\build.gradle.kts'.
+Using Kotlin Gradle Plugin gradle85 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+
+> Configure project :gradle-plugin:settings-plugin
+Evaluating project ':gradle-plugin:settings-plugin' using build file 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\settings-plugin\build.gradle.kts'.
+Using Kotlin Gradle Plugin gradle85 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+
+> Configure project :gradle-plugin:shared
+Evaluating project ':gradle-plugin:shared' using build file 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\shared\build.gradle.kts'.
+Using Kotlin Gradle Plugin gradle85 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+
+> Configure project :gradle-plugin:shared-testutil
+Evaluating project ':gradle-plugin:shared-testutil' using build file 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\shared-testutil\build.gradle.kts'.
+Using Kotlin Gradle Plugin gradle85 variant
+kotlin scripting plugin: created the scripting discovery configuration: kotlinScriptDef
+kotlin scripting plugin: created the scripting discovery configuration: testKotlinScriptDef
+Directory 'C:\Program Files\Java\jre-1.8' (Windows Registry) used for java installations does not exist
+Directory 'C:\Program Files\Java\jre-1.8' (Windows Registry) used for java installations does not exist
+Resolve mutations for :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors (Thread[included builds,5,main]) started.
+:gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Build bbaeec0c-d138-4ea2-8d03-4f80f6c49721 is started
+Resolve mutations for :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors (Thread[included builds,5,main]) started.
+:gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Resolve mutations for :gradle-plugin:shared:compileKotlin (Thread[included builds,5,main]) started.
+:gradle-plugin:shared:compileKotlin (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:shared:compileKotlin UP-TO-DATE
+Transforming kotlin-stdlib-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming gson-2.8.9.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming guava-31.0.1-jre.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming annotations-13.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming failureaccess-1.0.1.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming jsr305-3.0.2.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming checker-qual-3.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming error_prone_annotations-2.7.1.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming j2objc-annotations-1.3.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Caching disabled for task ':gradle-plugin:shared:compileKotlin' because:
+  Build cache is disabled
+Skipping task ':gradle-plugin:shared:compileKotlin' as it is up-to-date.
+Resolve mutations for :gradle-plugin:shared:compileJava (Thread[included builds,5,main]) started.
+:gradle-plugin:shared:compileJava (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+Skipping task ':gradle-plugin:shared:compileJava' as it has no source files and no previous output files.
+Resolve mutations for :gradle-plugin:shared:processResources (Thread[included builds,5,main]) started.
+:gradle-plugin:shared:processResources (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+Skipping task ':gradle-plugin:shared:processResources' as it has no source files and no previous output files.
+Resolve mutations for :gradle-plugin:shared:classes (Thread[included builds,5,main]) started.
+:gradle-plugin:shared:classes (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+Skipping task ':gradle-plugin:shared:classes' as it has no actions.
+Resolve mutations for :gradle-plugin:shared:jar (Thread[included builds,5,main]) started.
+:gradle-plugin:shared:jar (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:shared:jar UP-TO-DATE
+Caching disabled for task ':gradle-plugin:shared:jar' because:
+  Build cache is disabled
+Skipping task ':gradle-plugin:shared:jar' as it is up-to-date.
+work action resolve shared.jar (project :gradle-plugin:shared) (Thread[included builds,5,main]) started.
+Resolve mutations for :gradle-plugin:settings-plugin:compileKotlin (Thread[included builds,5,main]) started.
+:gradle-plugin:settings-plugin:compileKotlin (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:settings-plugin:compileKotlin UP-TO-DATE
+Transforming gradle-api-8.6.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-ant-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-astbuilder-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-console-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-datetime-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-dateutil-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-groovydoc-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-json-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-nio-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-sql-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-templates-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-test-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-xml-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming javaparser-core-3.17.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-1.9.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-reflect-1.9.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming gradle-installation-beacon-8.6.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming shared.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming gson-2.8.9.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming guava-31.0.1-jre.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming javapoet-1.13.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming annotations-13.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming failureaccess-1.0.1.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming jsr305-3.0.2.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming checker-qual-3.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming error_prone_annotations-2.7.1.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming j2objc-annotations-1.3.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Caching disabled for task ':gradle-plugin:settings-plugin:compileKotlin' because:
+  Build cache is disabled
+Skipping task ':gradle-plugin:settings-plugin:compileKotlin' as it is up-to-date.
+Resolve mutations for :gradle-plugin:settings-plugin:compileJava (Thread[Execution worker,5,main]) started.
+:gradle-plugin:settings-plugin:compileJava (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+Skipping task ':gradle-plugin:settings-plugin:compileJava' as it has no source files and no previous output files.
+Resolve mutations for :gradle-plugin:settings-plugin:pluginDescriptors (Thread[Execution worker Thread 2,5,main]) started.
+:gradle-plugin:settings-plugin:pluginDescriptors (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:settings-plugin:pluginDescriptors UP-TO-DATE
+Caching disabled for task ':gradle-plugin:settings-plugin:pluginDescriptors' because:
+  Build cache is disabled
+Skipping task ':gradle-plugin:settings-plugin:pluginDescriptors' as it is up-to-date.
+Resolve mutations for :gradle-plugin:settings-plugin:processResources (Thread[included builds,5,main]) started.
+:gradle-plugin:settings-plugin:processResources (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:settings-plugin:processResources UP-TO-DATE
+Caching disabled for task ':gradle-plugin:settings-plugin:processResources' because:
+  Build cache is disabled
+Skipping task ':gradle-plugin:settings-plugin:processResources' as it is up-to-date.
+Resolve mutations for :gradle-plugin:settings-plugin:classes (Thread[included builds,5,main]) started.
+:gradle-plugin:settings-plugin:classes (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :gradle-plugin:settings-plugin:classes UP-TO-DATE
+Skipping task ':gradle-plugin:settings-plugin:classes' as it has no actions.
+Resolve mutations for :gradle-plugin:settings-plugin:jar (Thread[included builds,5,main]) started.
+:gradle-plugin:settings-plugin:jar (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:settings-plugin:jar UP-TO-DATE
+Caching disabled for task ':gradle-plugin:settings-plugin:jar' because:
+  Build cache is disabled
+Skipping task ':gradle-plugin:settings-plugin:jar' as it is up-to-date.
+Transforming kotlin-stdlib-2.1.20.jar (org.jetbrains.kotlin:kotlin-stdlib:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gson-2.8.9.jar (com.google.code.gson:gson:2.8.9) with ExternalDependencyInstrumentingArtifactTransform
+Transforming guava-31.0.1-jre.jar (com.google.guava:guava:31.0.1-jre) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javapoet-1.13.0.jar (com.squareup:javapoet:1.13.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming annotations-13.0.jar (org.jetbrains:annotations:13.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming failureaccess-1.0.1.jar (com.google.guava:failureaccess:1.0.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming checker-qual-3.12.0.jar (org.checkerframework:checker-qual:3.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming error_prone_annotations-2.7.1.jar (com.google.errorprone:error_prone_annotations:2.7.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming j2objc-annotations-1.3.jar (com.google.j2objc:j2objc-annotations:1.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming settings-plugin.jar (project :gradle-plugin:settings-plugin) with ProjectDependencyInstrumentingArtifactTransform
+Transforming shared.jar (project :gradle-plugin:shared) with ProjectDependencyInstrumentingArtifactTransform
+Settings evaluated using settings file 'D:\CODS\APP\SmartCooking\SmartAICooking\android\settings.gradle'.
+Projects loaded. Root project using build file 'D:\CODS\APP\SmartCooking\SmartAICooking\android\build.gradle'.
+Included projects: [root project 'SmartAICooking', project ':app']
+Resolve mutations for :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 2,5,main]) started.
+:gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Skipping task ':gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors' as task onlyIf 'errorDiagnostics are present' is false.
+Resolve mutations for :gradle-plugin:react-native-gradle-plugin:compileKotlin (Thread[Execution worker Thread 2,5,main]) started.
+:gradle-plugin:react-native-gradle-plugin:compileKotlin (Thread[Execution worker Thread 2,5,main]) started.
+
+> Configure project :
+Evaluating root project 'SmartAICooking' using build file 'D:\CODS\APP\SmartCooking\SmartAICooking\android\build.gradle'.
+Compiling build file 'D:\CODS\APP\SmartCooking\SmartAICooking\android\build.gradle' using SubsetScriptTransformer.
+Downloading https://dl.google.com/dl/android/maven2/com/android/application/com.android.application.gradle.plugin/8.5.2/com.android.application.gradle.plugin-8.5.2.pom to C:\Users\aadar\.gradle\.tmp\gradle_download8484714164261194764bin
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/android/application/com.android.application.gradle.plugin/8.5.2/com.android.application.gradle.plugin-8.5.2.jar]
+Downloading https://dl.google.com/dl/android/maven2/com/android/library/com.android.library.gradle.plugin/8.5.2/com.android.library.gradle.plugin-8.5.2.pom to C:\Users\aadar\.gradle\.tmp\gradle_download2001043000581599520bin
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/android/library/com.android.library.gradle.plugin/8.5.2/com.android.library.gradle.plugin-8.5.2.jar]
+Ignoring listeners of task graph ready event, as this build (:gradle-plugin) has already executed work.
+Resolve mutations for :gradle-plugin:react-native-gradle-plugin:pluginDescriptors (Thread[included builds,5,main]) started.
+:gradle-plugin:react-native-gradle-plugin:pluginDescriptors (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors
+Caching disabled for task ':gradle-plugin:react-native-gradle-plugin:pluginDescriptors' because:
+  Build cache is disabled
+Task ':gradle-plugin:react-native-gradle-plugin:pluginDescriptors' is not up-to-date because:
+  No history is available.
+
+> Task :gradle-plugin:react-native-gradle-plugin:processResources
+Caching disabled for task ':gradle-plugin:react-native-gradle-plugin:processResources' because:
+  Build cache is disabled
+Task ':gradle-plugin:react-native-gradle-plugin:processResources' is not up-to-date because:
+  No history is available.
+file or directory 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\resources', not found
+
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin/2.1.20/kotlin-gradle-plugin-2.1.20.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.12.0/gradle-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle\8.12.0\36e0846caa9c29a74622b3fd5faf4c68c54f808b\gradle-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.12.0/gradle-8.12.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle\8.12.0\1e25d510b3465d6ccb8bb01354bb110c3accd2da\gradle-8.12.0.module]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-gradle-plugins-bom/2.1.20/kotlin-gradle-plugins-bom-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin-model/2.1.20/kotlin-gradle-plugin-model-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/fus-statistics-gradle-plugin/2.1.20/fus-statistics-gradle-plugin-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin-api/2.1.20/kotlin-gradle-plugin-api-2.1.20.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-model/8.12.0/builder-model-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder-model\8.12.0\78f6b6066dd63e100b23b2eef4ccd397a6224484\builder-model-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-api/8.12.0/gradle-api-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle-api\8.12.0\7eb6b79fc0c1080d752507fc5bb61cb6d675bad3\gradle-api-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder/8.12.0/builder-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder\8.12.0\87b57efaada8bdab48641cce658ae5f621cac6f7\builder-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-model/8.12.0/builder-model-8.12.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder-model\8.12.0\fa4fb1044e4a837bf2db9c13fe0a3cae004390bd\builder-model-8.12.0.module]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-api/8.12.0/gradle-api-8.12.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle-api\8.12.0\18fbccbc691f27baf208933eb3844612ff29e7d6\gradle-api-8.12.0.module]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder/8.12.0/builder-8.12.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder\8.12.0\4be901dcdca37482e8e4dcf39600ee0c02989ff7\builder-8.12.0.module]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-tooling-core/2.1.20/kotlin-tooling-core-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin-annotations/2.1.20/kotlin-gradle-plugin-annotations-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-native-utils/2.1.20/kotlin-native-utils-2.1.20.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/apksig/8.12.0/apksig-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\apksig\8.12.0\8b7c14526c7427195fe833a86abda023c1460c4a\apksig-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/apkzlib/8.12.0/apkzlib-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\apkzlib\8.12.0\977d79f47529c739427856c08276e7900ea00b1\apkzlib-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/zipflinger/8.12.0/zipflinger-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android\zipflinger\8.12.0\8ec8c4a890dd89d67486a7153f82b3237cd01aef\zipflinger-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/manifest-merger/31.12.0/manifest-merger-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\manifest-merger\31.12.0\24a26ad6583594bf41546ca725c2ee6b3601fa75\manifest-merger-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/manifest-merger/31.12.0/manifest-merger-31.12.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\manifest-merger\31.12.0\d7d9adabc457f8d5fd8b02f4c3ab1d2729e3d4f3\manifest-merger-31.12.0.module]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm\9.7.1\381a4b6892969305d88ee13c53e88eabff82d382\asm-9.7.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-util-io/2.1.20/kotlin-util-io-2.1.20.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-model/8.12.0/builder-model-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder-model\8.12.0\6c79ace77224deab4141fd8ac4d1ffe947ce2b65\builder-model-8.12.0.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle/8.12.0/gradle-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle\8.12.0\735c3adb072a74e5822924151f2c5bfbb090b18c\gradle-8.12.0.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder/8.12.0/builder-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder\8.12.0\e9309f368b4153b13bfcfe4da1036141f4db8cd\builder-8.12.0.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-api/8.12.0/gradle-api-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle-api\8.12.0\b667b6e6e48340810e694fa1208faf1eb8005873\gradle-api-8.12.0.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/manifest-merger/31.12.0/manifest-merger-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\manifest-merger\31.12.0\cd6b3a9db88c5f84a888b634ab174baff4b6fb90\manifest-merger-31.12.0.jar]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm\9.7.1\f0ed132a49244b042cd0e15702ab9f2ce3cc8436\asm-9.7.1.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/zipflinger/8.12.0/zipflinger-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android\zipflinger\8.12.0\3a3b1786c331db72b9610eb1f68f0ec1ec9a1f\zipflinger-8.12.0.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/apksig/8.12.0/apksig-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\apksig\8.12.0\f005788487574c7d6ba23dea63bf8cb3a4f164a6\apksig-8.12.0.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/apkzlib/8.12.0/apkzlib-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\apkzlib\8.12.0\ea2327cd7a67c0fc9a4d26f035b922dff11c7219\apkzlib-8.12.0.jar]
+Transforming gradle-api-8.6.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-ant-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-astbuilder-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-console-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-datetime-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-dateutil-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-groovydoc-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-json-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-nio-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-sql-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-templates-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-test-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming groovy-xml-3.0.17.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming javaparser-core-3.17.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-1.9.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-reflect-1.9.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming gradle-installation-beacon-8.6.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming shared.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-stdlib-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-gradle-plugin-model-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming fus-statistics-gradle-plugin-2.1.20-gradle85.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-gradle-plugin-api-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-gradle-plugin-api-2.1.20-gradle85.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-gradle-plugin-2.1.20-gradle85.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming gradle-8.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-gradle-plugin-model\2.1.20\fa71fac34c72b1d65385f2141e6eb9a87d8f443f\kotlin-gradle-plugin-model-2.1.20.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-gradle-plugin-api\2.1.20\e9e45fb71c59d76e30ed774235e76c710b61ae64\kotlin-gradle-plugin-api-2.1.20.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-gradle-plugin-api\2.1.20\e9e45fb71c59d76e30ed774235e76c710b61ae64\kotlin-gradle-plugin-api-2.1.20-gradle85.jar because:
+  Build cache is disabled
+Transforming gson-2.8.9.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming guava-31.0.1-jre.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming javapoet-1.13.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming annotations-13.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming builder-8.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\fus-statistics-gradle-plugin\2.1.20\d9276c17544f4c4eeaab2ac3e0a325e0d8e202ea\fus-statistics-gradle-plugin-2.1.20-gradle85.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-gradle-plugin\2.1.20\f2928b44391e91d349790c08ce4152888e4abeaf\kotlin-gradle-plugin-2.1.20-gradle85.jar because:
+  Build cache is disabled
+Transforming builder-model-8.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming gradle-api-8.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming failureaccess-1.0.1.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming jsr305-3.0.2.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming checker-qual-3.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming error_prone_annotations-2.7.1.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming j2objc-annotations-1.3.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-gradle-plugin-annotations-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-native-utils-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-tooling-core-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-build-tools-api-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming manifest-merger-31.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming zipflinger-8.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming apksig-8.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming apkzlib-8.12.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming javawriter-2.5.0.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming asm-9.7.1.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Transforming kotlin-util-io-2.1.20.jar with BuildToolsApiClasspathEntrySnapshotTransform
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder-model\8.12.0\6c79ace77224deab4141fd8ac4d1ffe947ce2b65\builder-model-8.12.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle-api\8.12.0\b667b6e6e48340810e694fa1208faf1eb8005873\gradle-api-8.12.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-gradle-plugin-annotations\2.1.20\61dd4d2a6f587fa89dbcbb7dbd5acc1a1148fd7f\kotlin-gradle-plugin-annotations-2.1.20.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-native-utils\2.1.20\e09c9c87435b5bc1c168565b30d0235fddb5b26b\kotlin-native-utils-2.1.20.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-tooling-core\2.1.20\f97205e762c89f284965a6044c122a3ca5c34128\kotlin-tooling-core-2.1.20.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle\8.12.0\735c3adb072a74e5822924151f2c5bfbb090b18c\gradle-8.12.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-build-tools-api\2.1.20\2b93b2f25cb547decd609bfa1b07c5897c1dc483\kotlin-build-tools-api-2.1.20.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\manifest-merger\31.12.0\cd6b3a9db88c5f84a888b634ab174baff4b6fb90\manifest-merger-31.12.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android\zipflinger\8.12.0\3a3b1786c331db72b9610eb1f68f0ec1ec9a1f\zipflinger-8.12.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\apksig\8.12.0\f005788487574c7d6ba23dea63bf8cb3a4f164a6\apksig-8.12.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder\8.12.0\e9309f368b4153b13bfcfe4da1036141f4db8cd\builder-8.12.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\apkzlib\8.12.0\ea2327cd7a67c0fc9a4d26f035b922dff11c7219\apkzlib-8.12.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.squareup\javawriter\2.5.0\81241ff7078ef14f42ea2a8995fa09c096256e6b\javawriter-2.5.0.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm\9.7.1\f0ed132a49244b042cd0e15702ab9f2ce3cc8436\asm-9.7.1.jar because:
+  Build cache is disabled
+Caching disabled for BuildToolsApiClasspathEntrySnapshotTransform: C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-util-io\2.1.20\9777b81bdf2a888edfe856654426217e0ac33cf2\kotlin-util-io-2.1.20.jar because:
+  Build cache is disabled
+Caching disabled for task ':gradle-plugin:react-native-gradle-plugin:compileKotlin' because:
+  Build cache is disabled
+Task ':gradle-plugin:react-native-gradle-plugin:compileKotlin' is not up-to-date because:
+  No history is available.
+The input changes require a full rebuild for incremental task ':gradle-plugin:react-native-gradle-plugin:compileKotlin'.
+file or directory 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\java', not found
+file or directory 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\java', not found
+file or directory 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\java', not found
+file or directory 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\java', not found
+Kotlin source files: D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\internal\PrivateReactExtension.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\ReactExtension.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\ReactPlugin.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\ReactRootProjectPlugin.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\TaskConfiguration.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\BundleHermesCTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\GenerateAutolinkingNewArchitecturesFileTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\GenerateCodegenArtifactsTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\GenerateCodegenSchemaTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\GenerateEntryPointTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\GeneratePackageListTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\internal\BuildCodegenCLITask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\internal\CustomExecTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\internal\PrepareBoostTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\internal\PrepareGflagsTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\internal\PrepareGlogTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\internal\PreparePrefabHeadersTask.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\tasks\internal\utils\PrefabPreprocessingEntry.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\AgpConfiguratorUtils.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\BackwardCompatUtils.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\DependencyUtils.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\FileUtils.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\JdkConfiguratorUtils.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\NdkConfiguratorUtils.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\PathUtils.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\ProjectUtils.kt, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\src\main\kotlin\com\facebook\react\utils\PropertyUtils.kt
+Java source files: 
+Script source files: 
+Script file extensions: 
+Using Kotlin/JVM incremental compilation
+[KOTLIN] Kotlin compilation 'jdkHome' argument: C:\Program Files\Java\jdk-17
+Options for KOTLIN DAEMON: IncrementalCompilationOptions(super=CompilationOptions(compilerMode=INCREMENTAL_COMPILER, targetPlatform=JVM, reportCategories=[0, 3], reportSeverity=2, requestedCompilationResults=[0], kotlinScriptExtensions=[]), sourceChanges=org.jetbrains.kotlin.buildtools.api.SourcesChanges$Unknown@65509b0, classpathChanges=NotAvailableForNonIncrementalRun, workingDir=D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\build\kotlin\compileKotlin\cacheable, multiModuleICSettings=MultiModuleICSettings(buildHistoryFile=D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\build\kotlin\compileKotlin\local-state\build-history.bin, useModuleDetection=false), usePreciseJavaTracking=true, icFeatures=IncrementalCompilationFeatures(withAbiSnapshot=false, preciseCompilationResultsBackup=true, keepIncrementalCompilationCachesInMemory=true, enableUnsafeIncrementalCompilationForMultiplatform=false, enableMonotonousIncrementalCompileSetExpansion=true), outputFiles=[D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\build\classes\kotlin\main, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\build\kotlin\compileKotlin\cacheable, D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\build\kotlin\compileKotlin\local-state])
+Finished executing kotlin compiler using DAEMON strategy
+Resolve mutations for :gradle-plugin:react-native-gradle-plugin:compileJava (Thread[Execution worker Thread 2,5,main]) started.
+:gradle-plugin:react-native-gradle-plugin:compileJava (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+Skipping task ':gradle-plugin:react-native-gradle-plugin:compileJava' as it has no source files and no previous output files.
+Resolve mutations for :gradle-plugin:react-native-gradle-plugin:classes (Thread[Execution worker Thread 2,5,main]) started.
+:gradle-plugin:react-native-gradle-plugin:classes (Thread[Execution worker Thread 2,5,main]) started.
+
+> Task :gradle-plugin:react-native-gradle-plugin:classes
+Skipping task ':gradle-plugin:react-native-gradle-plugin:classes' as it has no actions.
+Resolve mutations for :gradle-plugin:react-native-gradle-plugin:jar (Thread[Execution worker Thread 2,5,main]) started.
+:gradle-plugin:react-native-gradle-plugin:jar (Thread[Execution worker Thread 2,5,main]) started.
+
+> Configure project :
+Resolve mutations for :gradle-plugin:react-native-gradle-plugin:processResources (Thread[included builds,5,main]) started.
+:gradle-plugin:react-native-gradle-plugin:processResources (Thread[included builds,5,main]) started.
+
+> Task :gradle-plugin:react-native-gradle-plugin:jar
+Caching disabled for task ':gradle-plugin:react-native-gradle-plugin:jar' because:
+  Build cache is disabled
+Task ':gradle-plugin:react-native-gradle-plugin:jar' is not up-to-date because:
+  No history is available.
+file or directory 'D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\build\classes\java\main', not found
+
+> Configure project :
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/code/gson/gson/2.11.0/gson-2.11.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/sdklib/31.12.0/sdklib-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\sdklib\31.12.0\f44e85cc6515ac0ecd1a5e2880d8eee2f0633b87\sdklib-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/sdk-common/31.12.0/sdk-common-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\sdk-common\31.12.0\20248dd22410623358371bf9371f3fb1a197b6f7\sdk-common-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/repository/31.12.0/repository-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\repository\31.12.0\83f3a5423c2bc9a2218c18518f69bab612046002\repository-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-settings-api/8.12.0/gradle-settings-api-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle-settings-api\8.12.0\9092094d1057566c7db164b1dcab91abf5c78236\gradle-settings-api-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/ddms/ddmlib/31.12.0/ddmlib-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.ddms\ddmlib\31.12.0\99e622f01f5b294788c0c0986b86922a858b4a06\ddmlib-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/aaptcompiler/8.12.0/aaptcompiler-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\aaptcompiler\8.12.0\b5fc24d2f3f922ece1cfb5e86478881a7b7de6f5\aaptcompiler-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.12.0-13700139/aapt2-proto-8.12.0-13700139.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\aapt2-proto\8.12.0-13700139\84afc845d19c8f06deaa348a7b2870a6d2bcd8c\aapt2-proto-8.12.0-13700139.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-settings-api/8.12.0/gradle-settings-api-8.12.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle-settings-api\8.12.0\82ad811f3220f12555b5b96127d8a20d5d3b8f2a\gradle-settings-api-8.12.0.module]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/crash/31.12.0/crash-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.analytics-library\crash\31.12.0\1cc29c3ac9112effdabfc51f6e03c7f5910bc58b\crash-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/aaptcompiler/8.12.0/aaptcompiler-8.12.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\aaptcompiler\8.12.0\b2dbfa549261fb0224f8154d5cf2c45b003bb675\aaptcompiler-8.12.0.module]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.12.0-13700139/aapt2-proto-8.12.0-13700139.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\aapt2-proto\8.12.0-13700139\fe1767304c1c7760681d2f17a3772ff748c4c81a\aapt2-proto-8.12.0-13700139.module]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/shared/31.12.0/shared-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.analytics-library\shared\31.12.0\9856418e9ea6b1472983361f1fc2bdfd4ca0375f\shared-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-compiler-common/8.12.0/databinding-compiler-common-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\androidx.databinding\databinding-compiler-common\8.12.0\a1573e21a32180e6717b2c1b4de774d6cd5c2484\databinding-compiler-common-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-typedef-remover/31.12.0/lint-typedef-remover-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.lint\lint-typedef-remover\31.12.0\ab820b9ae220e4dce736283fda4f60710d4137ef\lint-typedef-remover-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-model/31.12.0/lint-model-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.lint\lint-model\31.12.0\391b1e4e3d53c13440556b4c265a69e849d9a476\lint-model-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-common/8.12.0/databinding-common-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\androidx.databinding\databinding-common\8.12.0\4862687ab84aaffc0e1a9e6a87cd0a23392c1d4a\databinding-common-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/databinding/baseLibrary/8.12.0/baseLibrary-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.databinding\baseLibrary\8.12.0\60b0bf956bcbf534ba537a093145c3ecdf4bd589\baseLibrary-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-test-api/8.12.0/builder-test-api-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder-test-api\8.12.0\d935cc93bad9ff5bebbd44395bc0a676dcb26ae4\builder-test-api-8.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/layoutlib/layoutlib-api/31.12.0/layoutlib-api-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.layoutlib\layoutlib-api\31.12.0\4c603a3c50424fe6bc658f8b3c58f2a4716049ae\layoutlib-api-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-ddmlib-proto/31.12.0/android-device-provider-ddmlib-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-device-provider-ddmlib-proto\31.12.0\e47ac0fff5fb79ea165bec2a2d07a3357ddd00e9\android-device-provider-ddmlib-proto-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-test-api/8.12.0/builder-test-api-8.12.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder-test-api\8.12.0\43f772d7ed875f759b6feffc44586ee20b999359\builder-test-api-8.12.0.module]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-additional-test-output-proto/31.12.0/android-test-plugin-host-additional-test-output-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-additional-test-output-proto\31.12.0\c5341299c8ec395deaa4f29d3f4a1a8414acb08b\android-test-plugin-host-additional-test-output-proto-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-profile-proto/31.12.0/android-device-provider-profile-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-device-provider-profile-proto\31.12.0\786c4b90cb6a623f344c69c946208a8ee8bb12e9\android-device-provider-profile-proto-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-gradle-proto/31.12.0/android-device-provider-gradle-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-device-provider-gradle-proto\31.12.0\a0fac058ba8cbf2cfa26e00e957685ac4bb160f5\android-device-provider-gradle-proto-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-logcat-proto/31.12.0/android-test-plugin-host-logcat-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-logcat-proto\31.12.0\cc2fdcf016ddbdd150e266015d7f95dd744e108f\android-test-plugin-host-logcat-proto-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-emulator-control-proto/31.12.0/android-test-plugin-host-emulator-control-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-emulator-control-proto\31.12.0\1e55b13ee2899e9261795e030ba6da4d40f77a4b\android-test-plugin-host-emulator-control-proto-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-apk-installer-proto/31.12.0/android-test-plugin-host-apk-installer-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-apk-installer-proto\31.12.0\919a8dc8b1686781a695b225d3f836f8d18b8eed\android-test-plugin-host-apk-installer-proto-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-coverage-proto/31.12.0/android-test-plugin-host-coverage-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-coverage-proto\31.12.0\885d023d15ea79a3e58e1aa9c39eaabd0621819\android-test-plugin-host-coverage-proto-31.12.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/commons-io/commons-io/2.16.1/commons-io-2.16.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/ow2/asm/asm-commons/9.7.1/asm-commons-9.7.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.7.1/asm-commons-9.7.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-commons\9.7.1\1efae0cd5d2599b35cba54897887351b3a087080\asm-commons-9.7.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/commons-io/commons-io/2.16.1/commons-io-2.16.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.16.1\553d6f69e338060a231755afe0ebf99d14b45da6\commons-io-2.16.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/ow2/asm/asm-analysis/9.7.1/asm-analysis-9.7.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/9.7.1/asm-analysis-9.7.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-analysis\9.7.1\5901669092f40a0aff0e25662a06ed92da228b9a\asm-analysis-9.7.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/apache/commons/commons-parent/69/commons-parent-69.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/ow2/asm/asm-util/9.7.1/asm-util-9.7.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/bouncycastle/bcpkix-jdk18on/1.79/bcpkix-jdk18on-1.79.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm-util/9.7.1/asm-util-9.7.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-util\9.7.1\8836078fa6c41418cfa1ff05b6a26cb7b1f0520a\asm-util-9.7.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/apache/commons/commons-parent/69/commons-parent-69.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.apache.commons\commons-parent\69\6ebeacd37818d945d96c06b44af10e050d2ef7c4\commons-parent-69.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.79/bcpkix-jdk18on-1.79.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcpkix-jdk18on\1.79\783d463a7227fea427268e34fb60d98475c64f19\bcpkix-jdk18on-1.79.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-result-listener-gradle-proto/31.12.0/android-test-plugin-result-listener-gradle-proto-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-result-listener-gradle-proto\31.12.0\ef2941e613d13cb0471f521dd7257ca8ee1bbd04\android-test-plugin-result-listener-gradle-proto-31.12.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/protobuf/protobuf-java-util/3.25.5/protobuf-java-util-3.25.5.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/protobuf/protobuf-java/3.25.5/protobuf-java-3.25.5.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/apache/apache/31/apache-31.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java-util/3.25.5/protobuf-java-util-3.25.5.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.protobuf\protobuf-java-util\3.25.5\2fd002f689dead93bf55c1a0b023ba67fe7155be\protobuf-java-util-3.25.5.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.25.5/protobuf-java-3.25.5.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.protobuf\protobuf-java\3.25.5\2c4a0bfc6a807df9b919b366d15f4904b3bd0170\protobuf-java-3.25.5.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/apache/apache/31/apache-31.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.apache\apache\31\9009cbdad2b69835f2df9265794c8ab50cf4dce1\apache-31.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/protobuf/protobuf-parent/3.25.5/protobuf-parent-3.25.5.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/junit/junit-bom/5.10.2/junit-bom-5.10.2.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-parent/3.25.5/protobuf-parent-3.25.5.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.protobuf\protobuf-parent\3.25.5\fefa8b2e68e227b4b32f795d4206c70558eb07ef\protobuf-parent-3.25.5.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.10.2/junit-bom-5.10.2.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.junit\junit-bom\5.10.2\b25ed98a5bd08cdda60e569cf22822a760e76019\junit-bom-5.10.2.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/junit/junit-bom/5.10.2/junit-bom-5.10.2.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.junit\junit-bom\5.10.2\ce536748a853ae6ac09e7815fce0678a96cff778\junit-bom-5.10.2.module]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/protobuf/protobuf-bom/3.25.5/protobuf-bom-3.25.5.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/bundletool/1.18.1/bundletool-1.18.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\bundletool\1.18.1\7c426c36c6d7fbff758331201e67d665c80bb615\bundletool-1.18.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-bom/3.25.5/protobuf-bom-3.25.5.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.protobuf\protobuf-bom\3.25.5\1da93689fa589dc4dc5dce60844b47d28105842c\protobuf-bom-3.25.5.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-core/1.69.1/grpc-core-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-core/1.69.1/grpc-core-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-core\1.69.1\e4631780cb00360fac1913b32a5e9dafc85ffe0a\grpc-core-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-stub/1.69.1/grpc-stub-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-stub/1.69.1/grpc-stub-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-stub\1.69.1\48fe3527730da5c923c3ae9d585715deed21c854\grpc-stub-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-inprocess/1.69.1/grpc-inprocess-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-inprocess/1.69.1/grpc-inprocess-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-inprocess\1.69.1\5327073892eb8b88e3b94c8375c49a6c10972fbb\grpc-inprocess-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-netty/1.69.1/grpc-netty-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-netty/1.69.1/grpc-netty-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-netty\1.69.1\a7c19e9ffabde3f5c0293b5fdc90dc612772b846\grpc-netty-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-protobuf/1.69.1/grpc-protobuf-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf/1.69.1/grpc-protobuf-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-protobuf\1.69.1\bb0ea8b6bd41a0843aab74a1f77f85f62a395336\grpc-protobuf-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/tensorflow/tensorflow-lite-metadata/0.2.0/tensorflow-lite-metadata-0.2.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/tensorflow/tensorflow-lite-metadata/0.2.0/tensorflow-lite-metadata-0.2.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.tensorflow\tensorflow-lite-metadata\0.2.0\3d4eeba9903312a3ddf95937897f99db183be6c8\tensorflow-lite-metadata-0.2.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/google/testing/platform/core-proto/0.0.9-alpha03/core-proto-0.0.9-alpha03.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.testing.platform\core-proto\0.0.9-alpha03\448611beede716f25d5e26a7378400c5b60dd5bc\core-proto-0.0.9-alpha03.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-build-statistics/2.1.20/kotlin-build-statistics-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea-proto/2.1.20/kotlin-gradle-plugin-idea-proto-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-klib-commonizer-api/2.1.20/kotlin-klib-commonizer-api-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-gradle-plugin-idea/2.1.20/kotlin-gradle-plugin-idea-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-util-klib-metadata/2.1.20/kotlin-util-klib-metadata-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/errorprone/error_prone_annotations/2.27.0/error_prone_annotations-2.27.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/guava/guava/33.3.1-jre/guava-33.3.1-jre.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/guava/guava/33.3.1-jre/guava-33.3.1-jre.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\33.3.1-jre\5a5628b34628748abcb73144a909ddbea2265ed9\guava-33.3.1-jre.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/guava/guava-parent/33.3.1-jre/guava-parent-33.3.1-jre.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/guava/guava-parent/33.3.1-jre/guava-parent-33.3.1-jre.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.guava\guava-parent\33.3.1-jre\94729a0ed1dc35f623edd13afa6c1c2fe9a15d7c\guava-parent-33.3.1-jre.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/guava/guava/33.3.1-jre/guava-33.3.1-jre.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\33.3.1-jre\c99293bbf166d01849489fc6f94a101f79072aa7\guava-33.3.1-jre.module]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-reflect/2.1.20/kotlin-reflect-2.1.20.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-reflect/2.1.20/kotlin-reflect-2.1.20.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-reflect\2.1.20\4eab48232a386afc0330799a6a6bdf2741feddc9\kotlin-reflect-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/bouncycastle/bcprov-jdk18on/1.79/bcprov-jdk18on-1.79.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.79/bcprov-jdk18on-1.79.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcprov-jdk18on\1.79\460bea0d2ddd8860efd4e7c3c7d8add1d749e940\bcprov-jdk18on-1.79.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/common/31.12.0/common-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\common\31.12.0\2a73a0ddb424971d738ed25903d7afe3aea93790\common-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/dvlib/31.12.0/dvlib-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\dvlib\31.12.0\519a5a11782aafe89f6b8b7feb8e74a4ef0052dd\dvlib-31.12.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/2.1.20/kotlin-stdlib-jdk8-2.1.20.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/2.1.20/kotlin-stdlib-jdk8-2.1.20.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jdk8\2.1.20\c81b93a1a81a895376e2d97d0aadd8cab4ed23f1\kotlin-stdlib-jdk8-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.9.0/kotlinx-coroutines-core-1.9.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.9.0/kotlinx-coroutines-core-1.9.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core\1.9.0\d3fdd34e883e3a68fb4c10f33ab3abc4d66bdb28\kotlinx-coroutines-core-1.9.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.9.0/kotlinx-coroutines-bom-1.9.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-bom/1.9.0/kotlinx-coroutines-bom-1.9.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-bom\1.9.0\11a86a1aa2fb0ecb72e865e4e0b421be56eb30fb\kotlinx-coroutines-bom-1.9.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core/1.9.0/kotlinx-coroutines-core-1.9.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core\1.9.0\3bdff39bfd164fa139252fdcf98c5a5122f7aa9d\kotlinx-coroutines-core-1.9.0.module]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/annotations/31.12.0/annotations-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\annotations\31.12.0\569e7e46c9ccb4a9c45e8e8b09f3769bf94bd2ce\annotations-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/protos/31.12.0/protos-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.analytics-library\protos\31.12.0\14f3d5e780fa0340d6ad8d00f7d29a8b3d5e92bb\protos-31.12.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-tree\9.7.1\acf4a9c488ab0ca8974ef5623b1665361c74255c\asm-tree-9.7.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/bouncycastle/bcutil-jdk18on/1.79/bcutil-jdk18on-1.79.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.79/bcutil-jdk18on-1.79.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcutil-jdk18on\1.79\fcfc0f7305fbf2a4a1a1207887e8e1d230e9210d\bcutil-jdk18on-1.79.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/errorprone/error_prone_annotations/2.30.0/error_prone_annotations-2.30.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.30.0/error_prone_annotations-2.30.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.errorprone\error_prone_annotations\2.30.0\847765ac955397a29f39553e742b60d8f317b544\error_prone_annotations-2.30.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/errorprone/error_prone_parent/2.30.0/error_prone_parent-2.30.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_parent/2.30.0/error_prone_parent-2.30.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.errorprone\error_prone_parent\2.30.0\9a289b8781e308a5cc315a9a7e564b5a57421770\error_prone_parent-2.30.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-context/1.69.1/grpc-context-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/perfmark/perfmark-api/0.27.0/perfmark-api-0.27.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.69.1/grpc-context-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-context\1.69.1\963db08e8cba9adf453cc924e8de9980cbf8ffa4\grpc-context-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/perfmark/perfmark-api/0.27.0/perfmark-api-0.27.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.perfmark\perfmark-api\0.27.0\dc40cd0461e53cbc3ad70a8d5a22f0b4b1b67d8a\perfmark-api-0.27.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/perfmark/perfmark-api/0.27.0/perfmark-api-0.27.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.perfmark\perfmark-api\0.27.0\1025e5170119be2b2e7ca65ba81579c1e0cbb2f5\perfmark-api-0.27.0.module]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.24/animal-sniffer-annotations-1.24.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.24/animal-sniffer-annotations-1.24.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.codehaus.mojo\animal-sniffer-annotations\1.24\a671a0325694922bebf4cf062dde813827c82b4b\animal-sniffer-annotations-1.24.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-api/1.69.1/grpc-api-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-api/1.69.1/grpc-api-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-api\1.69.1\657c8dd3a06403c1c5deddee843bc115f5d846fa\grpc-api-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/codehaus/mojo/animal-sniffer-parent/1.24/animal-sniffer-parent-1.24.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-parent/1.24/animal-sniffer-parent-1.24.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.codehaus.mojo\animal-sniffer-parent\1.24\3c8a9968c0b8ccdc8fe7dc77a97e54e406cd0c56\animal-sniffer-parent-1.24.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/codehaus/mojo/mojo-parent/84/mojo-parent-84.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/codehaus/mojo/mojo-parent/84/mojo-parent-84.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.codehaus.mojo\mojo-parent\84\f7511e802abf301d927dd6085f2ee1826692b08f\mojo-parent-84.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-handler-proxy/4.1.110.Final/netty-handler-proxy-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-codec-http2/4.1.110.Final/netty-codec-http2-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-util/1.69.1/grpc-util-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.110.Final/netty-handler-proxy-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-handler-proxy\4.1.110.Final\2cf29a34f831daedbca46b37e317e8f54f03c502\netty-handler-proxy-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.110.Final/netty-codec-http2-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-codec-http2\4.1.110.Final\c08dbc791221c1936d2eb10df18a389920fe9971\netty-codec-http2-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-util/1.69.1/grpc-util-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-util\1.69.1\1b3486794765603e2a48f0ec98df2e316c23f97d\grpc-util-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-transport-native-unix-common/4.1.110.Final/netty-transport-native-unix-common-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.110.Final/netty-transport-native-unix-common-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-transport-native-unix-common\4.1.110.Final\8c8886d4e93dd5c2dddff9f8ec9fd13af6d8e9\netty-transport-native-unix-common-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-parent/4.1.110.Final/netty-parent-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-parent/4.1.110.Final/netty-parent-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-parent\4.1.110.Final\d05dfececb55882861d47645692896eb2b0c7964\netty-parent-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/grpc/grpc-protobuf-lite/1.69.1/grpc-protobuf-lite-1.69.1.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/api/grpc/proto-google-common-protos/2.48.0/proto-google-common-protos-2.48.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf-lite/1.69.1/grpc-protobuf-lite-1.69.1.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-protobuf-lite\1.69.1\82bbf18b8a4fff9e2a27ae9a61bf9c7f93390e5d\grpc-protobuf-lite-1.69.1.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/api/grpc/proto-google-common-protos/2.48.0/proto-google-common-protos-2.48.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.api.grpc\proto-google-common-protos\2.48.0\b88e8580c1804e66c71b0d3ad471fef55b500a51\proto-google-common-protos-2.48.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/tracker/31.12.0/tracker-31.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.analytics-library\tracker\31.12.0\79f0316204ba2901abbe3627578e421b6a8b4dee\tracker-31.12.0.pom]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/signflinger/8.12.0/signflinger-8.12.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android\signflinger\8.12.0\60c3f37390fe4080176648c33c18e55d79bb8cd3\signflinger-8.12.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-util-klib/2.1.20/kotlin-util-klib-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.checkerframework\checker-qual\3.43.0\48ad8955d64547b84ef581361c29c030e56430cb\checker-qual-3.43.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.checkerframework\checker-qual\3.43.0\3020cf05cf20a5f6e2137e59291be76cd1252b83\checker-qual-3.43.0.module]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.j2objc\j2objc-annotations\3.0.0\45cbaa9d129a696907d1e5bc56c707b6a0043181\j2objc-annotations-3.0.0.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.guava\failureaccess\1.0.2\2df7ebe307b885a222be352d3bffd5fcf0428ad4\failureaccess-1.0.2.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.9.0/kotlinx-coroutines-core-jvm-1.9.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.9.0/kotlinx-coroutines-core-jvm-1.9.0.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core-jvm\1.9.0\f3febcf3224434beeb65f4d19de553b6b9db6fd\kotlinx-coroutines-core-jvm-1.9.0.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.9.0/kotlinx-coroutines-core-jvm-1.9.0.module, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core-jvm\1.9.0\253c11ec9fcf1ba2abc04263404ae403e4560e76\kotlinx-coroutines-core-jvm-1.9.0.module]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-transport/4.1.110.Final/netty-transport-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-common/4.1.110.Final/netty-common-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-buffer/4.1.110.Final/netty-buffer-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.110.Final/netty-common-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-common\4.1.110.Final\6132314df55e8aab9938ca2edfead76a1b6e5763\netty-common-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.110.Final/netty-transport-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-transport\4.1.110.Final\b2f1e986b0a1fc09f92d7eff1cbfa9c97f42b662\netty-transport-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.110.Final/netty-buffer-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-buffer\4.1.110.Final\ec0a4d8867d7541a017f1cc09c3abf3919fade23\netty-buffer-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-codec/4.1.110.Final/netty-codec-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.110.Final/netty-codec-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-codec\4.1.110.Final\a720acd5a363021646b97047ac28f4203a52b786\netty-codec-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-handler/4.1.110.Final/netty-handler-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.110.Final/netty-handler-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-handler\4.1.110.Final\fc349f80a5c95d9dde46ea996e70f76b2deb2038\netty-handler-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-codec-http/4.1.110.Final/netty-codec-http-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.110.Final/netty-codec-http-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-codec-http\4.1.110.Final\3db352891c28bf3f0c8699e8b451f013f015dfa9\netty-codec-http-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-codec-socks/4.1.110.Final/netty-codec-socks-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.110.Final/netty-codec-socks-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-codec-socks\4.1.110.Final\5a1c9dd99b5e541b47aba02b9e78d1e21eb66d4c\netty-codec-socks-4.1.110.Final.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/2.1.20/kotlin-stdlib-jdk7-2.1.20.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/2.1.20/kotlin-stdlib-jdk7-2.1.20.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jdk7\2.1.20\497fa48a29ea0cd35191c29e4f11570a415bbf45\kotlin-stdlib-jdk7-2.1.20.pom]
+Resource missing. [HTTP HEAD: https://dl.google.com/dl/android/maven2/io/netty/netty-resolver/4.1.110.Final/netty-resolver-4.1.110.Final.pom]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.110.Final/netty-resolver-4.1.110.Final.pom, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-resolver\4.1.110.Final\16b8d470625759a5279f4bc1efa53b048f476d27\netty-resolver-4.1.110.Final.pom]
+Transforming gradle-8.12.0.jar (com.android.tools.build:gradle:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming builder-8.12.0.jar (com.android.tools.build:builder:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming builder-model-8.12.0.jar (com.android.tools.build:builder-model:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gradle-api-8.12.0.jar (com.android.tools.build:gradle-api:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming manifest-merger-31.12.0.jar (com.android.tools.build:manifest-merger:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-model-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-model:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming fus-statistics-gradle-plugin-2.1.20-gradle85.jar (org.jetbrains.kotlin:fus-statistics-gradle-plugin:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-api-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-api-2.1.20-gradle85.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-api:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-2.1.20-gradle85.jar (org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-compiler-runner-2.1.20.jar (org.jetbrains.kotlin:kotlin-compiler-runner:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-stdlib-2.1.20.jar (org.jetbrains.kotlin:kotlin-stdlib:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-build-statistics-2.1.20.jar (org.jetbrains.kotlin:kotlin-build-statistics:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming gson-2.11.0.jar (com.google.code.gson:gson:2.11.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming apkzlib-8.12.0.jar (com.android.tools.build:apkzlib:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javapoet-1.13.0.jar (com.squareup:javapoet:1.13.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming asm-9.7.1.jar (org.ow2.asm:asm:9.7.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-idea-proto-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea-proto:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-idea-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-idea:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-klib-commonizer-api-2.1.20.jar (org.jetbrains.kotlin:kotlin-klib-commonizer-api:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-klib-metadata-2.1.20.jar (org.jetbrains.kotlin:kotlin-util-klib-metadata:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar (com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jsr305-3.0.2.jar (com.google.code.findbugs:jsr305:3.0.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming zipflinger-8.12.0.jar (com.android:zipflinger:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming apksig-8.12.0.jar (com.android.tools.build:apksig:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javawriter-2.5.0.jar (com.squareup:javawriter:2.5.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-gradle-plugin-annotations-2.1.20.jar (org.jetbrains.kotlin:kotlin-gradle-plugin-annotations:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-native-utils-2.1.20.jar (org.jetbrains.kotlin:kotlin-native-utils:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-tooling-core-2.1.20.jar (org.jetbrains.kotlin:kotlin-tooling-core:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-build-tools-api-2.1.20.jar (org.jetbrains.kotlin:kotlin-build-tools-api:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-klib-2.1.20.jar (org.jetbrains.kotlin:kotlin-util-klib:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-util-io-2.1.20.jar (org.jetbrains.kotlin:kotlin-util-io:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kotlin-daemon-client-2.1.20.jar (org.jetbrains.kotlin:kotlin-daemon-client:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/gradle-settings-api/8.12.0/gradle-settings-api-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\gradle-settings-api\8.12.0\573036710167ab5a01769f1310e931de26394286\gradle-settings-api-8.12.0.jar]
+Transforming gradle-settings-api-8.12.0.jar (com.android.tools.build:gradle-settings-api:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jetifier-processor-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-processor:1.0.0-beta10) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jetifier-core-1.0.0-beta10.jar (com.android.tools.build.jetifier:jetifier-core:1.0.0-beta10) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/aaptcompiler/8.12.0/aaptcompiler-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\aaptcompiler\8.12.0\461de28e32bf64e46224c29598c69547ec1208c1\aaptcompiler-8.12.0.jar]
+Transforming aaptcompiler-8.12.0.jar (com.android.tools.build:aaptcompiler:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-compiler-common/8.12.0/databinding-compiler-common-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\androidx.databinding\databinding-compiler-common\8.12.0\3f8451ad766f5ca32208f922251b2149e2681d02\databinding-compiler-common-8.12.0.jar]
+Transforming databinding-compiler-common-8.12.0.jar (androidx.databinding:databinding-compiler-common:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-model/31.12.0/lint-model-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.lint\lint-model\31.12.0\71fcb4e666dc6658680083dcd0b326336c7848fe\lint-model-31.12.0.jar]
+Transforming lint-model-31.12.0.jar (com.android.tools.lint:lint-model:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-reflect/2.1.20/kotlin-reflect-2.1.20.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-reflect\2.1.20\3c1003045c4f2a72f987a147abac8e7058be1183\kotlin-reflect-2.1.20.jar]
+Transforming kotlin-reflect-2.1.20.jar (org.jetbrains.kotlin:kotlin-reflect:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/sdk-common/31.12.0/sdk-common-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\sdk-common\31.12.0\70fbbdbe7c1c2c9b41e05f10d165ccc9250079c7\sdk-common-31.12.0.jar]
+Transforming sdk-common-31.12.0.jar (com.android.tools:sdk-common:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/repository/31.12.0/repository-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\repository\31.12.0\43f06a3ed7ff978c327c5af716273a90a27d6969\repository-31.12.0.jar]
+Transforming repository-31.12.0.jar (com.android.tools:repository:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/sdklib/31.12.0/sdklib-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\sdklib\31.12.0\7a3d88a695f9caf399357cc48326171cc5e53de1\sdklib-31.12.0.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/tracker/31.12.0/tracker-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.analytics-library\tracker\31.12.0\9c2c0e33148176901008ac5d81c93238413b5b46\tracker-31.12.0.jar]
+Transforming tracker-31.12.0.jar (com.android.tools.analytics-library:tracker:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming sdklib-31.12.0.jar (com.android.tools:sdklib:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/shared/31.12.0/shared-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.analytics-library\shared\31.12.0\874640ccd1099a8f8316611b36efbe1c7617616d\shared-31.12.0.jar]
+Transforming shared-31.12.0.jar (com.android.tools.analytics-library:shared:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/builder-test-api/8.12.0/builder-test-api-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\builder-test-api\8.12.0\ffacdec614645b4069df3973dd4c5b49b61fe82d\builder-test-api-8.12.0.jar]
+Transforming builder-test-api-8.12.0.jar (com.android.tools.build:builder-test-api:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-emulator-control-proto/31.12.0/android-test-plugin-host-emulator-control-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-emulator-control-proto\31.12.0\9ad66b4b96af8d226c9d899030d9acdd101d03ed\android-test-plugin-host-emulator-control-proto-31.12.0.jar]
+Transforming android-test-plugin-host-emulator-control-proto-31.12.0.jar (com.android.tools.utp:android-test-plugin-host-emulator-control-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/ddms/ddmlib/31.12.0/ddmlib-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.ddms\ddmlib\31.12.0\772f1af975b6cbb75b0e69727e1c2d3d58f89f3f\ddmlib-31.12.0.jar]
+Transforming ddmlib-31.12.0.jar (com.android.tools.ddms:ddmlib:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk8/2.1.20/kotlin-stdlib-jdk8-2.1.20.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jdk8\2.1.20\1372ceab395defca310ff460dc219364d9df0a2e\kotlin-stdlib-jdk8-2.1.20.jar]
+Transforming kotlin-stdlib-jdk8-2.1.20.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.9.0/kotlinx-coroutines-core-jvm-1.9.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlinx\kotlinx-coroutines-core-jvm\1.9.0\9beade4c1c1569e4f36cbd2c37e02e3e41502601\kotlinx-coroutines-core-jvm-1.9.0.jar]
+Transforming kotlinx-coroutines-core-jvm-1.9.0.jar (org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.9.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib-jdk7/2.1.20/kotlin-stdlib-jdk7-2.1.20.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jdk7\2.1.20\72672df5e83231744c00550955b10acb71ed49d6\kotlin-stdlib-jdk7-2.1.20.jar]
+Transforming kotlin-stdlib-jdk7-2.1.20.jar (org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.20) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/layoutlib/layoutlib-api/31.12.0/layoutlib-api-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.layoutlib\layoutlib-api\31.12.0\3b7f1fe9c54d6fd684a3fd3b8feffeedfe546fd4\layoutlib-api-31.12.0.jar]
+Transforming layoutlib-api-31.12.0.jar (com.android.tools.layoutlib:layoutlib-api:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/dvlib/31.12.0/dvlib-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\dvlib\31.12.0\6079cc9f2fa5f5104b20779ca98faa1c495bb7f1\dvlib-31.12.0.jar]
+Transforming dvlib-31.12.0.jar (com.android.tools:dvlib:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/common/31.12.0/common-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\common\31.12.0\c363a2427fe8536b5186b0a012c0035924605ff1\common-31.12.0.jar]
+Transforming common-31.12.0.jar (com.android.tools:common:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java-util/3.25.5/protobuf-java-util-3.25.5.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.protobuf\protobuf-java-util\3.25.5\38cc5ce479603e36466feda2a9f1dfdb2210ef00\protobuf-java-util-3.25.5.jar]
+Transforming protobuf-java-util-3.25.5.jar (com.google.protobuf:protobuf-java-util:3.25.5) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-netty/1.69.1/grpc-netty-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-netty\1.69.1\9235ab343b80acd957b4bb8bd740b8272735ddb8\grpc-netty-1.69.1.jar]
+Transforming grpc-netty-1.69.1.jar (io.grpc:grpc-netty:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-inprocess/1.69.1/grpc-inprocess-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-inprocess\1.69.1\8999d859ebf25f00e5a968b5e36e1294b109cb9e\grpc-inprocess-1.69.1.jar]
+Transforming grpc-inprocess-1.69.1.jar (io.grpc:grpc-inprocess:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-result-listener-gradle-proto/31.12.0/android-test-plugin-result-listener-gradle-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-result-listener-gradle-proto\31.12.0\dbbef067ddf95379b587f6aa2baa93d3eb3342eb\android-test-plugin-result-listener-gradle-proto-31.12.0.jar]
+Transforming android-test-plugin-result-listener-gradle-proto-31.12.0.jar (com.android.tools.utp:android-test-plugin-result-listener-gradle-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-util/1.69.1/grpc-util-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-util\1.69.1\8c3a9d835a78be9653e9ba92ceab430547924937\grpc-util-1.69.1.jar]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-core/1.69.1/grpc-core-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-core\1.69.1\d9f6383e1903af6e9502e7c1c8e4fbe28a236321\grpc-core-1.69.1.jar]
+Transforming grpc-util-1.69.1.jar (io.grpc:grpc-util:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming grpc-core-1.69.1.jar (io.grpc:grpc-core:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming tink-1.7.0.jar (com.google.crypto.tink:tink:1.7.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf/1.69.1/grpc-protobuf-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-protobuf\1.69.1\433b61f31e1dce6adf6c43ea3ca510f8d8d7ea70\grpc-protobuf-1.69.1.jar]
+Transforming grpc-protobuf-1.69.1.jar (io.grpc:grpc-protobuf:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-stub/1.69.1/grpc-stub-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-stub\1.69.1\685c974e6717e6c1bcadd1b7461167d27f64c524\grpc-stub-1.69.1.jar]
+Transforming grpc-stub-1.69.1.jar (io.grpc:grpc-stub:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jimfs-1.1.jar (com.google.jimfs:jimfs:1.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-context/1.69.1/grpc-context-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-context\1.69.1\acec56668f9e67775cfe43fdb9edd046e9426a2d\grpc-context-1.69.1.jar]
+Transforming grpc-context-1.69.1.jar (io.grpc:grpc-context:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-protobuf-lite/1.69.1/grpc-protobuf-lite-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-protobuf-lite\1.69.1\40cc0d2c62b22c7c22056e17c1141cb714993ea9\grpc-protobuf-lite-1.69.1.jar]
+Transforming grpc-protobuf-lite-1.69.1.jar (io.grpc:grpc-protobuf-lite:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/grpc/grpc-api/1.69.1/grpc-api-1.69.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.grpc\grpc-api\1.69.1\e95c782de0217180c9b25c99e605c4513f3272f1\grpc-api-1.69.1.jar]
+Transforming grpc-api-1.69.1.jar (io.grpc:grpc-api:1.69.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/guava/guava/33.3.1-jre/guava-33.3.1-jre.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\33.3.1-jre\852f8b363da0111e819460021ca693cacca3e8db\guava-33.3.1-jre.jar]
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/lint/lint-typedef-remover/31.12.0/lint-typedef-remover-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.lint\lint-typedef-remover\31.12.0\bc9756d95080ee30b518adf2c02d70dea0930feb\lint-typedef-remover-31.12.0.jar]
+Transforming lint-typedef-remover-31.12.0.jar (com.android.tools.lint:lint-typedef-remover:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming guava-33.3.1-jre.jar (com.google.guava:guava:33.3.1-jre) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/crash/31.12.0/crash-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.analytics-library\crash\31.12.0\80c9f1f06e8d48d60fa91f4db811cf863e13c67f\crash-31.12.0.jar]
+Transforming crash-31.12.0.jar (com.android.tools.analytics-library:crash:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/bundletool/1.18.1/bundletool-1.18.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\bundletool\1.18.1\76bb1aa21a19495ca070bfb6abd194daf91dccd1\bundletool-1.18.1.jar]
+Transforming bundletool-1.18.1.jar (com.android.tools.build:bundletool:1.18.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/build/aapt2-proto/8.12.0-13700139/aapt2-proto-8.12.0-13700139.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.build\aapt2-proto\8.12.0-13700139\2b8256a1a1b9f99beb7607d90ee0bee0e445998d\aapt2-proto-8.12.0-13700139.jar]
+Transforming aapt2-proto-8.12.0-13700139.jar (com.android.tools.build:aapt2-proto:8.12.0-13700139) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/androidx/databinding/databinding-common/8.12.0/databinding-common-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\androidx.databinding\databinding-common\8.12.0\2be3530b78477835e69dce953b17adc1dbc5c6fa\databinding-common-8.12.0.jar]
+Transforming databinding-common-8.12.0.jar (androidx.databinding:databinding-common:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/databinding/baseLibrary/8.12.0/baseLibrary-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.databinding\baseLibrary\8.12.0\7e7399239e52d4069896277615e005add7ae8e5a\baseLibrary-8.12.0.jar]
+Transforming baseLibrary-8.12.0.jar (com.android.databinding:baseLibrary:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-ddmlib-proto/31.12.0/android-device-provider-ddmlib-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-device-provider-ddmlib-proto\31.12.0\9f96225642b573079e5544a619b18b815b3dc70f\android-device-provider-ddmlib-proto-31.12.0.jar]
+Transforming android-device-provider-ddmlib-proto-31.12.0.jar (com.android.tools.utp:android-device-provider-ddmlib-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-gradle-proto/31.12.0/android-device-provider-gradle-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-device-provider-gradle-proto\31.12.0\4df62b23d15680598277666a1a60676f1402397c\android-device-provider-gradle-proto-31.12.0.jar]
+Transforming android-device-provider-gradle-proto-31.12.0.jar (com.android.tools.utp:android-device-provider-gradle-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-device-provider-profile-proto/31.12.0/android-device-provider-profile-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-device-provider-profile-proto\31.12.0\7823ffdbacbe3e46ce243d459f946467b7126135\android-device-provider-profile-proto-31.12.0.jar]
+Transforming android-device-provider-profile-proto-31.12.0.jar (com.android.tools.utp:android-device-provider-profile-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-additional-test-output-proto/31.12.0/android-test-plugin-host-additional-test-output-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-additional-test-output-proto\31.12.0\fe467239b47e0709ba9bf1e2e9fccaabc6cabc22\android-test-plugin-host-additional-test-output-proto-31.12.0.jar]
+Transforming android-test-plugin-host-additional-test-output-proto-31.12.0.jar (com.android.tools.utp:android-test-plugin-host-additional-test-output-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming transform-api-2.0.0-deprecated-use-gradle-api.jar (com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpmime-4.5.6.jar (org.apache.httpcomponents:httpmime:4.5.6) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/commons-io/commons-io/2.16.1/commons-io-2.16.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\commons-io\commons-io\2.16.1\377d592e740dc77124e0901291dbfaa6810a200e\commons-io-2.16.1.jar]
+Transforming commons-io-2.16.1.jar (commons-io:commons-io:2.16.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-coverage-proto/31.12.0/android-test-plugin-host-coverage-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-coverage-proto\31.12.0\1ee63a78550acb6f922531668f4eb83dddf45e\android-test-plugin-host-coverage-proto-31.12.0.jar]
+Transforming android-test-plugin-host-coverage-proto-31.12.0.jar (com.android.tools.utp:android-test-plugin-host-coverage-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.7.1/asm-commons-9.7.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-commons\9.7.1\406c6a2225cfe1819f102a161e54cc16a5c24f75\asm-commons-9.7.1.jar]
+Transforming asm-commons-9.7.1.jar (org.ow2.asm:asm-commons:9.7.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm-util/9.7.1/asm-util-9.7.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-util\9.7.1\9e23359b598ec6b74b23e53110dd5c577adf2243\asm-util-9.7.1.jar]
+Transforming asm-util-9.7.1.jar (org.ow2.asm:asm-util:9.7.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm-analysis/9.7.1/asm-analysis-9.7.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-analysis\9.7.1\f97a3b319f0ed6a8cd944dc79060d3912a28985f\asm-analysis-9.7.1.jar]
+Transforming asm-analysis-9.7.1.jar (org.ow2.asm:asm-analysis:9.7.1) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.ow2.asm\asm-tree\9.7.1\3a53139787663b139de76b627fca0084ab60d32c\asm-tree-9.7.1.jar]
+Transforming asm-tree-9.7.1.jar (org.ow2.asm:asm-tree:9.7.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jaxb-runtime-2.3.2.jar (org.glassfish.jaxb:jaxb-runtime:2.3.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jopt-simple-4.9.jar (net.sf.jopt-simple:jopt-simple:4.9) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-logcat-proto/31.12.0/android-test-plugin-host-logcat-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-logcat-proto\31.12.0\2b1de9f172f374f9d8a0f60d0d7d556df7c30d14\android-test-plugin-host-logcat-proto-31.12.0.jar]
+Transforming android-test-plugin-host-logcat-proto-31.12.0.jar (com.android.tools.utp:android-test-plugin-host-logcat-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.79/bcpkix-jdk18on-1.79.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcpkix-jdk18on\1.79\7693cec3b8779b74b35466dcaeeaac7409872954\bcpkix-jdk18on-1.79.jar]
+Transforming bcpkix-jdk18on-1.79.jar (org.bouncycastle:bcpkix-jdk18on:1.79) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/api/grpc/proto-google-common-protos/2.48.0/proto-google-common-protos-2.48.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.api.grpc\proto-google-common-protos\2.48.0\86b550469172d830d174d7434c318d7dff179910\proto-google-common-protos-2.48.0.jar]
+Transforming proto-google-common-protos-2.48.0.jar (com.google.api.grpc:proto-google-common-protos:2.48.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/utp/android-test-plugin-host-apk-installer-proto/31.12.0/android-test-plugin-host-apk-installer-proto-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.utp\android-test-plugin-host-apk-installer-proto\31.12.0\915dc4efd7db61b0c2bb16f88dcf640e824a232d\android-test-plugin-host-apk-installer-proto-31.12.0.jar]
+Transforming android-test-plugin-host-apk-installer-proto-31.12.0.jar (com.android.tools.utp:android-test-plugin-host-apk-installer-proto:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/google/testing/platform/core-proto/0.0.9-alpha03/core-proto-0.0.9-alpha03.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.testing.platform\core-proto\0.0.9-alpha03\a0de640d69d847081f087c45dda7e9b3754fe350\core-proto-0.0.9-alpha03.jar]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/protobuf/protobuf-java/3.25.5/protobuf-java-3.25.5.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.protobuf\protobuf-java\3.25.5\5ae5c9ec39930ae9b5a61b32b93288818ec05ec1\protobuf-java-3.25.5.jar]
+Transforming core-proto-0.0.9-alpha03.jar (com.google.testing.platform:core-proto:0.0.9-alpha03) with ExternalDependencyInstrumentingArtifactTransform
+Transforming protobuf-java-3.25.5.jar (com.google.protobuf:protobuf-java:3.25.5) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/tensorflow/tensorflow-lite-metadata/0.2.0/tensorflow-lite-metadata-0.2.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.tensorflow\tensorflow-lite-metadata\0.2.0\7dbe8f75ae5c0ef7093c43c3ac8b560bbc7ea4b6\tensorflow-lite-metadata-0.2.0.jar]
+Transforming tensorflow-lite-metadata-0.2.0.jar (org.tensorflow:tensorflow-lite-metadata:0.2.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/analytics-library/protos/31.12.0/protos-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools.analytics-library\protos\31.12.0\46635092b33a3a78a955f23185f0e924855e18a0\protos-31.12.0.jar]
+Transforming flatbuffers-java-1.12.0.jar (com.google.flatbuffers:flatbuffers-java:1.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming annotations-23.0.0.jar (org.jetbrains:annotations:23.0.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/guava/failureaccess/1.0.2/failureaccess-1.0.2.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.guava\failureaccess\1.0.2\c4a06a64e650562f30b7bf9aaec1bfed43aca12b\failureaccess-1.0.2.jar]
+Transforming failureaccess-1.0.2.jar (com.google.guava:failureaccess:1.0.2) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/checkerframework/checker-qual/3.43.0/checker-qual-3.43.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.checkerframework\checker-qual\3.43.0\9425eee39e56b116d2b998b7c2cebcbd11a3c98b\checker-qual-3.43.0.jar]
+Transforming checker-qual-3.43.0.jar (org.checkerframework:checker-qual:3.43.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming protos-31.12.0.jar (com.android.tools.analytics-library:protos:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming dagger-2.28.3.jar (com.google.dagger:dagger:2.28.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javax.inject-1.jar (javax.inject:javax.inject:1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming kxml2-2.3.0.jar (net.sf.kxml:kxml2:2.3.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-compress-1.21.jar (org.apache.commons:commons-compress:1.21) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/errorprone/error_prone_annotations/2.30.0/error_prone_annotations-2.30.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.errorprone\error_prone_annotations\2.30.0\ff171acb7fb9cbe2b9f50b391e1d52459d30ee62\error_prone_annotations-2.30.0.jar]
+Transforming error_prone_annotations-2.30.0.jar (com.google.errorprone:error_prone_annotations:2.30.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/com/google/j2objc/j2objc-annotations/3.0.0/j2objc-annotations-3.0.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.google.j2objc\j2objc-annotations\3.0.0\7399e65dd7e9ff3404f4535b2f017093bdb134c7\j2objc-annotations-3.0.0.jar]
+Transforming j2objc-annotations-3.0.0.jar (com.google.j2objc:j2objc-annotations:3.0.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpclient-4.5.14.jar (org.apache.httpcomponents:httpclient:4.5.14) with ExternalDependencyInstrumentingArtifactTransform
+Transforming httpcore-4.4.16.jar (org.apache.httpcomponents:httpcore:4.4.16) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javax.activation-1.2.0.jar (com.sun.activation:javax.activation:1.2.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/bouncycastle/bcutil-jdk18on/1.79/bcutil-jdk18on-1.79.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcutil-jdk18on\1.79\ecfc5aef97cc7676ea0de5c53c407b9f533f0ad5\bcutil-jdk18on-1.79.jar]
+Transforming bcutil-jdk18on-1.79.jar (org.bouncycastle:bcutil-jdk18on:1.79) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/bouncycastle/bcprov-jdk18on/1.79/bcprov-jdk18on-1.79.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.bouncycastle\bcprov-jdk18on\1.79\4d8e2732bcee15f1db93df266c3f5b70ce5cac21\bcprov-jdk18on-1.79.jar]
+Transforming bcprov-jdk18on-1.79.jar (org.bouncycastle:bcprov-jdk18on:1.79) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/tools/annotations/31.12.0/annotations-31.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android.tools\annotations\31.12.0\a9a04a78f42fdb0276a0fc7fd538890f856a9753\annotations-31.12.0.jar]
+Transforming annotations-31.12.0.jar (com.android.tools:annotations:31.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jna-platform-5.6.0.jar (net.java.dev.jna:jna-platform:5.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Transforming juniversalchardet-1.0.3.jar (com.googlecode.juniversalchardet:juniversalchardet:1.0.3) with ExternalDependencyInstrumentingArtifactTransform
+Transforming javax.annotation-api-1.3.2.jar (javax.annotation:javax.annotation-api:1.3.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming stax-ex-1.8.1.jar (org.jvnet.staxex:stax-ex:1.8.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jakarta.xml.bind-api-2.3.2.jar (jakarta.xml.bind:jakarta.xml.bind-api:2.3.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming txw2-2.3.2.jar (org.glassfish.jaxb:txw2:2.3.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming istack-commons-runtime-3.0.8.jar (com.sun.istack:istack-commons-runtime:3.0.8) with ExternalDependencyInstrumentingArtifactTransform
+Transforming FastInfoset-1.2.16.jar (com.sun.xml.fastinfoset:FastInfoset:1.2.16) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jakarta.activation-api-1.2.1.jar (jakarta.activation:jakarta.activation-api:1.2.1) with ExternalDependencyInstrumentingArtifactTransform
+Transforming auto-value-annotations-1.6.2.jar (com.google.auto.value:auto-value-annotations:1.6.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jose4j-0.9.5.jar (org.bitbucket.b_c:jose4j:0.9.5) with ExternalDependencyInstrumentingArtifactTransform
+Transforming slf4j-api-1.7.30.jar (org.slf4j:slf4j-api:1.7.30) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jdom2-2.0.6.jar (org.jdom:jdom2:2.0.6) with ExternalDependencyInstrumentingArtifactTransform
+Transforming annotations-4.1.1.4.jar (com.google.android:annotations:4.1.1.4) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/org/codehaus/mojo/animal-sniffer-annotations/1.24/animal-sniffer-annotations-1.24.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\org.codehaus.mojo\animal-sniffer-annotations\1.24\aa9ba58d30e0aad7f1808fce9c541ea3760678d8\animal-sniffer-annotations-1.24.jar]
+Transforming animal-sniffer-annotations-1.24.jar (org.codehaus.mojo:animal-sniffer-annotations:1.24) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/perfmark/perfmark-api/0.27.0/perfmark-api-0.27.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.perfmark\perfmark-api\0.27.0\f86f575a41b091786a4b027cd9c0c1d2e3fc1c01\perfmark-api-0.27.0.jar]
+Transforming perfmark-api-0.27.0.jar (io.perfmark:perfmark-api:0.27.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://dl.google.com/dl/android/maven2/com/android/signflinger/8.12.0/signflinger-8.12.0.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\com.android\signflinger\8.12.0\13f035dd8e7e470ff8f3216a0b46333187f26df5\signflinger-8.12.0.jar]
+Transforming signflinger-8.12.0.jar (com.android:signflinger:8.12.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-handler-proxy/4.1.110.Final/netty-handler-proxy-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-handler-proxy\4.1.110.Final\b7fb401dd47c79e6b99f2319ac3b561c50c31c30\netty-handler-proxy-4.1.110.Final.jar]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-codec-http2/4.1.110.Final/netty-codec-http2-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-codec-http2\4.1.110.Final\e0849843eb5b1c036b12551baca98a9f7ff847a0\netty-codec-http2-4.1.110.Final.jar]
+Transforming netty-handler-proxy-4.1.110.Final.jar (io.netty:netty-handler-proxy:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-codec-http2-4.1.110.Final.jar (io.netty:netty-codec-http2:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-codec-http/4.1.110.Final/netty-codec-http-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-codec-http\4.1.110.Final\9d05cd927209ea25bbf342962c00b8e5a828c2a4\netty-codec-http-4.1.110.Final.jar]
+Transforming netty-codec-http-4.1.110.Final.jar (io.netty:netty-codec-http:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-handler/4.1.110.Final/netty-handler-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-handler\4.1.110.Final\168db749c22652ee7fed1ebf7ec46ce856d75e51\netty-handler-4.1.110.Final.jar]
+Transforming netty-handler-4.1.110.Final.jar (io.netty:netty-handler:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-transport-native-unix-common/4.1.110.Final/netty-transport-native-unix-common-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-transport-native-unix-common\4.1.110.Final\a7096e7c0a25a983647909d7513f5d4943d589c0\netty-transport-native-unix-common-4.1.110.Final.jar]
+Transforming netty-transport-native-unix-common-4.1.110.Final.jar (io.netty:netty-transport-native-unix-common:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-logging-1.2.jar (commons-logging:commons-logging:1.2) with ExternalDependencyInstrumentingArtifactTransform
+Transforming commons-codec-1.11.jar (commons-codec:commons-codec:1.11) with ExternalDependencyInstrumentingArtifactTransform
+Transforming jna-5.6.0.jar (net.java.dev.jna:jna:5.6.0) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-codec-socks/4.1.110.Final/netty-codec-socks-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-codec-socks\4.1.110.Final\4d54c8d5b95b14756043efb59b8c3e62ec67aa43\netty-codec-socks-4.1.110.Final.jar]
+Transforming netty-codec-socks-4.1.110.Final.jar (io.netty:netty-codec-socks:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-codec/4.1.110.Final/netty-codec-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-codec\4.1.110.Final\f1fa43b03e93ab88e805b6a4e3e83780c80b47d2\netty-codec-4.1.110.Final.jar]
+Transforming netty-codec-4.1.110.Final.jar (io.netty:netty-codec:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-transport/4.1.110.Final/netty-transport-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-transport\4.1.110.Final\b91f04c39ac14d6a29d07184ef305953ee6e0348\netty-transport-4.1.110.Final.jar]
+Transforming netty-transport-4.1.110.Final.jar (io.netty:netty-transport:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-resolver/4.1.110.Final/netty-resolver-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-resolver\4.1.110.Final\66c15921104cda0159b34e316541bc765dfaf3c0\netty-resolver-4.1.110.Final.jar]
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-buffer/4.1.110.Final/netty-buffer-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-buffer\4.1.110.Final\3d918a9ee057d995c362902b54634fc307132aac\netty-buffer-4.1.110.Final.jar]
+Transforming netty-resolver-4.1.110.Final.jar (io.netty:netty-resolver:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Transforming netty-buffer-4.1.110.Final.jar (io.netty:netty-buffer:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+Found locally available resource with matching checksum: [https://repo.maven.apache.org/maven2/io/netty/netty-common/4.1.110.Final/netty-common-4.1.110.Final.jar, C:\Users\aadar\.gradle\caches\modules-2\files-2.1\io.netty\netty-common\4.1.110.Final\ec361e7e025c029be50c55c8480080cabcbc01e7\netty-common-4.1.110.Final.jar]
+Transforming netty-common-4.1.110.Final.jar (io.netty:netty-common:4.1.110.Final) with ExternalDependencyInstrumentingArtifactTransform
+
+> Transform react-native-gradle-plugin.jar (project :gradle-plugin:react-native-gradle-plugin) with ProjectDependencyInstrumentingArtifactTransform
+Transforming react-native-gradle-plugin.jar (project :gradle-plugin:react-native-gradle-plugin) with ProjectDependencyInstrumentingArtifactTransform
+Caching disabled for ProjectDependencyInstrumentingArtifactTransform: D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin\react-native-gradle-plugin\build\libs\react-native-gradle-plugin.jar because:
+  Build cache is disabled
+
+> Transform shared.jar (project :gradle-plugin:shared) with ProjectDependencyInstrumentingArtifactTransform
+Transforming shared.jar (project :gradle-plugin:shared) with ProjectDependencyInstrumentingArtifactTransform
+
+> Configure project :
+Compiling build file 'D:\CODS\APP\SmartCooking\SmartAICooking\android\build.gradle' using BuildScriptTransformer.
+
+> Configure project :app
+Evaluating project ':app' using build file 'D:\CODS\APP\SmartCooking\SmartAICooking\android\app\build.gradle'.
+Compiling build file 'D:\CODS\APP\SmartCooking\SmartAICooking\android\app\build.gradle' using SubsetScriptTransformer.
+Compiling build file 'D:\CODS\APP\SmartCooking\SmartAICooking\android\app\build.gradle' using BuildScriptTransformer.
+Build bbaeec0c-d138-4ea2-8d03-4f80f6c49721 is closed
+10 actionable tasks: 4 executed, 6 up-to-date
+Watched directory hierarchies: [D:\CODS\APP\SmartCooking\SmartAICooking\node_modules\@react-native\gradle-plugin, D:\CODS\APP\SmartCooking\SmartAICooking\android]
