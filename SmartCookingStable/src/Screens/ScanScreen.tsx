@@ -9,11 +9,14 @@ import {
   ScrollView,
   Alert,
   Platform,
+  ActivityIndicator,
 } from 'react-native';
 import { launchCamera } from 'react-native-image-picker';
 import { request, check, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TAB_BAR_HEIGHT } from './constants';
+import { TAB_BAR_HEIGHT } from '../constants';
+import { convertImageToBase64, detectIngredients, DetectionResult } from '../api/inference';
+import { findRecipesByIngredients, RecipeMatch } from '../api/supabase';
 
 const ScanScreen = ({ navigation }: any) => {
   const [imageUri, setImageUri] = useState<string | null>(null);
@@ -21,6 +24,8 @@ const ScanScreen = ({ navigation }: any) => {
   const [newIngredient, setNewIngredient] = useState('');
   const [permissionStatus, setPermissionStatus] = useState<string>('');
   const [isIngredientsExpanded, setIsIngredientsExpanded] = useState(true);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [matchedRecipes, setMatchedRecipes] = useState<RecipeMatch[]>([]);
 
   // Check permission on mount
   useEffect(() => {
@@ -110,6 +115,54 @@ const ScanScreen = ({ navigation }: any) => {
     }
   };
 
+  // Process image with Flask API
+  const processImage = async (uri: string) => {
+    setIsProcessing(true);
+    setIngredients([]);
+    setMatchedRecipes([]);
+
+    try {
+      console.log('🔄 Converting image to base64...');
+      const base64Image = await convertImageToBase64(uri);
+
+      console.log('🔍 Detecting ingredients...');
+      const detectionResult = await detectIngredients(base64Image);
+
+      if (!detectionResult.success) {
+        throw new Error(detectionResult.error || 'Failed to detect ingredients');
+      }
+
+      console.log('✅ Detected:', detectionResult.detected_ingredients);
+      
+      if (detectionResult.detected_ingredients.length > 0) {
+        setIngredients(detectionResult.detected_ingredients);
+        setIsIngredientsExpanded(false); // Collapse to show results clearly
+        
+        Alert.alert(
+          'Ingredients Detected!',
+          `Found ${detectionResult.detected_ingredients.length} ingredients. Tap "Find Recipes" to search.`,
+          [{ text: 'OK' }]
+        );
+      } else {
+        Alert.alert(
+          'No Ingredients Detected',
+          'Could not detect any ingredients in the image. Please try:\n\n• Better lighting\n• Clear background\n• Closer photo\n\nOr add ingredients manually below.',
+          [{ text: 'OK' }]
+        );
+      }
+
+    } catch (error) {
+      console.error('❌ Processing error:', error);
+      Alert.alert(
+        'Error',
+        'Failed to process image. Please check:\n\n• Internet connection\n• Flask server is running\n• You are on the same WiFi network',
+        [{ text: 'OK' }]
+      );
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
   // Launch camera
   const handleStartScanning = async () => {
     const currentStatus = await checkCameraPermission();
@@ -144,12 +197,11 @@ const ScanScreen = ({ navigation }: any) => {
           );
         } else if (response.assets && response.assets[0]) {
           const uri = response.assets[0].uri;
-          setImageUri(uri || null);
-          
-          // Mock detected ingredients
-          setIngredients(['Potato', 'Onion', 'Tomato', 'Garlic', 'Ginger']);
-          // Start collapsed when ingredients are detected
-          setIsIngredientsExpanded(false);
+          if (uri) {
+            setImageUri(uri);
+            // Process image immediately
+            processImage(uri);
+          }
         }
       }
     );
@@ -177,14 +229,46 @@ const ScanScreen = ({ navigation }: any) => {
     }
   };
 
-  // Find recipes
-  const handleFindRecipes = () => {
+  // Find recipes using Supabase
+  const handleFindRecipes = async () => {
     if (ingredients.length === 0) {
       Alert.alert('No Ingredients', 'Please add at least one ingredient to find recipes.');
       return;
     }
+
+    setIsProcessing(true);
     
-    Alert.alert('Coming Soon', 'Recipe search will be implemented next!');
+    try {
+      console.log('🔍 Finding recipes for:', ingredients);
+      const recipes = await findRecipesByIngredients(ingredients);
+      
+      console.log('✅ Found recipes:', recipes.length);
+      setMatchedRecipes(recipes);
+
+      if (recipes.length === 0) {
+        Alert.alert(
+          'No Recipes Found',
+          'No recipes match your ingredients. Try adding more ingredients or adjusting the list.',
+          [{ text: 'OK' }]
+        );
+      } else {
+        // Navigate to recipes screen with results
+        navigation.navigate('Recipes', { 
+          matchedRecipes: recipes,
+          detectedIngredients: ingredients 
+        });
+      }
+
+    } catch (error) {
+      console.error('❌ Recipe search error:', error);
+      Alert.alert(
+        'Error',
+        'Failed to search recipes. Please check your internet connection.',
+        [{ text: 'OK' }]
+      );
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   // Start new scan
@@ -192,6 +276,7 @@ const ScanScreen = ({ navigation }: any) => {
     setImageUri(null);
     setIngredients([]);
     setNewIngredient('');
+    setMatchedRecipes([]);
     setIsIngredientsExpanded(true);
   };
 
@@ -216,6 +301,7 @@ const ScanScreen = ({ navigation }: any) => {
               style={styles.startButton} 
               onPress={handleStartScanning}
               activeOpacity={0.8}
+              disabled={isProcessing}
             >
               <Text style={styles.startButtonText}>Start Scanning</Text>
             </TouchableOpacity>
@@ -227,6 +313,15 @@ const ScanScreen = ({ navigation }: any) => {
           {/* Photo Preview */}
           <View style={styles.imageContainer}>
             <Image source={{ uri: imageUri }} style={styles.previewImage} />
+            {isProcessing && (
+              <View style={styles.processingOverlay}>
+                <View style={styles.processingCard}>
+                  <ActivityIndicator size="large" color="#FDB813" />
+                  <Text style={styles.processingText}>Analyzing ingredients...</Text>
+                  <Text style={styles.processingSubtext}>This may take a few seconds</Text>
+                </View>
+              </View>
+            )}
           </View>
 
           {/* Detected Ingredients Section - Dropdown */}
@@ -254,7 +349,11 @@ const ScanScreen = ({ navigation }: any) => {
             {isIngredientsExpanded && (
               <>
                 {ingredients.length === 0 ? (
-                  <Text style={styles.emptyText}>No ingredients detected. Add manually below.</Text>
+                  <Text style={styles.emptyText}>
+                    {isProcessing 
+                      ? 'Detecting ingredients...' 
+                      : 'No ingredients detected. Add manually below.'}
+                  </Text>
                 ) : (
                   <View style={styles.ingredientsList}>
                     {ingredients.map((ingredient, index) => (
@@ -310,18 +409,39 @@ const ScanScreen = ({ navigation }: any) => {
               style={[styles.actionButton, styles.newScanButton]}
               onPress={handleNewScan}
               activeOpacity={0.8}
+              disabled={isProcessing}
             >
               <Icon name="camera-outline" size={20} color="#5A67D8" />
               <Text style={styles.newScanText}>New Scan</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.actionButton, styles.findRecipesButton]}
+              style={[
+                styles.actionButton, 
+                styles.findRecipesButton,
+                (isProcessing || ingredients.length === 0) && styles.disabledButton
+              ]}
               onPress={handleFindRecipes}
               activeOpacity={0.8}
+              disabled={isProcessing || ingredients.length === 0}
             >
-              <Text style={styles.findRecipesText}>Find Recipes</Text>
+              {isProcessing ? (
+                <ActivityIndicator size="small" color="#FFFFFF" />
+              ) : (
+                <>
+                  <Icon name="magnify" size={20} color="#FFFFFF" />
+                  <Text style={styles.findRecipesText}>Find Recipes</Text>
+                </>
+              )}
             </TouchableOpacity>
+          </View>
+
+          {/* Tips Section */}
+          <View style={styles.tipsContainer}>
+            <Text style={styles.tipsTitle}>💡 Tips:</Text>
+            <Text style={styles.tipText}>• You can edit or remove detected ingredients</Text>
+            <Text style={styles.tipText}>• Add missing ingredients manually</Text>
+            <Text style={styles.tipText}>• Better lighting gives better results</Text>
           </View>
         </View>
       )}
@@ -409,6 +529,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     paddingHorizontal: 20,
     marginBottom: 20,
+    position: 'relative',
   },
   previewImage: {
     width: '100%',
@@ -420,6 +541,35 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.15,
     shadowRadius: 8,
     elevation: 4,
+  },
+  processingOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  processingCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    padding: 24,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  processingText: {
+    marginTop: 16,
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1A202C',
+  },
+  processingSubtext: {
+    marginTop: 4,
+    fontSize: 13,
+    color: '#718096',
   },
 
   // Ingredients Section - Dropdown
@@ -579,6 +729,33 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 15,
     fontWeight: '700',
+  },
+  disabledButton: {
+    backgroundColor: '#CBD5E0',
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+
+  // Tips Section
+  tipsContainer: {
+    marginHorizontal: 20,
+    marginTop: 16,
+    padding: 16,
+    backgroundColor: '#EBF8FF',
+    borderRadius: 12,
+    borderLeftWidth: 4,
+    borderLeftColor: '#3182CE',
+  },
+  tipsTitle: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#2C5282',
+    marginBottom: 8,
+  },
+  tipText: {
+    fontSize: 13,
+    color: '#2C5282',
+    marginBottom: 4,
   },
 });
 

@@ -1,4 +1,4 @@
-// App.tsx – final stable version
+// App.tsx – updated for src folder structure
 
 import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,8 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import LandingScreen from './Screens/LandingScreen';
-import MainTabs from './Screens/MainTabs';
+import LandingScreen from './src/Screens/LandingScreen';
+import MainTabs from './src/Screens/MainTabs';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,7 +43,6 @@ export default function App() {
             component={MainTabs} 
             options={{ gestureEnabled: false }} // optional: disable swipe-back to landing
           />
-          
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
