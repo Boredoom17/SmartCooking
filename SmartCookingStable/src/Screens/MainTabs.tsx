@@ -6,20 +6,23 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from './HomeScreen';
 import ScanScreen from './ScanScreen';
 import ProfileScreen from './ProfileScreen';
+
 const Tab = createBottomTabNavigator();
 
 // Export this constant so all screens can use it
-import { TAB_BAR_HEIGHT } from './constants';
+import { TAB_BAR_HEIGHT } from '../constants';
 
 function CustomTabBar({ state, navigation }: any) {
   return (
     <View style={styles.tabBar}>
       {state.routes.map((route: any, index: number) => {
         const isFocused = state.index === index;
-        const iconName =
-          route.name === 'Home' ? 'home' :
-          route.name === 'Scan' ? 'camera' :
-          'account-circle';
+        
+        // Generic emoji icons
+        const emojiIcon =
+          route.name === 'Home' ? '🏠︎' :           // House for Home
+          route.name === 'Scan' ? '⛶' :          // Camera for Scan
+          '👤';                                   // Person for Profile
 
         const onPress = () => {
           navigation.navigate(route.name);
@@ -36,11 +39,13 @@ function CustomTabBar({ state, navigation }: any) {
             ]}
             activeOpacity={0.75}
           >
-            <Icon
-              name={iconName}
-              size={route.name === 'Scan' ? 36 : 26}
-              color={isFocused ? '#FDB813' : '#777'}
-            />
+            <Text style={[
+              styles.emojiIcon,
+              route.name === 'Scan' && styles.scanEmoji,
+              isFocused && styles.focusedEmoji
+            ]}>
+              {emojiIcon}
+            </Text>
             {route.name !== 'Scan' && (
               <Text
                 style={[
@@ -99,6 +104,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  emojiIcon: {
+    fontSize: 26,
+    marginBottom: 4,
+  },
+  scanEmoji: {
+    fontSize: 36,
+    color: '#FFFFFF',
+  },
+  focusedEmoji: {
+    transform: [{ scale: 1.1 }],
+  },
   scanButton: {
     backgroundColor: '#FDB813',
     borderRadius: 50,
@@ -106,6 +122,10 @@ const styles = StyleSheet.create({
     height: 80,
     marginTop: -40,
     elevation: 10,
+    shadowColor: '#FDB813',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
   focusedItem: {
     transform: [{ scale: 1.08 }],

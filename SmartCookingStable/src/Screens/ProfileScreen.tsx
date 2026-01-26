@@ -9,15 +9,29 @@ import {
   ScrollView,
   Image,
   ActivityIndicator,
+  Modal,
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { COLORS, TAB_BAR_HEIGHT } from '../constants';
 
 const SUPABASE_URL = 'https://eqcerlwpnrnlgzuwbhof.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxY2VybHdwbnJubGd6dXdiaG9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMDc3NDMsImV4cCI6MjA4NDU4Mzc0M30.EVfCkxXtKxoZ5MW6s8348aMebgb9kCWyFZKaj4P-OR8';
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+interface ScanHistory {
+  id: string;
+  user_id: string;
+  ingredients: string[];
+  image_url?: string;
+  created_at: string;
+}
 
 export default function ProfileScreen() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,11 +42,24 @@ export default function ProfileScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [userData, setUserData] = useState<any>(null);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [scanHistory, setScanHistory] = useState<ScanHistory[]>([]);
+  const [showHistory, setShowHistory] = useState(false);
+  const [showEditProfile, setShowEditProfile] = useState(false);
+  const [editUsername, setEditUsername] = useState('');
+  const [totalScans, setTotalScans] = useState(0);
 
   // Check if user is already logged in
   useEffect(() => {
     checkUser();
   }, []);
+
+  // Fetch scan history when logged in
+  useEffect(() => {
+    if (isLoggedIn && userData?.id) {
+      fetchScanHistory();
+    }
+  }, [isLoggedIn, userData]);
 
   const checkUser = async () => {
     try {
@@ -41,7 +68,9 @@ export default function ProfileScreen() {
         setIsLoggedIn(true);
         setEmail(session.user.email || '');
         setUsername(session.user.user_metadata?.username || session.user.email?.split('@')[0] || 'User');
+        setProfileImage(session.user.user_metadata?.profile_image || null);
         setUserData(session.user);
+        setEditUsername(session.user.user_metadata?.username || session.user.email?.split('@')[0] || 'User');
       }
     } catch (error) {
       console.error('Session check error:', error);
@@ -50,8 +79,24 @@ export default function ProfileScreen() {
     }
   };
 
+  const fetchScanHistory = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('scan_history')
+        .select('*')
+        .eq('user_id', userData.id)
+        .order('created_at', { ascending: false })
+        .limit(50);
+
+      if (error) throw error;
+      setScanHistory(data || []);
+      setTotalScans(data?.length || 0);
+    } catch (error) {
+      console.error('Error fetching scan history:', error);
+    }
+  };
+
   const handleAuth = async () => {
-    // Validation
     if (!email || !password) {
       Alert.alert('Missing Fields', 'Please fill in all fields');
       return;
@@ -80,8 +125,8 @@ export default function ProfileScreen() {
         if (error) throw error;
         
         Alert.alert(
-          'Success! 🎉', 
-          'Account created! Please check your email to verify your account.',
+          'Account Created! 🎉', 
+          'Please check your email to verify your account.',
           [{ text: 'OK', onPress: () => setIsSignup(false) }]
         );
       } else {
@@ -92,10 +137,9 @@ export default function ProfileScreen() {
         if (error) throw error;
         
         setUsername(data.user?.user_metadata?.username || data.user?.email?.split('@')[0] || 'User');
+        setProfileImage(data.user?.user_metadata?.profile_image || null);
         setUserData(data.user);
         setIsLoggedIn(true);
-        
-        // Clear password for security
         setPassword('');
       }
     } catch (error: any) {
@@ -129,6 +173,9 @@ export default function ProfileScreen() {
               setEmail('');
               setPassword('');
               setUserData(null);
+              setProfileImage(null);
+              setScanHistory([]);
+              setTotalScans(0);
             } catch (error: any) {
               Alert.alert('Error', error.message || 'Logout failed');
             } finally {
@@ -160,11 +207,73 @@ export default function ProfileScreen() {
     );
   };
 
+  const handleProfileImagePick = async () => {
+    try {
+      const result = await launchImageLibrary({
+        mediaType: 'photo',
+        quality: 0.7,
+        maxWidth: 400,
+        maxHeight: 400,
+      });
+
+      if (result.assets && result.assets[0].uri) {
+        const imageUri = result.assets[0].uri;
+        setProfileImage(imageUri);
+        
+        // Update user metadata
+        const { error } = await supabase.auth.updateUser({
+          data: { profile_image: imageUri }
+        });
+        
+        if (error) throw error;
+        Alert.alert('Success', 'Profile picture updated!');
+      }
+    } catch (error) {
+      console.error('Error picking image:', error);
+      Alert.alert('Error', 'Failed to update profile picture');
+    }
+  };
+
+  const handleUpdateProfile = async () => {
+    if (!editUsername.trim()) {
+      Alert.alert('Error', 'Username cannot be empty');
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.updateUser({
+        data: { username: editUsername }
+      });
+
+      if (error) throw error;
+      
+      setUsername(editUsername);
+      setShowEditProfile(false);
+      Alert.alert('Success', 'Profile updated successfully!');
+    } catch (error: any) {
+      Alert.alert('Error', error.message || 'Failed to update profile');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric', 
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
   // Loading state
   if (isLoading && !isLoggedIn) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#FDB813" />
+        <ActivityIndicator size="large" color={COLORS.primary} />
         <Text style={styles.loadingText}>Loading...</Text>
       </View>
     );
@@ -173,113 +282,119 @@ export default function ProfileScreen() {
   // Login/Signup Screen
   if (!isLoggedIn) {
     return (
-      <ScrollView 
-        style={styles.container} 
-        contentContainerStyle={styles.contentContainer}
-        keyboardShouldPersistTaps="handled"
+      <KeyboardAvoidingView 
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       >
-        <View style={styles.formCard}>
-          <View style={styles.logoContainer}>
-            <View style={styles.logoCircle}>
-              <Icon name="chef-hat" size={48} color="#FDB813" />
+        <ScrollView 
+          style={styles.container}
+          contentContainerStyle={styles.authContainer}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.formCard}>
+            <View style={styles.logoContainer}>
+              <View style={styles.logoCircle}>
+                <Icon name="nutrition-outline" size={56} color={COLORS.primary} />
+              </View>
+              <Text style={styles.appName}>NutriSnap</Text>
             </View>
-            <Text style={styles.appName}>Smart Cooking</Text>
-            <Text style={styles.tagline}>Discover Nepali Flavors</Text>
-          </View>
 
-          <Text style={styles.formTitle}>
-            {isSignup ? 'Create Account' : 'Welcome Back'}
-          </Text>
-          <Text style={styles.formSubtitle}>
-            {isSignup ? 'Sign up to save your recipes' : 'Sign in to continue'}
-          </Text>
+            <Text style={styles.formTitle}>
+              {isSignup ? 'Create Account' : 'Welcome Back'}
+            </Text>
+            <Text style={styles.formSubtitle}>
+              {isSignup ? 'Sign up to track your scans' : 'Sign in to continue'}
+            </Text>
 
-          {isSignup && (
+            {isSignup && (
+              <View style={styles.inputWrapper}>
+                <Icon name="person-outline" size={20} color="#718096" style={styles.inputIcon} />
+                <TextInput
+                  style={styles.input}
+                  placeholder="Username"
+                  value={username}
+                  onChangeText={setUsername}
+                  autoCapitalize="none"
+                  placeholderTextColor="#A0AEC0"
+                />
+              </View>
+            )}
+
             <View style={styles.inputWrapper}>
-              <Icon name="account-outline" size={22} color="#777" style={styles.inputIcon} />
+              <Icon name="mail-outline" size={20} color="#718096" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
-                placeholder="Username"
-                value={username}
-                onChangeText={setUsername}
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
                 autoCapitalize="none"
-                placeholderTextColor="#aaa"
+                autoComplete="email"
+                placeholderTextColor="#A0AEC0"
               />
             </View>
-          )}
 
-          <View style={styles.inputWrapper}>
-            <Icon name="email-outline" size={22} color="#777" style={styles.inputIcon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Email"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              autoComplete="email"
-              placeholderTextColor="#aaa"
-            />
-          </View>
-
-          <View style={styles.inputWrapper}>
-            <Icon name="lock-outline" size={22} color="#777" style={styles.inputIcon} />
-            <TextInput
-              style={styles.input}
-              placeholder="Password (min 6 characters)"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!showPassword}
-              autoComplete="password"
-              placeholderTextColor="#aaa"
-            />
-            <TouchableOpacity 
-              onPress={() => setShowPassword(!showPassword)}
-              style={styles.eyeIcon}
-            >
-              <Icon 
-                name={showPassword ? 'eye-off' : 'eye'} 
-                size={22} 
-                color="#777" 
+            <View style={styles.inputWrapper}>
+              <Icon name="lock-closed-outline" size={20} color="#718096" style={styles.inputIcon} />
+              <TextInput
+                style={styles.input}
+                placeholder="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+                autoComplete="password"
+                placeholderTextColor="#A0AEC0"
               />
-            </TouchableOpacity>
-          </View>
+              <TouchableOpacity 
+                onPress={() => setShowPassword(!showPassword)}
+                style={styles.eyeIcon}
+              >
+                <Icon 
+                  name={showPassword ? 'eye-off-outline' : 'eye-outline'} 
+                  size={20} 
+                  color="#718096" 
+                />
+              </TouchableOpacity>
+            </View>
 
-          {!isSignup && (
-            <TouchableOpacity 
-              style={styles.forgotLink}
-              onPress={handleForgotPassword}
-            >
-              <Text style={styles.forgotText}>Forgot password?</Text>
-            </TouchableOpacity>
-          )}
-
-          <TouchableOpacity 
-            style={styles.primaryButton} 
-            onPress={handleAuth}
-            disabled={isLoading}
-          >
-            {isLoading ? (
-              <ActivityIndicator color="#000" />
-            ) : (
-              <Text style={styles.buttonText}>
-                {isSignup ? 'Sign Up' : 'Sign In'}
-              </Text>
+            {!isSignup && (
+              <TouchableOpacity 
+                style={styles.forgotLink}
+                onPress={handleForgotPassword}
+              >
+                <Text style={styles.forgotText}>Forgot password?</Text>
+              </TouchableOpacity>
             )}
-          </TouchableOpacity>
 
-          <View style={styles.switchRow}>
-            <Text style={styles.switchText}>
-              {isSignup ? 'Already have an account?' : "Don't have an account?"}
-            </Text>
-            <TouchableOpacity onPress={() => setIsSignup(!isSignup)}>
-              <Text style={styles.switchLink}>
-                {isSignup ? 'Sign In' : 'Sign Up'}
-              </Text>
+            <TouchableOpacity 
+              style={styles.primaryButton} 
+              onPress={handleAuth}
+              disabled={isLoading}
+              activeOpacity={0.85}
+            >
+              {isLoading ? (
+                <ActivityIndicator color="#FFFFFF" />
+              ) : (
+                <Text style={styles.buttonText}>
+                  {isSignup ? 'Sign Up' : 'Sign In'}
+                </Text>
+              )}
             </TouchableOpacity>
+
+            <View style={styles.switchRow}>
+              <Text style={styles.switchText}>
+                {isSignup ? 'Already have an account?' : "Don't have an account?"}
+              </Text>
+              <TouchableOpacity onPress={() => setIsSignup(!isSignup)}>
+                <Text style={styles.switchLink}>
+                  {isSignup ? 'Sign In' : 'Sign Up'}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 
@@ -287,19 +402,27 @@ export default function ProfileScreen() {
   return (
     <ScrollView 
       style={styles.container} 
-      contentContainerStyle={styles.contentContainer}
+      contentContainerStyle={styles.profileContainer}
       showsVerticalScrollIndicator={false}
     >
-      <View style={styles.topGradient} />
+      <View style={styles.headerGradient} />
 
       <View style={styles.profileHeader}>
         <View style={styles.avatarContainer}>
           <Image
-            source={{ uri: `https://ui-avatars.com/api/?name=${username}&size=200&background=FDB813&color=fff&bold=true` }}
+            source={
+              profileImage 
+                ? { uri: profileImage }
+                : { uri: `https://ui-avatars.com/api/?name=${username}&size=200&background=FDB813&color=fff&bold=true` }
+            }
             style={styles.avatar}
           />
-          <TouchableOpacity style={styles.editAvatarButton}>
-            <Icon name="camera" size={18} color="#fff" />
+          <TouchableOpacity 
+            style={styles.editAvatarButton}
+            onPress={handleProfileImagePick}
+            activeOpacity={0.8}
+          >
+            <Icon name="camera" size={20} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
         
@@ -308,81 +431,102 @@ export default function ProfileScreen() {
         
         {userData?.email_confirmed_at ? (
           <View style={styles.verifiedBadge}>
-            <Icon name="check-decagram" size={16} color="#4CAF50" />
+            <Icon name="checkmark-circle" size={16} color="#48BB78" />
             <Text style={styles.verifiedText}>Verified</Text>
           </View>
         ) : (
           <View style={styles.unverifiedBadge}>
-            <Icon name="alert-circle" size={16} color="#FF9800" />
+            <Icon name="alert-circle-outline" size={16} color="#FF9800" />
             <Text style={styles.unverifiedText}>Email not verified</Text>
           </View>
         )}
       </View>
 
-      {/* Stats Cards */}
-      <View style={styles.statsContainer}>
-        <View style={[styles.statCard, { backgroundColor: '#FDB813' }]}>
-          <Icon name="camera" size={28} color="#fff" />
-          <Text style={styles.statNumber}>0</Text>
-          <Text style={styles.statLabel}>Scans</Text>
-        </View>
-        <View style={[styles.statCard, { backgroundColor: '#4CAF50' }]}>
-          <Icon name="book-open-variant" size={28} color="#fff" />
-          <Text style={styles.statNumber}>0</Text>
-          <Text style={styles.statLabel}>Saved</Text>
-        </View>
-        <View style={[styles.statCard, { backgroundColor: '#2196F3' }]}>
-          <Icon name="fire" size={28} color="#fff" />
-          <Text style={styles.statNumber}>0</Text>
-          <Text style={styles.statLabel}>Streak</Text>
-        </View>
-      </View>
-
-      {/* Quick Actions */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Quick Actions</Text>
-        <View style={styles.quickActions}>
-          <TouchableOpacity style={styles.quickActionButton}>
-            <Icon name="history" size={24} color="#FDB813" />
-            <Text style={styles.quickActionText}>History</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.quickActionButton}>
-            <Icon name="heart" size={24} color="#e74c3c" />
-            <Text style={styles.quickActionText}>Favorites</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.quickActionButton}>
-            <Icon name="food-apple" size={24} color="#4CAF50" />
-            <Text style={styles.quickActionText}>Diet Plan</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
       {/* Settings Options */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Settings</Text>
         <View style={styles.optionsList}>
-          {[
-            { icon: 'account-edit', color: '#5A67D8', label: 'Edit Profile' },
-            { icon: 'bell-ring', color: '#FDB813', label: 'Notifications' },
-            { icon: 'shield-check', color: '#4CAF50', label: 'Privacy & Security' },
-            { icon: 'food-variant', color: '#FF9800', label: 'Dietary Preferences' },
-            { icon: 'help-circle', color: '#2196F3', label: 'Help & Support' },
-            { icon: 'information', color: '#9C27B0', label: 'About' },
-          ].map((item, index) => (
-            <TouchableOpacity 
-              key={index} 
-              style={styles.optionItem}
-              onPress={() => Alert.alert('Coming Soon', `${item.label} feature will be available soon!`)}
-            >
-              <View style={styles.optionLeft}>
-                <View style={[styles.iconCircle, { backgroundColor: `${item.color}20` }]}>
-                  <Icon name={item.icon} size={22} color={item.color} />
-                </View>
-                <Text style={styles.optionLabel}>{item.label}</Text>
+          <TouchableOpacity 
+            style={styles.optionItem}
+            onPress={() => {
+              setEditUsername(username);
+              setShowEditProfile(true);
+            }}
+            activeOpacity={0.7}
+          >
+            <View style={styles.optionLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#E8EAF6' }]}>
+                <Icon name="person-outline" size={22} color="#5A67D8" />
               </View>
-              <Icon name="chevron-right" size={20} color="#ccc" />
-            </TouchableOpacity>
-          ))}
+              <Text style={styles.optionLabel}>Edit Profile</Text>
+            </View>
+            <Icon name="chevron-forward" size={22} color="#CBD5E0" />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.optionItem}
+            onPress={() => {
+              setShowHistory(true);
+              fetchScanHistory();
+            }}
+            activeOpacity={0.7}
+          >
+            <View style={styles.optionLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#FFF9E6' }]}>
+                <Icon name="time-outline" size={22} color={COLORS.primary} />
+              </View>
+              <Text style={styles.optionLabel}>Scan History</Text>
+            </View>
+            <View style={styles.optionRight}>
+              {totalScans > 0 && (
+                <View style={styles.countBadge}>
+                  <Text style={styles.countText}>{totalScans}</Text>
+                </View>
+              )}
+              <Icon name="chevron-forward" size={22} color="#CBD5E0" />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.optionItem}
+            onPress={() => Alert.alert('Notifications', 'Notification settings coming soon!')}
+            activeOpacity={0.7}
+          >
+            <View style={styles.optionLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#FFF3E0' }]}>
+                <Icon name="notifications-outline" size={22} color="#FF9800" />
+              </View>
+              <Text style={styles.optionLabel}>Notifications</Text>
+            </View>
+            <Icon name="chevron-forward" size={22} color="#CBD5E0" />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={styles.optionItem}
+            onPress={() => Alert.alert('Help & Support', 'Contact us at support@nutrisnap.com\n\nWe\'re here to help!')}
+            activeOpacity={0.7}
+          >
+            <View style={styles.optionLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#E3F2FD' }]}>
+                <Icon name="help-circle-outline" size={22} color="#2196F3" />
+              </View>
+              <Text style={styles.optionLabel}>Help & Support</Text>
+            </View>
+            <Icon name="chevron-forward" size={22} color="#CBD5E0" />
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={[styles.optionItem, { borderBottomWidth: 0 }]}
+            onPress={() => Alert.alert('About NutriSnap', 'Version 1.0.0\n\nDiscover authentic Nepali recipes by scanning ingredients.\n\n© 2026 NutriSnap')}
+            activeOpacity={0.7}
+          >
+            <View style={styles.optionLeft}>
+              <View style={[styles.iconCircle, { backgroundColor: '#F3E5F5' }]}>
+                <Icon name="information-circle-outline" size={22} color="#9C27B0" />
+              </View>
+              <Text style={styles.optionLabel}>About</Text>
+            </View>
+            <Icon name="chevron-forward" size={22} color="#CBD5E0" />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -391,18 +535,113 @@ export default function ProfileScreen() {
         style={styles.logoutButton} 
         onPress={handleLogout}
         disabled={isLoading}
+        activeOpacity={0.8}
       >
         {isLoading ? (
-          <ActivityIndicator color="#e74c3c" />
+          <ActivityIndicator color="#E53E3E" />
         ) : (
           <>
-            <Icon name="logout" size={20} color="#e74c3c" />
+            <Icon name="log-out-outline" size={22} color="#E53E3E" />
             <Text style={styles.logoutText}>Log Out</Text>
           </>
         )}
       </TouchableOpacity>
 
-      <View style={{ height: 40 }} />
+      {/* Edit Profile Modal */}
+      <Modal
+        visible={showEditProfile}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowEditProfile(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Edit Profile</Text>
+              <TouchableOpacity onPress={() => setShowEditProfile(false)}>
+                <Icon name="close" size={28} color="#4A5568" />
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.modalBody}>
+              <Text style={styles.modalLabel}>Username</Text>
+              <TextInput
+                style={styles.modalInput}
+                value={editUsername}
+                onChangeText={setEditUsername}
+                placeholder="Enter username"
+                placeholderTextColor="#A0AEC0"
+              />
+
+              <TouchableOpacity 
+                style={styles.modalButton}
+                onPress={handleUpdateProfile}
+                disabled={isLoading}
+                activeOpacity={0.85}
+              >
+                {isLoading ? (
+                  <ActivityIndicator color="#FFFFFF" />
+                ) : (
+                  <Text style={styles.modalButtonText}>Save Changes</Text>
+                )}
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Scan History Modal */}
+      <Modal
+        visible={showHistory}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowHistory(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalHeader}>
+              <Text style={styles.modalTitle}>Scan History</Text>
+              <TouchableOpacity onPress={() => setShowHistory(false)}>
+                <Icon name="close" size={28} color="#4A5568" />
+              </TouchableOpacity>
+            </View>
+
+            <FlatList
+              data={scanHistory}
+              keyExtractor={(item) => item.id}
+              contentContainerStyle={styles.historyList}
+              showsVerticalScrollIndicator={false}
+              ListEmptyComponent={
+                <View style={styles.emptyHistory}>
+                  <Icon name="scan-outline" size={64} color="#CBD5E0" />
+                  <Text style={styles.emptyHistoryText}>No scan history yet</Text>
+                  <Text style={styles.emptyHistorySubtext}>
+                    Start scanning ingredients to see your history here
+                  </Text>
+                </View>
+              }
+              renderItem={({ item }) => (
+                <View style={styles.historyItem}>
+                  <View style={styles.historyIconContainer}>
+                    <Icon name="nutrition-outline" size={24} color={COLORS.primary} />
+                  </View>
+                  <View style={styles.historyContent}>
+                    <Text style={styles.historyIngredients}>
+                      {item.ingredients.join(', ')}
+                    </Text>
+                    <Text style={styles.historyDate}>{formatDate(item.created_at)}</Text>
+                  </View>
+                  <View style={styles.historyBadge}>
+                    <Text style={styles.historyBadgeText}>{item.ingredients.length}</Text>
+                  </View>
+                </View>
+              )}
+            />
+          </View>
+        </View>
+      </Modal>
+
+      <View style={{ height: TAB_BAR_HEIGHT + 20 }} />
     </ScrollView>
   );
 }
@@ -410,212 +649,218 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: '#f8fafc' 
+    backgroundColor: COLORS.background,
   },
-  contentContainer: { 
-    flexGrow: 1, 
-    paddingBottom: 120 
+  authContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    paddingVertical: 20,
+    paddingBottom: TAB_BAR_HEIGHT + 40,
+  },
+  profileContainer: {
+    flexGrow: 1,
+    paddingBottom: TAB_BAR_HEIGHT + 40,
   },
   loadingContainer: { 
     flex: 1, 
     justifyContent: 'center', 
     alignItems: 'center',
-    backgroundColor: '#f8fafc'
+    backgroundColor: COLORS.background,
   },
   loadingText: { 
     marginTop: 16, 
     fontSize: 16, 
-    color: '#695a44',
-    fontWeight: '600' 
+    color: COLORS.text.muted,
+    fontWeight: '600',
   },
 
   // Auth Screen Styles
   formCard: { 
-    flex: 1,
-    justifyContent: 'center', 
-    backgroundColor: '#fff', 
-    borderRadius: 24, 
-    padding: 32, 
+    backgroundColor: COLORS.white,
+    borderRadius: 24,
+    padding: 28,
     marginHorizontal: 20,
-    marginVertical: 40, 
-    shadowColor: '#000', 
-    shadowOffset: { width: 0, height: 8 }, 
-    shadowOpacity: 0.12, 
-    shadowRadius: 24, 
-    elevation: 10 
+    marginTop: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 8,
   },
   logoContainer: { 
     alignItems: 'center', 
-    marginBottom: 40 
+    marginBottom: 32,
   },
   logoCircle: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
     backgroundColor: '#FFF9E6',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
     borderWidth: 3,
-    borderColor: '#FDB813',
+    borderColor: COLORS.primary,
   },
   appName: { 
-    fontSize: 28, 
-    fontWeight: '800', 
-    color: '#695a44',
-    letterSpacing: 0.5
-  },
-  tagline: {
-    fontSize: 14,
-    color: '#999',
-    marginTop: 4,
-    fontWeight: '500'
+    fontSize: 32,
+    fontWeight: '700',
+    color: COLORS.text.primary,
+    letterSpacing: 0.5,
   },
   formTitle: { 
-    fontSize: 28, 
-    fontWeight: '800', 
-    color: '#1a202c', 
-    textAlign: 'center', 
-    marginBottom: 8 
+    fontSize: 24,
+    fontWeight: '700',
+    color: COLORS.text.primary,
+    textAlign: 'center',
+    marginBottom: 6,
   },
   formSubtitle: { 
-    fontSize: 15, 
-    color: '#718096', 
-    textAlign: 'center', 
-    marginBottom: 32 
+    fontSize: 14,
+    color: COLORS.text.muted,
+    textAlign: 'center',
+    marginBottom: 24,
   },
   inputWrapper: { 
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    backgroundColor: '#f7fafc', 
-    borderRadius: 12, 
-    borderWidth: 1.5, 
-    borderColor: '#e2e8f0', 
-    marginBottom: 16 
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.background,
+    borderRadius: 12,
+    borderWidth: 1.5,
+    borderColor: COLORS.border,
+    marginBottom: 14,
+    paddingHorizontal: 4,
   },
   inputIcon: { 
-    paddingLeft: 16 
+    paddingLeft: 12,
+    paddingRight: 8,
   },
   input: { 
-    flex: 1, 
-    paddingVertical: 16, 
-    paddingRight: 16, 
-    fontSize: 16, 
-    color: '#1a202c',
-    fontWeight: '500' 
+    flex: 1,
+    paddingVertical: 14,
+    paddingRight: 12,
+    fontSize: 15,
+    color: COLORS.text.secondary,
+    fontWeight: '500',
   },
   eyeIcon: {
-    paddingRight: 16,
-    paddingLeft: 8,
+    paddingHorizontal: 12,
   },
   forgotLink: { 
-    alignSelf: 'flex-end', 
-    marginBottom: 24,
-    marginTop: -8 
+    alignSelf: 'flex-end',
+    marginBottom: 20,
+    marginTop: -6,
   },
   forgotText: { 
-    color: '#FDB813', 
-    fontSize: 14, 
-    fontWeight: '700' 
+    color: COLORS.primary,
+    fontSize: 13,
+    fontWeight: '700',
   },
   primaryButton: { 
-    backgroundColor: '#FDB813', 
-    borderRadius: 12, 
-    paddingVertical: 18, 
-    alignItems: 'center', 
-    marginBottom: 24,
-    shadowColor: '#FDB813',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 6,
+    backgroundColor: COLORS.primary,
+    borderRadius: 14,
+    paddingVertical: 16,
+    alignItems: 'center',
+    marginBottom: 20,
+    shadowColor: COLORS.primary,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
+    shadowRadius: 10,
+    elevation: 8,
   },
   buttonText: { 
-    color: '#000', 
-    fontSize: 18, 
-    fontWeight: '800',
-    letterSpacing: 0.5 
+    color: COLORS.white,
+    fontSize: 17,
+    fontWeight: '700',
+    letterSpacing: 0.3,
   },
   switchRow: { 
-    flexDirection: 'row', 
-    justifyContent: 'center', 
-    marginTop: 8,
-    gap: 8 
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 4,
+    gap: 6,
   },
   switchText: { 
-    color: '#718096', 
-    fontSize: 15,
-    fontWeight: '500' 
+    color: COLORS.text.muted,
+    fontSize: 14,
+    fontWeight: '500',
   },
   switchLink: { 
-    color: '#FDB813', 
-    fontWeight: '800' 
+    color: COLORS.primary,
+    fontWeight: '700',
+    fontSize: 14,
   },
 
   // Profile Screen Styles
-  topGradient: { 
-    height: 120, 
-    backgroundColor: '#FDB813', 
-    opacity: 0.08 
+  headerGradient: { 
+    height: 100,
+    backgroundColor: COLORS.primary,
+    opacity: 0.08,
   },
   profileHeader: { 
-    alignItems: 'center', 
-    marginBottom: 32, 
-    marginTop: -60,
-    paddingHorizontal: 24 
+    alignItems: 'center',
+    marginBottom: 32,
+    marginTop: -50,
+    paddingHorizontal: 24,
   },
   avatarContainer: {
     position: 'relative',
     marginBottom: 16,
   },
   avatar: { 
-    width: 120, 
-    height: 120, 
-    borderRadius: 60, 
-    borderWidth: 4, 
-    borderColor: '#fff',
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    borderWidth: 4,
+    borderColor: COLORS.white,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
+    shadowOpacity: 0.18,
+    shadowRadius: 12,
     elevation: 8,
   },
   editAvatarButton: {
     position: 'absolute',
     bottom: 0,
     right: 0,
-    backgroundColor: '#FDB813',
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    backgroundColor: COLORS.primary,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 3,
-    borderColor: '#fff',
+    borderColor: COLORS.white,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
   },
   profileName: { 
-    fontSize: 28, 
-    fontWeight: '800', 
-    color: '#1a202c',
-    marginBottom: 4 
+    fontSize: 28,
+    fontWeight: '700',
+    color: COLORS.text.primary,
+    marginBottom: 4,
   },
   profileEmail: {
     fontSize: 15,
-    color: '#718096',
+    color: COLORS.text.muted,
     marginBottom: 12,
-    fontWeight: '500'
+    fontWeight: '500',
   },
   verifiedBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#E8F5E9',
+    backgroundColor: '#E6F7ED',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
     gap: 6,
   },
   verifiedText: {
-    color: '#4CAF50',
+    color: '#48BB78',
     fontSize: 13,
     fontWeight: '700',
   },
@@ -633,93 +878,40 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
   },
-  statsContainer: { 
-    flexDirection: 'row', 
-    justifyContent: 'space-between', 
-    marginBottom: 32,
-    paddingHorizontal: 24,
-    gap: 12 
-  },
-  statCard: { 
-    flex: 1, 
-    borderRadius: 16, 
-    paddingVertical: 24, 
-    alignItems: 'center', 
-    shadowColor: '#000', 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.1, 
-    shadowRadius: 8, 
-    elevation: 4 
-  },
-  statNumber: { 
-    fontSize: 28, 
-    fontWeight: '800', 
-    color: '#fff',
-    marginTop: 8 
-  },
-  statLabel: { 
-    fontSize: 13, 
-    color: '#fff', 
-    marginTop: 4,
-    fontWeight: '600',
-    opacity: 0.9 
-  },
   section: {
-    marginBottom: 32,
+    marginBottom: 24,
     paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#1a202c',
-    marginBottom: 16,
-  },
-  quickActions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    gap: 12,
-  },
-  quickActionButton: {
-    flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    paddingVertical: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
-  },
-  quickActionText: {
-    fontSize: 13,
-    fontWeight: '700',
-    color: '#4a5568',
-    marginTop: 8,
   },
   optionsList: { 
-    backgroundColor: '#fff', 
-    borderRadius: 16, 
+    backgroundColor: COLORS.white,
+    borderRadius: 16,
     overflow: 'hidden',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 5,
+    borderWidth: 1,
+    borderColor: COLORS.border,
   },
   optionItem: { 
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 18, 
-    paddingHorizontal: 20, 
-    borderBottomWidth: 1, 
-    borderBottomColor: '#f1f5f9' 
+    paddingVertical: 18,
+    paddingHorizontal: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
   },
   optionLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
+  },
+  optionRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
   },
   iconCircle: {
     width: 44,
@@ -731,20 +923,33 @@ const styles = StyleSheet.create({
   },
   optionLabel: { 
     flex: 1,
-    fontSize: 16, 
-    color: '#1a202c', 
-    fontWeight: '600' 
+    fontSize: 16,
+    color: COLORS.text.secondary,
+    fontWeight: '600',
+  },
+  countBadge: {
+    backgroundColor: COLORS.primary,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    minWidth: 28,
+    alignItems: 'center',
+  },
+  countText: {
+    color: COLORS.white,
+    fontSize: 13,
+    fontWeight: '700',
   },
   logoutButton: { 
-    flexDirection: 'row', 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    backgroundColor: '#fff', 
-    borderRadius: 16, 
-    paddingVertical: 18, 
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.white,
+    borderRadius: 14,
+    paddingVertical: 18,
     marginHorizontal: 24,
-    borderWidth: 2, 
-    borderColor: '#fee',
+    borderWidth: 2,
+    borderColor: '#FEE2E2',
     gap: 12,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -753,8 +958,136 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   logoutText: { 
-    color: '#e74c3c', 
-    fontSize: 17, 
-    fontWeight: '800' 
+    color: '#E53E3E',
+    fontSize: 17,
+    fontWeight: '700',
+  },
+
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalContent: {
+    backgroundColor: COLORS.white,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    maxHeight: '80%',
+    paddingBottom: 40,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.border,
+  },
+  modalTitle: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: COLORS.text.primary,
+  },
+  modalBody: {
+    padding: 24,
+  },
+  modalLabel: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: COLORS.text.secondary,
+    marginBottom: 10,
+  },
+  modalInput: {
+    backgroundColor: COLORS.background,
+    borderRadius: 12,
+    borderWidth: 1.5,
+    borderColor: COLORS.border,
+    paddingVertical: 16,
+    paddingHorizontal: 16,
+    fontSize: 16,
+    color: COLORS.text.secondary,
+    fontWeight: '500',
+    marginBottom: 24,
+  },
+  modalButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 12,
+    paddingVertical: 16,
+    alignItems: 'center',
+  },
+  modalButtonText: {
+    color: COLORS.white,
+    fontSize: 17,
+    fontWeight: '700',
+  },
+
+  // History Styles
+  historyList: {
+    padding: 24,
+  },
+  historyItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.background,
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  historyIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: '#FFF9E6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  historyContent: {
+    flex: 1,
+  },
+  historyIngredients: {
+    fontSize: 15,
+    fontWeight: '600',
+    color: COLORS.text.secondary,
+    marginBottom: 4,
+  },
+  historyDate: {
+    fontSize: 13,
+    color: COLORS.text.muted,
+    fontWeight: '500',
+  },
+  historyBadge: {
+    backgroundColor: COLORS.primary,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    minWidth: 28,
+    alignItems: 'center',
+  },
+  historyBadgeText: {
+    color: COLORS.white,
+    fontSize: 13,
+    fontWeight: '700',
+  },
+  emptyHistory: {
+    alignItems: 'center',
+    paddingVertical: 60,
+    paddingHorizontal: 40,
+  },
+  emptyHistoryText: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: COLORS.text.secondary,
+    marginTop: 16,
+    marginBottom: 8,
+  },
+  emptyHistorySubtext: {
+    fontSize: 14,
+    color: COLORS.text.muted,
+    textAlign: 'center',
+    lineHeight: 20,
   },
 });

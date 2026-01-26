@@ -37,4 +37,5 @@ target 'SmartCookingStable' do
       # :ccache_enabled => true
     )
   end
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 end
