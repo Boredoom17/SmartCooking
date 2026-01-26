@@ -9,6 +9,9 @@ import ProfileScreen from './ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
+// Export this constant so all screens can use it
+export const TAB_BAR_HEIGHT = 80;
+
 function CustomTabBar({ state, navigation }: any) {
   return (
     <View style={styles.tabBar}>
@@ -16,8 +19,8 @@ function CustomTabBar({ state, navigation }: any) {
         const isFocused = state.index === index;
         const iconName =
           route.name === 'Home' ? 'home' :
-          route.name === 'Scan' ? 'barcode-scan' :
-          'account';
+          route.name === 'Scan' ? 'camera' :
+          'account-circle';
 
         const onPress = () => {
           navigation.navigate(route.name);
@@ -60,7 +63,13 @@ export default function MainTabs() {
   return (
     <Tab.Navigator
       tabBar={(props) => <CustomTabBar {...props} />}
-      screenOptions={{ headerShown: false }}
+      screenOptions={{ 
+        headerShown: false,
+        tabBarStyle: {
+          position: 'absolute',
+          height: TAB_BAR_HEIGHT,
+        },
+      }}
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Scan" component={ScanScreen} />
@@ -75,7 +84,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderTopWidth: 1,
     borderTopColor: '#EEEEEE',
-    height: 80,
+    height: TAB_BAR_HEIGHT,
     position: 'absolute',
     bottom: 0,
     left: 0,
