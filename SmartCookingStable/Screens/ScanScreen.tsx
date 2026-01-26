@@ -13,7 +13,7 @@ import {
 import { launchCamera } from 'react-native-image-picker';
 import { request, check, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TAB_BAR_HEIGHT } from './MainTabs';
+import { TAB_BAR_HEIGHT } from './constants';
 
 const ScanScreen = ({ navigation }: any) => {
   const [imageUri, setImageUri] = useState<string | null>(null);

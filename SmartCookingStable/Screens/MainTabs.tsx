@@ -6,11 +6,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeScreen from './HomeScreen';
 import ScanScreen from './ScanScreen';
 import ProfileScreen from './ProfileScreen';
-
 const Tab = createBottomTabNavigator();
 
 // Export this constant so all screens can use it
-export const TAB_BAR_HEIGHT = 80;
+import { TAB_BAR_HEIGHT } from './constants';
 
 function CustomTabBar({ state, navigation }: any) {
   return (
