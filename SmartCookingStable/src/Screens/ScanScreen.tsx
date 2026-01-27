@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -16,12 +15,16 @@ import { launchCamera } from 'react-native-image-picker';
 import { request, check, PERMISSIONS, RESULTS, openSettings } from 'react-native-permissions';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { TAB_BAR_HEIGHT, COLORS } from '../constants';
-import { convertImageToBase64, detectIngredients, DetectionResult } from '../api/inference';
+import { convertImageToBase64, detectIngredients } from '../api/inference';
 import { findRecipesByIngredients, RecipeMatch } from '../api/supabase';
 import { saveScanHistory } from '../api/scanHistory';
 import { supabase } from '../api/supabase';
 
-const ScanScreen = ({ navigation }: any) => {
+interface ScanScreenProps {
+  navigation: any;
+}
+
+const ScanScreen: React.FC<ScanScreenProps> = ({ navigation }) => {
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [newIngredient, setNewIngredient] = useState('');
@@ -32,63 +35,51 @@ const ScanScreen = ({ navigation }: any) => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
-  // SUPER AGGRESSIVE emoji cleaner
-  const cleanAllEmojis = useCallback((text: string): string => {
+  // Simplified emoji cleaner - more efficient
+  const cleanText = useCallback((text: string): string => {
     if (!text || typeof text !== 'string') return '';
     
-    // First, remove all Unicode emoji ranges
-    let cleaned = text
-      .replace(/[\u{1F600}-\u{1F64F}]/gu, '')
-      .replace(/[\u{1F300}-\u{1F5FF}]/gu, '')
-      .replace(/[\u{1F680}-\u{1F6FF}]/gu, '')
-      .replace(/[\u{1F1E0}-\u{1F1FF}]/gu, '')
-      .replace(/[\u{2600}-\u{26FF}]/gu, '')
-      .replace(/[\u{2700}-\u{27BF}]/gu, '')
-      .replace(/[\u{1F900}-\u{1F9FF}]/gu, '')
-      .replace(/[\u{1FA70}-\u{1FAFF}]/gu, '')
-      .replace(/[\u{E000}-\u{F8FF}]/gu, '');
+    // Remove emojis using a simpler regex pattern
+    let cleaned = text.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, '');
     
-    // Remove zero-width joiners and variation selectors
-    cleaned = cleaned
-      .replace(/[\u200D\uFE0F\u200B\uFEFF]/g, '');
+    // Remove zero-width characters
+    cleaned = cleaned.replace(/[\u200B-\u200D\uFEFF]/g, '');
     
-    // Remove specific problematic patterns
-    cleaned = cleaned
-      .replace(/\b\d+(st|nd|rd|th)\s*[🚑👮‍♂️👨🚗👨❤️👨🤰🔢🎺🎷🎸🥁🏃‍♀️💃🧍‍♀️🚶‍♂️👫👬👭]/g, '')
-      .replace(/[🚑👮‍♂️👨🚗👨❤️👨🤰🔢🎺🎷🎸🥁🏃‍♀️💃🧍‍♀️🚶‍♂️👫👬👭]/g, '');
-    
-    // Clean up
-    cleaned = cleaned
-      .replace(/\s+/g, ' ')
-      .trim();
+    // Clean up whitespace
+    cleaned = cleaned.replace(/\s+/g, ' ').trim();
     
     return cleaned;
   }, []);
 
-  // Clean entire ingredients array
-  const cleanIngredientsArray = useCallback((items: string[]): string[] => {
-    return items
-      .map(cleanAllEmojis)
-      .filter(item => item.length > 0 && item.length < 50);
-  }, [cleanAllEmojis]);
-
-  // Check if user is logged in
-  useEffect(() => {
-    checkAuthStatus();
+  // Validate ingredient text
+  const isValidIngredient = useCallback((text: string): boolean => {
+    if (!text || text.length < 2 || text.length > 50) return false;
+    
+    // Check if it contains at least one letter
+    if (!/[a-zA-Z]/.test(text)) return false;
+    
+    // Reject if it's only numbers or special characters
+    if (/^[\d\s\W]+$/.test(text)) return false;
+    
+    return true;
   }, []);
 
-  // Listen for navigation focus to recheck auth
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      checkAuthStatus();
-    });
-    return unsubscribe;
-  }, [navigation]);
+  // Clean array of ingredients
+  const cleanIngredientsArray = useCallback((items: string[]): string[] => {
+    return items
+      .map(cleanText)
+      .filter(isValidIngredient)
+      .filter((item, index, self) => 
+        // Remove duplicates (case-insensitive)
+        self.findIndex(i => i.toLowerCase() === item.toLowerCase()) === index
+      );
+  }, [cleanText, isValidIngredient]);
 
-  const checkAuthStatus = async () => {
+  // Check authentication status
+  const checkAuthStatus = useCallback(async () => {
     try {
       const { data: { session } } = await supabase.auth.getSession();
-      console.log('🔍 ScanScreen auth check:', session?.user?.id);
+      console.log('🔍 Auth check:', session?.user?.id ? 'Logged in' : 'Not logged in');
       setIsUserLoggedIn(!!session?.user);
     } catch (error) {
       console.error('Auth check error:', error);
@@ -96,22 +87,22 @@ const ScanScreen = ({ navigation }: any) => {
     } finally {
       setIsCheckingAuth(false);
     }
-  };
-
-  // Check permission on mount AND clean any existing ingredients
-  useEffect(() => {
-    checkCameraPermission();
-    
-    if (ingredients.length > 0) {
-      const cleaned = cleanIngredientsArray(ingredients);
-      if (JSON.stringify(cleaned) !== JSON.stringify(ingredients)) {
-        setIngredients(cleaned);
-      }
-    }
   }, []);
 
-  // Check current permission status
-  const checkCameraPermission = async () => {
+  // Initial setup
+  useEffect(() => {
+    checkAuthStatus();
+    checkCameraPermission();
+  }, []);
+
+  // Listen for navigation focus
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', checkAuthStatus);
+    return unsubscribe;
+  }, [navigation, checkAuthStatus]);
+
+  // Check camera permission
+  const checkCameraPermission = async (): Promise<string> => {
     try {
       const permission = Platform.OS === 'ios' 
         ? PERMISSIONS.IOS.CAMERA 
@@ -121,13 +112,13 @@ const ScanScreen = ({ navigation }: any) => {
       setPermissionStatus(result);
       return result;
     } catch (error) {
-      console.log('Permission check error:', error);
+      console.error('Permission check error:', error);
       return RESULTS.UNAVAILABLE;
     }
   };
 
-  // Request camera permission with proper handling
-  const requestCameraPermission = async () => {
+  // Request camera permission
+  const requestCameraPermission = async (): Promise<boolean> => {
     try {
       const permission = Platform.OS === 'ios' 
         ? PERMISSIONS.IOS.CAMERA 
@@ -142,16 +133,10 @@ const ScanScreen = ({ navigation }: any) => {
       if (currentStatus === RESULTS.BLOCKED) {
         Alert.alert(
           'Camera Permission Required',
-          'Camera permission is blocked. Please enable it in your device settings to scan food items.',
+          'Camera access is blocked. Please enable it in your device settings.',
           [
-            { 
-              text: 'Cancel', 
-              style: 'cancel' 
-            },
-            { 
-              text: 'Open Settings', 
-              onPress: () => openSettings() 
-            }
+            { text: 'Cancel', style: 'cancel' },
+            { text: 'Open Settings', onPress: () => openSettings() }
           ]
         );
         return false;
@@ -162,38 +147,28 @@ const ScanScreen = ({ navigation }: any) => {
       
       if (result === RESULTS.GRANTED) {
         return true;
-      } else if (result === RESULTS.BLOCKED || result === RESULTS.DENIED) {
+      }
+      
+      if (result === RESULTS.BLOCKED || result === RESULTS.DENIED) {
         Alert.alert(
           'Camera Permission Required',
-          'NutriSnap needs camera access to scan food items. Please enable camera permission in your device settings.',
+          'Please enable camera access in your device settings to scan food items.',
           [
-            { 
-              text: 'Cancel', 
-              style: 'cancel' 
-            },
-            { 
-              text: 'Open Settings', 
-              onPress: () => openSettings() 
-            }
+            { text: 'Cancel', style: 'cancel' },
+            { text: 'Open Settings', onPress: () => openSettings() }
           ]
         );
-        return false;
-      } else {
-        Alert.alert(
-          'Permission Required',
-          'Camera access is needed to scan food items.',
-          [{ text: 'OK' }]
-        );
-        return false;
       }
+      
+      return false;
     } catch (error) {
-      console.log('Permission error:', error);
+      console.error('Permission request error:', error);
       Alert.alert('Error', 'Failed to request camera permission. Please try again.');
       return false;
     }
   };
 
-  // Process image with Flask API
+  // Process image with API
   const processImage = async (uri: string) => {
     setIsProcessing(true);
     setIngredients([]);
@@ -210,52 +185,40 @@ const ScanScreen = ({ navigation }: any) => {
         throw new Error(detectionResult.error || 'Failed to detect ingredients');
       }
 
-      console.log('API Response:', detectionResult);
+      console.log('Detection result:', detectionResult);
       
-      let detectedItems = (detectionResult as any).detected_ingredients || [];
+      const rawIngredients = (detectionResult as any).detected_ingredients || [];
+      const cleanedIngredients = cleanIngredientsArray(rawIngredients);
       
-      detectedItems = detectedItems.map(cleanAllEmojis).filter((item: string) => {
-        return item && 
-               item.length > 1 && 
-               item.length < 30 &&
-               !item.match(/^\d+$/) &&
-               !item.match(/^[^a-zA-Z0-9]+$/) &&
-               !item.toLowerCase().includes('ambulance') &&
-               !item.toLowerCase().includes('police') &&
-               !item.toLowerCase().includes('pregnant') &&
-               !item.toLowerCase().includes('kiss');
-      });
-      
-      if (detectedItems.length > 0) {
-        setIngredients(detectedItems);
-        setIsIngredientsExpanded(false);
+      if (cleanedIngredients.length > 0) {
+        setIngredients(cleanedIngredients);
+        setIsIngredientsExpanded(true);
 
-        // Refresh auth status
+        // Refresh auth and save to history
         await checkAuthStatus();
-
-        // Save to scan history with image URI
-        saveScanHistory(detectedItems, uri).catch(err => 
-          console.log('Could not save scan history:', err)
+        
+        saveScanHistory(cleanedIngredients, uri).catch(err => 
+          console.warn('Could not save scan history:', err)
         );
 
         Alert.alert(
-          'Ingredients Detected!',
-          `Found ${detectedItems.length} ingredients. Tap "Find Recipes" to search.`,
+          'Ingredients Detected',
+          `Found ${cleanedIngredients.length} ingredient${cleanedIngredients.length !== 1 ? 's' : ''}. Review and tap "Find Recipes" to continue.`,
           [{ text: 'OK' }]
         );
       } else {
         Alert.alert(
           'No Ingredients Detected',
-          'Could not detect any valid ingredients in the image. Please try:\n• Better lighting\n• Clear background\n• Closer photo\n\nOr add ingredients manually below.',
+          'Could not detect valid ingredients. Try:\n\n• Better lighting\n• Clear background\n• Closer photo\n\nOr add ingredients manually.',
           [{ text: 'OK' }]
         );
       }
 
-    } catch (error) {
-      console.log('Processing error:', error);
+    } catch (error: any) {
+      console.error('Processing error:', error);
       Alert.alert(
-        'Error',
-        'Failed to process image. Please check:\n• Internet connection\n• Flask server is running\n• You are on the same WiFi network',
+        'Processing Error',
+        error.message || 'Failed to process image. Please check your internet connection and try again.',
         [{ text: 'OK' }]
       );
     } finally {
@@ -267,17 +230,10 @@ const ScanScreen = ({ navigation }: any) => {
   const handleStartScanning = async () => {
     const currentStatus = await checkCameraPermission();
     
-    let hasPermission = false;
+    const hasPermission = currentStatus === RESULTS.GRANTED || 
+                          await requestCameraPermission();
     
-    if (currentStatus === RESULTS.GRANTED) {
-      hasPermission = true;
-    } else {
-      hasPermission = await requestCameraPermission();
-    }
-    
-    if (!hasPermission) {
-      return;
-    }
+    if (!hasPermission) return;
 
     launchCamera(
       {
@@ -290,17 +246,15 @@ const ScanScreen = ({ navigation }: any) => {
         if (response.didCancel) {
           console.log('User cancelled camera');
         } else if (response.errorCode) {
-          console.log('Camera error:', response.errorCode, response.errorMessage);
+          console.error('Camera error:', response.errorCode, response.errorMessage);
           Alert.alert(
             'Camera Error', 
             response.errorMessage || 'Failed to open camera. Please try again.'
           );
-        } else if (response.assets && response.assets[0]) {
+        } else if (response.assets?.[0]?.uri) {
           const uri = response.assets[0].uri;
-          if (uri) {
-            setImageUri(uri);
-            processImage(uri);
-          }
+          setImageUri(uri);
+          processImage(uri);
         }
       }
     );
@@ -308,7 +262,7 @@ const ScanScreen = ({ navigation }: any) => {
 
   // Handle ingredient text change
   const handleIngredientChange = (text: string, index: number) => {
-    const cleanedText = cleanAllEmojis(text);
+    const cleanedText = cleanText(text);
     const updated = [...ingredients];
     updated[index] = cleanedText;
     setIngredients(updated);
@@ -316,20 +270,31 @@ const ScanScreen = ({ navigation }: any) => {
 
   // Remove ingredient
   const handleRemoveIngredient = (index: number) => {
-    const updated = ingredients.filter((_, i) => i !== index);
-    setIngredients(updated);
+    setIngredients(prev => prev.filter((_, i) => i !== index));
   };
 
   // Add new ingredient
   const handleAddIngredient = () => {
-    const trimmed = cleanAllEmojis(newIngredient);
-    if (trimmed && trimmed.length > 1) {
-      setIngredients([...ingredients, trimmed]);
+    const trimmed = cleanText(newIngredient);
+    if (isValidIngredient(trimmed)) {
+      // Check for duplicates
+      const isDuplicate = ingredients.some(
+        ing => ing.toLowerCase() === trimmed.toLowerCase()
+      );
+      
+      if (isDuplicate) {
+        Alert.alert('Duplicate', 'This ingredient is already in the list.');
+        return;
+      }
+      
+      setIngredients(prev => [...prev, trimmed]);
       setNewIngredient('');
+    } else {
+      Alert.alert('Invalid', 'Please enter a valid ingredient name (2-50 characters).');
     }
   };
 
-  // Find recipes using Supabase
+  // Find recipes
   const handleFindRecipes = async () => {
     if (ingredients.length === 0) {
       Alert.alert('No Ingredients', 'Please add at least one ingredient to find recipes.');
@@ -348,7 +313,7 @@ const ScanScreen = ({ navigation }: any) => {
       if (recipes.length === 0) {
         Alert.alert(
           'No Recipes Found',
-          'No recipes match your ingredients. Try adding more ingredients or adjusting the list.',
+          'No recipes match your ingredients. Try adding more items or adjusting the list.',
           [{ text: 'OK' }]
         );
       } else {
@@ -359,9 +324,9 @@ const ScanScreen = ({ navigation }: any) => {
       }
 
     } catch (error) {
-      console.log('Recipe search error:', error);
+      console.error('Recipe search error:', error);
       Alert.alert(
-        'Error',
+        'Search Error',
         'Failed to search recipes. Please check your internet connection.',
         [{ text: 'OK' }]
       );
@@ -379,40 +344,17 @@ const ScanScreen = ({ navigation }: any) => {
     setIsIngredientsExpanded(true);
   };
 
-  // Render ingredients with safety check
-  const renderIngredients = () => {
-    return ingredients.map((ingredient, index) => {
-      const displayText = cleanAllEmojis(ingredient);
-      
-      if (!displayText || displayText.length === 0) {
-        return null;
-      }
-      
-      return (
-        <View key={index} style={styles.ingredientRow}>
-          <View style={styles.numberBadge}>
-            <Text style={styles.numberText}>{index + 1}</Text>
-          </View>
-          <TextInput
-            style={styles.ingredientInput}
-            value={displayText}
-            onChangeText={(text) => handleIngredientChange(text, index)}
-            placeholder="Ingredient name"
-            placeholderTextColor={COLORS.text.light}
-          />
-          <TouchableOpacity
-            onPress={() => handleRemoveIngredient(index)}
-            style={styles.deleteButton}
-            activeOpacity={0.6}
-          >
-            <Icon name="close-circle" size={26} color={COLORS.error} />
-          </TouchableOpacity>
-        </View>
-      );
-    }).filter(Boolean);
-  };
+  // Memoized computed values
+  const canAddIngredient = useMemo(() => {
+    const trimmed = cleanText(newIngredient);
+    return isValidIngredient(trimmed);
+  }, [newIngredient, cleanText, isValidIngredient]);
 
-  // Show loading while checking auth
+  const canFindRecipes = useMemo(() => {
+    return ingredients.length > 0 && !isProcessing;
+  }, [ingredients.length, isProcessing]);
+
+  // Loading state
   if (isCheckingAuth) {
     return (
       <View style={styles.loadingState}>
@@ -422,7 +364,7 @@ const ScanScreen = ({ navigation }: any) => {
     );
   }
 
-  // Show login required if not logged in
+  // Not logged in state
   if (!isUserLoggedIn) {
     return (
       <ScrollView 
@@ -453,7 +395,7 @@ const ScanScreen = ({ navigation }: any) => {
     );
   }
 
-  // Main scan interface (user is logged in)
+  // Main interface
   return (
     <ScrollView 
       style={styles.container} 
@@ -483,6 +425,7 @@ const ScanScreen = ({ navigation }: any) => {
         </View>
       ) : (
         <View style={styles.resultContainer}>
+          {/* Image Preview */}
           <View style={styles.imageContainer}>
             <Image source={{ uri: imageUri }} style={styles.previewImage} />
             {isProcessing && (
@@ -496,6 +439,7 @@ const ScanScreen = ({ navigation }: any) => {
             )}
           </View>
 
+          {/* Ingredients Section */}
           <View style={styles.ingredientsSection}>
             <TouchableOpacity 
               style={styles.sectionHeader}
@@ -531,10 +475,31 @@ const ScanScreen = ({ navigation }: any) => {
                   </View>
                 ) : (
                   <View style={styles.ingredientsList}>
-                    {renderIngredients()}
+                    {ingredients.map((ingredient, index) => (
+                      <View key={`${ingredient}-${index}`} style={styles.ingredientRow}>
+                        <View style={styles.numberBadge}>
+                          <Text style={styles.numberText}>{index + 1}</Text>
+                        </View>
+                        <TextInput
+                          style={styles.ingredientInput}
+                          value={ingredient}
+                          onChangeText={(text) => handleIngredientChange(text, index)}
+                          placeholder="Ingredient name"
+                          placeholderTextColor={COLORS.text.light}
+                        />
+                        <TouchableOpacity
+                          onPress={() => handleRemoveIngredient(index)}
+                          style={styles.deleteButton}
+                          activeOpacity={0.6}
+                        >
+                          <Icon name="close-circle" size={26} color={COLORS.error} />
+                        </TouchableOpacity>
+                      </View>
+                    ))}
                   </View>
                 )}
 
+                {/* Add Ingredient */}
                 <View style={styles.addSection}>
                   <View style={styles.addLabelContainer}>
                     <Icon name="add-circle-outline" size={20} color={COLORS.text.muted} />
@@ -553,11 +518,11 @@ const ScanScreen = ({ navigation }: any) => {
                     <TouchableOpacity
                       style={[
                         styles.addButton,
-                        !newIngredient.trim() && styles.addButtonDisabled
+                        !canAddIngredient && styles.addButtonDisabled
                       ]}
                       onPress={handleAddIngredient}
                       activeOpacity={0.8}
-                      disabled={!newIngredient.trim()}
+                      disabled={!canAddIngredient}
                     >
                       <Icon name="checkmark" size={24} color={COLORS.white} />
                     </TouchableOpacity>
@@ -567,6 +532,7 @@ const ScanScreen = ({ navigation }: any) => {
             )}
           </View>
 
+          {/* Action Buttons */}
           <View style={styles.actionButtons}>
             <TouchableOpacity
               style={[styles.actionButton, styles.newScanButton]}
@@ -582,11 +548,11 @@ const ScanScreen = ({ navigation }: any) => {
               style={[
                 styles.actionButton, 
                 styles.findRecipesButton,
-                (isProcessing || ingredients.length === 0) && styles.disabledButton
+                !canFindRecipes && styles.disabledButton
               ]}
               onPress={handleFindRecipes}
               activeOpacity={0.85}
-              disabled={isProcessing || ingredients.length === 0}
+              disabled={!canFindRecipes}
             >
               {isProcessing ? (
                 <ActivityIndicator size="small" color={COLORS.white} />
@@ -599,6 +565,7 @@ const ScanScreen = ({ navigation }: any) => {
             </TouchableOpacity>
           </View>
 
+          {/* Tips */}
           <View style={styles.tipsContainer}>
             <View style={styles.tipsHeader}>
               <Icon name="information-circle-outline" size={22} color="#2C5282" />
@@ -1010,9 +977,3 @@ const styles = StyleSheet.create({
 });
 
 export default ScanScreen;
-
-
-
-
-
-

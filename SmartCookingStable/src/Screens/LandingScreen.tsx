@@ -1,23 +1,22 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import FloatingFood from '../components/FloatingFood';
 import { useNavigation } from '@react-navigation/native';
-import type { NavigationProp } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../../App';
 
-type RootStackParamList = {
-  Main: undefined;
-  // add other routes here if needed
-};
+type NavProp = NativeStackNavigationProp<RootStackParamList, 'Landing'>;
 
 const { height, width } = Dimensions.get('window');
 
 export default function LandingScreen() {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NavProp>();
 
-  const handleGetStarted = async () => {
-    await AsyncStorage.setItem('hasSeenOnboarding', 'true');
-    navigation.navigate('Main');
+  const handleGetStarted = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Main' }],
+    });
   };
 
   return (
@@ -28,10 +27,9 @@ export default function LandingScreen() {
 
         <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
           <Text style={styles.buttonText}>Get Started</Text>
-        </TouchableOpacity>   
+        </TouchableOpacity>
       </View>
 
-      {/* Your floating items – already good */}
       <FloatingFood emoji="🍿" top={height * 0.72} left={width * 0.08} />
       <FloatingFood emoji="🍛" top={height * 0.08} right={width * 0.10} />
       <FloatingFood emoji="🍎" top={height * 0.24} left={width * 0.12} />
@@ -43,10 +41,10 @@ export default function LandingScreen() {
       <FloatingFood emoji="🥚" top={height * 0.40} left={width * 0.40} />
       <FloatingFood emoji="🍟" top={height * 0.45} right={width * 0.08} />
       <FloatingFood emoji="☕" top={height * 0.70} right={width * 0.32} />
-
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
