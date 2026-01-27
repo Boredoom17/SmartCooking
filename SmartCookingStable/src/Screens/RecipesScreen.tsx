@@ -32,10 +32,7 @@ export default function RecipesScreen() {
   const [selectedRecipe, setSelectedRecipe] = useState<RecipeDetail | null>(null);
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
-  const [expandedSections, setExpandedSections] = useState({
-    ingredients: true,
-    instructions: false,
-  });
+  const [expandedInstructions, setExpandedInstructions] = useState(true);
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
 
   const handleRecipePress = async (recipeId: number) => {
@@ -52,14 +49,10 @@ export default function RecipesScreen() {
     }
   };
 
-  const toggleSection = (key: 'ingredients' | 'instructions') => {
-    setExpandedSections(prev => ({ ...prev, [key]: !prev[key] }));
-  };
-
   const closeModal = () => {
     setShowDetailModal(false);
     setSelectedRecipe(null);
-    setExpandedSections({ ingredients: true, instructions: false });
+    setExpandedInstructions(true);
   };
 
   if (matchedRecipes.length === 0) {
@@ -204,73 +197,24 @@ export default function RecipesScreen() {
                 )}
               </View>
 
-              {/* Ingredients Section */}
+              {/* Instructions Section - No Dropdown, Always Expanded */}
               <View style={styles.section}>
-                <TouchableOpacity
-                  onPress={() => toggleSection('ingredients')}
-                  style={styles.sectionHeader}
-                >
-                  <View style={styles.sectionHeaderLeft}>
-                    <Icon name="nutrition-outline" size={24} color="#f59e0b" />
-                    <Text style={styles.sectionTitle}>Ingredients</Text>
-                  </View>
-                  <Icon
-                    name={expandedSections.ingredients ? 'chevron-up' : 'chevron-down'}
-                    size={24}
-                    color="#666"
-                  />
-                </TouchableOpacity>
-
-                {expandedSections.ingredients && (
-                  <View style={styles.sectionContent}>
-                    {selectedRecipe.recipe_ingredients.length > 0 ? (
-                      selectedRecipe.recipe_ingredients.map((item, idx) => (
-                        <View key={idx} style={styles.ingredientItem}>
-                          <Icon 
-                            name={item.is_essential ? "checkmark-circle" : "ellipse-outline"} 
-                            size={18} 
-                            color={item.is_essential ? "#10b981" : "#999"} 
-                          />
-                          <Text style={styles.ingredientText}>
-                            {item.quantity} {item.ingredient.name}
-                          </Text>
-                        </View>
-                      ))
-                    ) : (
-                      <Text style={styles.noDataText}>No ingredients listed</Text>
-                    )}
-                  </View>
-                )}
-              </View>
-
-              {/* Instructions Section */}
-              <View style={styles.section}>
-                <TouchableOpacity
-                  onPress={() => toggleSection('instructions')}
-                  style={styles.sectionHeader}
-                >
+                <View style={styles.sectionHeader}>
                   <View style={styles.sectionHeaderLeft}>
                     <Icon name="list-outline" size={24} color="#f59e0b" />
                     <Text style={styles.sectionTitle}>Instructions</Text>
                   </View>
-                  <Icon
-                    name={expandedSections.instructions ? 'chevron-up' : 'chevron-down'}
-                    size={24}
-                    color="#666"
-                  />
-                </TouchableOpacity>
+                </View>
 
-                {expandedSections.instructions && (
-                  <View style={styles.sectionContent}>
-                    {selectedRecipe.instructions ? (
-                      <Text style={styles.instructionsText}>
-                        {selectedRecipe.instructions}
-                      </Text>
-                    ) : (
-                      <Text style={styles.noDataText}>No instructions available</Text>
-                    )}
-                  </View>
-                )}
+                <View style={styles.sectionContent}>
+                  {selectedRecipe.instructions ? (
+                    <Text style={styles.instructionsText}>
+                      {selectedRecipe.instructions}
+                    </Text>
+                  ) : (
+                    <Text style={styles.noDataText}>No instructions available</Text>
+                  )}
+                </View>
               </View>
 
               <View style={styles.bottomPadding} />
@@ -458,18 +402,6 @@ const styles = StyleSheet.create({
   sectionContent: {
     paddingHorizontal: 20,
     paddingBottom: 20,
-  },
-  ingredientItem: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: 12,
-    marginBottom: 12,
-  },
-  ingredientText: {
-    flex: 1,
-    fontSize: 15,
-    lineHeight: 22,
-    color: '#374151',
   },
   instructionsText: {
     fontSize: 15,

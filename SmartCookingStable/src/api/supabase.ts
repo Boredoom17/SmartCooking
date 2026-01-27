@@ -38,6 +38,8 @@ export interface RecipeMatch {
  */
 export const getRecipeDetails = async (recipeId: number): Promise<RecipeDetail> => {
   try {
+    console.log('📖 Fetching recipe details for ID:', recipeId);
+
     // 1️⃣ Fetch recipe basic info
     const { data: recipeData, error: recipeError } = await supabase
       .from('recipes')
@@ -46,13 +48,15 @@ export const getRecipeDetails = async (recipeId: number): Promise<RecipeDetail> 
       .single();
 
     if (recipeError) {
-      console.error('Error fetching recipe:', recipeError);
+      console.error('❌ Error fetching recipe:', recipeError);
       throw new Error(`Failed to fetch recipe: ${recipeError.message}`);
     }
 
     if (!recipeData) {
       throw new Error('Recipe not found');
     }
+
+    console.log('✅ Recipe fetched:', recipeData.name);
 
     // 2️⃣ Fetch recipe ingredients
     const { data: ingredientsData, error: ingredientsError } = await supabase
@@ -65,9 +69,11 @@ export const getRecipeDetails = async (recipeId: number): Promise<RecipeDetail> 
       .eq('recipe_id', recipeId);
 
     if (ingredientsError) {
-      console.error('Error fetching ingredients:', ingredientsError);
+      console.error('⚠️ Error fetching ingredients:', ingredientsError);
       console.warn('Continuing without ingredients');
     }
+
+    console.log('📦 Ingredients fetched:', ingredientsData?.length || 0);
 
     // 3️⃣ Map ingredients to expected format
     const recipeIngredients: RecipeIngredient[] = (ingredientsData || []).map(
@@ -95,7 +101,7 @@ export const getRecipeDetails = async (recipeId: number): Promise<RecipeDetail> 
       recipe_ingredients: recipeIngredients,
     };
   } catch (error: any) {
-    console.error('getRecipeDetails error:', error);
+    console.error('❌ getRecipeDetails error:', error);
     throw error;
   }
 };
@@ -109,7 +115,11 @@ export const findRecipesByIngredients = async (
   ingredients: string[]
 ): Promise<RecipeMatch[]> => {
   try {
+    console.log('🔍 Starting recipe search...');
+    console.log('📝 Ingredients to search:', ingredients);
+
     if (!ingredients || ingredients.length === 0) {
+      console.log('⚠️ No ingredients provided');
       return [];
     }
 
@@ -119,22 +129,41 @@ export const findRecipesByIngredients = async (
       .filter(ing => ing.length > 0);
 
     if (normalizedIngredients.length === 0) {
+      console.log('⚠️ No valid ingredients after normalization');
       return [];
     }
 
-    console.log('Searching recipes for:', normalizedIngredients);
+    console.log('✅ Normalized ingredients:', normalizedIngredients);
+    console.log('🔄 Trying RPC function: find_recipes_by_ingredients...');
 
-    // Try using RPC function first
-    const { data, error } = await supabase
-      .rpc('find_recipes_by_ingredients', {
-        ingredient_names: normalizedIngredients,
-      });
+    // Try using RPC function first (with timeout)
+    const rpcPromise = supabase.rpc('find_recipes_by_ingredients', {
+      ingredient_names: normalizedIngredients,
+    });
 
-    if (error) {
-      console.error('RPC error, falling back to simple search:', error);
-      // Fallback to simple search if RPC doesn't exist
+    // Add timeout to RPC call
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('RPC timeout after 10 seconds')), 10000);
+    });
+
+    let data, error;
+    try {
+      const result = await Promise.race([rpcPromise, timeoutPromise]);
+      data = (result as any).data;
+      error = (result as any).error;
+    } catch (timeoutError: any) {
+      console.error('⏰ RPC function timeout:', timeoutError.message);
+      console.log('🔄 Falling back to simple search...');
       return await findRecipesByIngredientsSimple(normalizedIngredients);
     }
+
+    if (error) {
+      console.error('❌ RPC error:', error);
+      console.log('🔄 Falling back to simple search...');
+      return await findRecipesByIngredientsSimple(normalizedIngredients);
+    }
+
+    console.log('✅ RPC function succeeded, processing results...');
 
     // Map to RecipeMatch format
     const matches: RecipeMatch[] = (data || []).map((item: any) => ({
@@ -147,10 +176,10 @@ export const findRecipesByIngredients = async (
     // Sort by match percentage (highest first)
     matches.sort((a, b) => b.match_percentage - a.match_percentage);
 
-    console.log(`Found ${matches.length} matching recipes`);
+    console.log(`✅ Found ${matches.length} matching recipes`);
     return matches;
   } catch (error: any) {
-    console.error('findRecipesByIngredients error:', error);
+    console.error('❌ findRecipesByIngredients error:', error);
     throw error;
   }
 };
@@ -162,23 +191,42 @@ export const findRecipesByIngredientsSimple = async (
   ingredients: string[]
 ): Promise<RecipeMatch[]> => {
   try {
-    // Fetch all recipes (you may want to add pagination)
-    const { data: recipes, error: recipesError } = await supabase
+    console.log('🔍 Simple search: Fetching all recipes...');
+
+    // Fetch all recipes with timeout
+    const recipesPromise = supabase
       .from('recipes')
-      .select('id, name, image_url');
+      .select('id, name, image_url')
+      .limit(50); // Limit to 50 recipes for performance
+
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Recipes fetch timeout')), 10000);
+    });
+
+    const result = await Promise.race([recipesPromise, timeoutPromise]);
+    const { data: recipes, error: recipesError } = result as any;
 
     if (recipesError) {
       throw new Error(`Failed to fetch recipes: ${recipesError.message}`);
     }
 
     if (!recipes || recipes.length === 0) {
+      console.log('⚠️ No recipes found in database');
       return [];
     }
 
+    console.log(`📦 Fetched ${recipes.length} recipes, calculating matches...`);
+
     // For each recipe, calculate match percentage
     const matches: RecipeMatch[] = [];
+    let processed = 0;
 
     for (const recipe of recipes) {
+      processed++;
+      if (processed % 10 === 0) {
+        console.log(`⏳ Processing... ${processed}/${recipes.length}`);
+      }
+
       // Fetch ingredients for this recipe
       const { data: recipeIngredients, error: ingredientsError } = await supabase
         .from('recipe_ingredients')
@@ -186,7 +234,7 @@ export const findRecipesByIngredientsSimple = async (
         .eq('recipe_id', recipe.id);
 
       if (ingredientsError) {
-        console.warn(`Failed to fetch ingredients for recipe ${recipe.id}`);
+        console.warn(`⚠️ Failed to fetch ingredients for recipe ${recipe.id}`);
         continue;
       }
 
@@ -218,9 +266,10 @@ export const findRecipesByIngredientsSimple = async (
     // Sort by match percentage
     matches.sort((a, b) => b.match_percentage - a.match_percentage);
 
+    console.log(`✅ Simple search complete: ${matches.length} matches found`);
     return matches.slice(0, 20); // Return top 20 matches
   } catch (error: any) {
-    console.error('findRecipesByIngredientsSimple error:', error);
+    console.error('❌ findRecipesByIngredientsSimple error:', error);
     throw error;
   }
 };
