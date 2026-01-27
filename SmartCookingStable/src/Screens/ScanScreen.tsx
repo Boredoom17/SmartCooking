@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
@@ -18,6 +19,7 @@ import { TAB_BAR_HEIGHT, COLORS } from '../constants';
 import { convertImageToBase64, detectIngredients, DetectionResult } from '../api/inference';
 import { findRecipesByIngredients, RecipeMatch } from '../api/supabase';
 import { saveScanHistory } from '../api/scanHistory';
+import { supabase } from '../api/supabase';
 
 const ScanScreen = ({ navigation }: any) => {
   const [imageUri, setImageUri] = useState<string | null>(null);
@@ -27,6 +29,8 @@ const ScanScreen = ({ navigation }: any) => {
   const [isIngredientsExpanded, setIsIngredientsExpanded] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [matchedRecipes, setMatchedRecipes] = useState<RecipeMatch[]>([]);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   // SUPER AGGRESSIVE emoji cleaner
   const cleanAllEmojis = useCallback((text: string): string => {
@@ -67,6 +71,32 @@ const ScanScreen = ({ navigation }: any) => {
       .map(cleanAllEmojis)
       .filter(item => item.length > 0 && item.length < 50);
   }, [cleanAllEmojis]);
+
+  // Check if user is logged in
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
+
+  // Listen for navigation focus to recheck auth
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      checkAuthStatus();
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  const checkAuthStatus = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      console.log('🔍 ScanScreen auth check:', session?.user?.id);
+      setIsUserLoggedIn(!!session?.user);
+    } catch (error) {
+      console.error('Auth check error:', error);
+      setIsUserLoggedIn(false);
+    } finally {
+      setIsCheckingAuth(false);
+    }
+  };
 
   // Check permission on mount AND clean any existing ingredients
   useEffect(() => {
@@ -196,21 +226,24 @@ const ScanScreen = ({ navigation }: any) => {
                !item.toLowerCase().includes('kiss');
       });
       
-       if (detectedItems.length > 0) {
+      if (detectedItems.length > 0) {
         setIngredients(detectedItems);
-         setIsIngredientsExpanded(false);
-  
-  // Save to scan history if user is logged in
-         saveScanHistory(detectedItems).catch(err => 
+        setIsIngredientsExpanded(false);
+
+        // Refresh auth status
+        await checkAuthStatus();
+
+        // Save to scan history with image URI
+        saveScanHistory(detectedItems, uri).catch(err => 
           console.log('Could not save scan history:', err)
-         );
-     Alert.alert(
-       'Ingredients Detected!',
-       `Found ${detectedItems.length} ingredients. Tap "Find Recipes" to search.`,
-         [{ text: 'OK' }]
-          );
-        }
-      else {
+        );
+
+        Alert.alert(
+          'Ingredients Detected!',
+          `Found ${detectedItems.length} ingredients. Tap "Find Recipes" to search.`,
+          [{ text: 'OK' }]
+        );
+      } else {
         Alert.alert(
           'No Ingredients Detected',
           'Could not detect any valid ingredients in the image. Please try:\n• Better lighting\n• Clear background\n• Closer photo\n\nOr add ingredients manually below.',
@@ -379,6 +412,48 @@ const ScanScreen = ({ navigation }: any) => {
     }).filter(Boolean);
   };
 
+  // Show loading while checking auth
+  if (isCheckingAuth) {
+    return (
+      <View style={styles.loadingState}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+        <Text style={styles.loadingText}>Loading...</Text>
+      </View>
+    );
+  }
+
+  // Show login required if not logged in
+  if (!isUserLoggedIn) {
+    return (
+      <ScrollView 
+        style={styles.container} 
+        contentContainerStyle={styles.contentContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.emptyState}>
+          <View style={styles.scanCard}>
+            <View style={styles.iconContainer}>
+              <Icon name="lock-closed-outline" size={64} color={COLORS.primary} />
+            </View>
+            <Text style={styles.scanTitle}>Login Required</Text>
+            <Text style={styles.scanSubtitle}>
+              Please sign in to scan ingredients and track your history
+            </Text>
+            <TouchableOpacity 
+              style={styles.startButton} 
+              onPress={() => navigation.navigate('Profile')}
+              activeOpacity={0.85}
+            >
+              <Icon name="log-in-outline" size={24} color={COLORS.white} style={styles.buttonIcon} />
+              <Text style={styles.startButtonText}>Go to Login</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ScrollView>
+    );
+  }
+
+  // Main scan interface (user is logged in)
   return (
     <ScrollView 
       style={styles.container} 
@@ -556,6 +631,18 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     paddingBottom: TAB_BAR_HEIGHT + 20,
+  },
+  loadingState: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 100,
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: COLORS.text.muted,
+    fontWeight: '600',
   },
   emptyState: {
     flex: 1,
@@ -923,3 +1010,9 @@ const styles = StyleSheet.create({
 });
 
 export default ScanScreen;
+
+
+
+
+
+

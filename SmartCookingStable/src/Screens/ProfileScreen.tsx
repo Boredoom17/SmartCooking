@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -14,16 +16,11 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import { createClient } from '@supabase/supabase-js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { COLORS, TAB_BAR_HEIGHT } from '../constants';
-
-const SUPABASE_URL = 'https://eqcerlwpnrnlgzuwbhof.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxY2VybHdwbnJubGd6dXdiaG9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMDc3NDMsImV4cCI6MjA4NDU4Mzc0M30.EVfCkxXtKxoZ5MW6s8348aMebgb9kCWyFZKaj4P-OR8';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+import { supabase } from '../api/supabase'; // ✅ USE SHARED INSTANCE
 
 interface ScanHistory {
   id: string;
@@ -64,6 +61,7 @@ export default function ProfileScreen() {
   const checkUser = async () => {
     try {
       const { data: { session } } = await supabase.auth.getSession();
+      console.log('🔍 ProfileScreen session check:', session?.user?.id);
       if (session?.user) {
         setIsLoggedIn(true);
         setEmail(session.user.email || '');
@@ -136,6 +134,7 @@ export default function ProfileScreen() {
         });
         if (error) throw error;
         
+        console.log('✅ Login successful:', data.user?.id);
         setUsername(data.user?.user_metadata?.username || data.user?.email?.split('@')[0] || 'User');
         setProfileImage(data.user?.user_metadata?.profile_image || null);
         setUserData(data.user);
@@ -1089,5 +1088,6 @@ const styles = StyleSheet.create({
     color: COLORS.text.muted,
     textAlign: 'center',
     lineHeight: 20,
-  },
+  }
+
 });

@@ -1,19 +1,14 @@
 
-import { createClient } from '@supabase/supabase-js';
-
-const SUPABASE_URL = 'https://eqcerlwpnrnlgzuwbhof.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxY2VybHdwbnJubGd6dXdiaG9mIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkwMDc3NDMsImV4cCI6MjA4NDU4Mzc0M30.EVfCkxXtKxoZ5MW6s8348aMebgb9kCWyFZKaj4P-OR8';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+import { supabase } from './supabase';
 
 /**
  * Save a scan to the user's history
  * @param ingredients - Array of detected ingredients
- * @param imageUrl - Optional image URL
+ * @param imageUri - Optional image URI (base64 or file path)
  */
 export const saveScanHistory = async (
   ingredients: string[],
-  imageUrl?: string
+  imageUri?: string
 ): Promise<boolean> => {
   try {
     // Check if user is logged in
@@ -30,7 +25,8 @@ export const saveScanHistory = async (
       .insert({
         user_id: session.user.id,
         ingredients: ingredients,
-        image_url: imageUrl,
+        image_url: imageUri, // Store the image URI/base64
+        created_at: new Date().toISOString(),
       });
 
     if (error) {
@@ -93,9 +89,19 @@ export const deleteScanHistory = async (scanId: string): Promise<boolean> => {
       return false;
     }
 
+    console.log('✅ Scan history deleted successfully');
     return true;
   } catch (error) {
     console.error('Error in deleteScanHistory:', error);
     return false;
   }
 };
+
+
+
+
+
+
+
+
+
