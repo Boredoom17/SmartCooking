@@ -84,23 +84,23 @@ Tomato · Cauliflower · Capsicum · Potato · Ginger · Garlic · Cabbage · Pu
    npm run ios
 
 For detailed build troubleshooting, Supabase integration, or Flask server setup → see SETUP.md
-
+<br>
 📱 Demo
-(Placeholder — add a short video/gif here when ready)
+(Placeholder — add a short video/gif here when ready)<br>
 https://user-images.githubusercontent.com/VIDEO_ID/demo.mp4
 
-
-🤝 Contributing
+<br>
+🤝 Contributing<br>
 We welcome contributions of all kinds!
 
-1.Fork the repository
-2.Create your feature branch
-git checkout -b feature/amazing-feature
-3.Commit your changes
-git commit -m 'Add amazing feature'
-4.Push to the branch
-git push origin feature/amazing-feature
-5.Open a Pull Request
+1.Fork the repository<br>
+2.Create your feature branch<br>
+git checkout -b feature/amazing-feature<br>
+3.Commit your changes<br>
+git commit -m 'Add amazing feature'<br>
+4.Push to the branch<br>
+git push origin feature/amazing-feature<br>
+5.Open a Pull Request<br>
 
 Please read CONTRIBUTING.md (create if missing) for detailed guidelines.
 
