@@ -59,26 +59,26 @@ Tomato · Cauliflower · Capsicum · Potato · Ginger · Garlic · Cabbage · Pu
 
 
 2. Install frontend dependencies
-  Bash
-  npm install
-  # or
-  yarn install
+   ```bash
+    npm install
+    # or
+    yarn install
   
 3. Set up environment variables
-   Bash
+   ```bash
    cp .env.example .env
-   Fill in your Supabase credentials and backend API URL in .env
+  Fill in your Supabase credentials and backend API URL in .env
 
 
 4. (Optional) Backend setup
-   Bash
+   ```bash
    cd backend          # or wherever your Flask app lives
    python -m venv venv
    source venv/bin/activate    # Windows: venv\Scripts\activate
    pip install -r requirements.txt
 
 5. Run the mobile app
-   Bash
+   ```bash
    npm run android
    # or
    npm run ios
