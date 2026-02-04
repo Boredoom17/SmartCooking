@@ -1,4 +1,4 @@
-NutriSnap
+NutriSnap <br>
 AI-powered vegetable detection and recipe recommendation system
 An intelligent mobile application that identifies vegetables from images and suggests relevant Nepali recipes to reduce food waste and enhance culinary discovery.
 
