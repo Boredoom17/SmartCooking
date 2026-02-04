@@ -84,36 +84,37 @@ Tomato · Cauliflower · Capsicum · Potato · Ginger · Garlic · Cabbage · Pu
    npm run ios
 
 For detailed build troubleshooting, Supabase integration, or Flask server setup → see SETUP.md
-<br>
+<br><br>
 📱 Demo
 (Placeholder — add a short video/gif here when ready)<br>
 https://user-images.githubusercontent.com/VIDEO_ID/demo.mp4
 
-<br>
-🤝 Contributing<br>
-We welcome contributions of all kinds!
+<br><br>
+🤝 Contributing<br><br>
+We welcome contributions of all kinds!<br><br>
 
 1.Fork the repository<br>
 2.Create your feature branch<br>
-git checkout -b feature/amazing-feature<br>
+     git checkout -b feature/amazing-feature<br>
 3.Commit your changes<br>
-git commit -m 'Add amazing feature'<br>
+     git commit -m 'Add amazing feature'<br>
 4.Push to the branch<br>
-git push origin feature/amazing-feature<br>
+     git push origin feature/amazing-feature<br>
 5.Open a Pull Request<br>
-
+<br>
 Please read CONTRIBUTING.md (create if missing) for detailed guidelines.
 
+<br><br><br>
+❤️ Acknowledgments<br><br>
 
-❤️ Acknowledgments
+-Supervisor: Mr. Suraj Khattri, Oxford College, Butwal<br>
+-Institution: Bachelor of Information Management (BIM), Tribhuvan University, Nepal <br>
+-Guidance & Support: Oxford College Butwal and Tribhuvan University<br>
+<br>
 
-Supervisor: Mr. Suraj Khattri, Oxford College, Butwal
-Institution: Bachelor of Information Management (BIM), Tribhuvan University, Nepal
-Guidance & Support: Oxford College Butwal and Tribhuvan University
+📄 License <br>
+This project is licensed under the MIT License — see the LICENSE file for details. <br>
 
-📄 License
-This project is licensed under the MIT License — see the LICENSE file for details.
-
-Developed with ❤️ by
-Aadarsha Chhetri
-Vipassi Kumar Bajracharya
+Developed with ❤️ by<br>
+Aadarsha Chhetri<br>
+Vipassi Kumar Bajracharya<br>
