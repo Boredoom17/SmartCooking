@@ -31,7 +31,7 @@ Tomato · Cauliflower · Capsicum · Potato · Ginger · Garlic · Cabbage · Pu
 | **Backend**        | Flask (Python)                        |
 | **Database & Auth**| Supabase (PostgreSQL + Auth)          |
 | **Training**       | Google Colab                          |
-| **Camera**         | react-native-camera / vision-camera   |
+| **Camera**         |  vision-camera   |
 
 ## 📊 Model Performance
 
@@ -85,9 +85,7 @@ Tomato · Cauliflower · Capsicum · Potato · Ginger · Garlic · Cabbage · Pu
 
 For detailed build troubleshooting, Supabase integration, or Flask server setup → see SETUP.md
 <br><br>
-📱 Demo
-(Placeholder — add a short video/gif here when ready)<br>
-https://user-images.githubusercontent.com/VIDEO_ID/demo.mp4
+
 
 <br><br>
 🤝 Contributing<br><br>
