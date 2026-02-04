@@ -1,97 +1,119 @@
-NutriSnap <br>
-AI-powered vegetable detection and recipe recommendation system
-An intelligent mobile application that identifies vegetables from images and suggests relevant Nepali recipes to reduce food waste and enhance culinary discovery.
+# NutriSnap
 
-About
-NutriSnap uses computer vision to automatically detect vegetables from user-captured photos and recommends recipes based on available ingredients. The app addresses household food waste by helping users discover recipes they can make with ingredients they already have.
-Key Features:
+**AI-Powered Vegetable Detection & Nepali Recipe Recommender**
 
-📸 Snap a photo of your vegetables
-🤖 AI automatically detects 14 types of vegetables
-🍳 Get recipe suggestions in English & Nepali
-⭐ Save your favorite recipes
+NutriSnap is an intelligent mobile application that uses computer vision to identify vegetables from user-captured photos and suggests relevant **Nepali recipes**, helping reduce household food waste while promoting culinary creativity and discovery.
 
-Supported Vegetables (14):
-Tomato, Cauliflower, Capsicum, Potato, Ginger, Garlic, Cabbage, Pumpkin, Eggplant, Onion, Peas, Radish, Carrot, Spinach
+<p align="center">
+  <img src="https://via.placeholder.com/800x400.png?text=NutriSnap+App+Screenshots" alt="NutriSnap Screenshots" width="80%" />
+  <br/>
+  <em>Coming soon: Demo screenshots / video</em>
+</p>
 
-Tech Stack
+## ✨ Key Features
 
-Mobile: React Native, TypeScript
-AI/ML: YOLOv8n, PyTorch, Google Colab
-Backend: Flask (Python), Supabase (PostgreSQL)
-Authentication: Supabase Auth
+- 📸 **Snap** a photo of your vegetables using the device camera
+- 🤖 **AI Detection** — automatically recognizes 14 common vegetables
+- 🍲 **Recipe Suggestions** — personalized Nepali recipes in **English** and **Nepali**
+- ⭐ **Favorites** — save recipes for quick access later
+- ♻️ Helps reduce food waste by utilizing ingredients you already have
 
+### Supported Vegetables (14 classes)
 
-Getting Started
-Prerequisites
+Tomato · Cauliflower · Capsicum · Potato · Ginger · Garlic · Cabbage · Pumpkin · Eggplant · Onion · Peas · Radish · Carrot · Spinach
 
-Node.js 18+
-Python 3.12+
-Android Studio or Xcode
+## 🛠 Tech Stack
 
-Installation
+| Layer              | Technology                            |
+|--------------------|---------------------------------------|
+| **Mobile**         | React Native (CLI) + TypeScript       |
+| **AI / ML**        | YOLOv8n (Ultralytics), PyTorch        |
+| **Backend**        | Flask (Python)                        |
+| **Database & Auth**| Supabase (PostgreSQL + Auth)          |
+| **Training**       | Google Colab                          |
+| **Camera**         | react-native-camera / vision-camera   |
 
-Clone the repository
+## 📊 Model Performance
 
-bashgit clone https://github.com/yourusername/nutrisnap.git
-cd nutrisnap
+- **mAP@50** — 72.2%  
+- **Inference time** — ~6.3 ms (on suitable mobile hardware)  
+- **Training dataset** — 2,229 annotated images across 14 classes
 
-Install mobile app dependencies
+## 🚀 Getting Started
 
-bashcd SmartCookingStable
-npm install
+### Prerequisites
 
-Set up environment variables
+- Node.js ≥ 18
+- npm ≥ 8
+- Python ≥ 3.12
+- Android Studio (for Android builds) or Xcode (for iOS)
+- Supabase account & project
 
-bashcp .env.example .env
-# Add your Supabase and API URLs
+### Installation
 
-Run the app
+1. Clone the repository
 
-bashnpm run android  # or npm run ios
-For detailed setup instructions, see SETUP.md.
-
-Model Performance
-Our YOLOv8n model achieves:
-
-72.2% mAP50 accuracy
-6.3ms inference time
-Trained on 2,229 images across 14 vegetable classes
-
-
-Contributing
-We welcome contributions! Whether it's:
-
-🐛 Bug fixes
-✨ New features
-📝 Documentation improvements
-🎨 UI/UX enhancements
-
-How to contribute:
-
-Fork the repository
-Create your feature branch (git checkout -b feature/amazing-feature)
-Commit your changes (git commit -m 'Add amazing feature')
-Push to the branch (git push origin feature/amazing-feature)
-Open a Pull Request
+   ```bash
+   git clone https://github.com/Boredoom17/SmartCooking.git
+   cd SmartCooking/SmartAICooking
 
 
-Team
-Developed by:
+2. Install frontend dependencies
+  Bash
+  npm install
+  # or
+  yarn install
+  
+3. Set up environment variables
+   Bash
+   cp .env.example .env
+   Fill in your Supabase credentials and backend API URL in .env
 
+
+4. (Optional) Backend setup
+   Bash
+   cd backend          # or wherever your Flask app lives
+   python -m venv venv
+   source venv/bin/activate    # Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+
+5. Run the mobile app
+   Bash
+   npm run android
+   # or
+   npm run ios
+
+For detailed build troubleshooting, Supabase integration, or Flask server setup → see SETUP.md
+
+📱 Demo
+(Placeholder — add a short video/gif here when ready)
+https://user-images.githubusercontent.com/VIDEO_ID/demo.mp4
+
+
+🤝 Contributing
+We welcome contributions of all kinds!
+
+1.Fork the repository
+2.Create your feature branch
+git checkout -b feature/amazing-feature
+3.Commit your changes
+git commit -m 'Add amazing feature'
+4.Push to the branch
+git push origin feature/amazing-feature
+5.Open a Pull Request
+
+Please read CONTRIBUTING.md (create if missing) for detailed guidelines.
+
+
+❤️ Acknowledgments
+
+Supervisor: Mr. Suraj Khattri, Oxford College, Butwal
+Institution: Bachelor of Information Management (BIM), Tribhuvan University, Nepal
+Guidance & Support: Oxford College Butwal and Tribhuvan University
+
+📄 License
+This project is licensed under the MIT License — see the LICENSE file for details.
+
+Developed with ❤️ by
 Aadarsha Chhetri
 Vipassi Kumar Bajracharya
-
-Supervised by:
-
-Suraj Khattri, Oxford College, Butwal
-
-Institution:
-Bachelor of Information Management (BIM)
-Tribhuvan University, Nepal
-
-License
-This project is licensed under the MIT License - see LICENSE for details.
-
-Acknowledgments
-Special thanks to Oxford College Butwal, Tribhuvan University, and our supervisor Mr. Suraj Khattri for their guidance and support throughout this project.
