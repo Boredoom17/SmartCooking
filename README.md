@@ -1,118 +1,352 @@
-# NutriSnap
+<div align="center">
 
-**AI-Powered Vegetable Detection & Nepali Recipe Recommender**
+# 🍳 SmartCooking Backend
+### AI-Powered Recipe API with Vision Intelligence
 
-NutriSnap is an intelligent mobile application that uses computer vision to identify vegetables from user-captured photos and suggests relevant **Nepali recipes**, helping reduce household food waste while promoting culinary creativity and discovery.
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
+[![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)](LICENSE)
 
-<p align="center">
-  <img src="https://via.placeholder.com/800x400.png?text=NutriSnap+App+Screenshots" alt="NutriSnap Screenshots" width="80%" />
-  <br/>
-  <em>Coming soon: Demo screenshots / video</em>
-</p>
+**Smart Recipe Generation** • **Image Recognition** • **RESTful API**
 
-## ✨ Key Features
+---
 
-- 📸 **Snap** a photo of your vegetables using the device camera
-- 🤖 **AI Detection** — automatically recognizes 14 common vegetables
-- 🍲 **Recipe Suggestions** — personalized Nepali recipes in **English** and **Nepali**
-- ⭐ **Favorites** — save recipes for quick access later
-- ♻️ Helps reduce food waste by utilizing ingredients you already have
+</div>
 
-### Supported Vegetables (14 classes)
+## 📖 Overview
 
-Tomato · Cauliflower · Capsicum · Potato · Ginger · Garlic · Cabbage · Pumpkin · Eggplant · Onion · Peas · Radish · Carrot · Spinach
+A Flask-based backend service that powers the SmartCooking mobile app with intelligent recipe generation capabilities. Uses OpenAI's GPT-4 Vision API to analyze ingredient images and generate personalized recipes based on available ingredients, dietary preferences, and cooking constraints.
 
-## 🛠 Tech Stack
+### ✨ Key Features
 
-| Layer              | Technology                            |
-|--------------------|---------------------------------------|
-| **Mobile**         | React Native (CLI) + TypeScript       |
-| **AI / ML**        | YOLOv8n (Ultralytics), PyTorch        |
-| **Backend**        | Flask (Python)                        |
-| **Database & Auth**| Supabase (PostgreSQL + Auth)          |
-| **Training**       | Google Colab                          |
-| **Camera**         |  vision-camera   |
+- 🤖 **AI Recipe Generation** - Leverages GPT-4 for intelligent recipe creation
+- 📸 **Image Analysis** - Computer vision for ingredient identification from photos
+- 🎯 **Smart Recommendations** - Personalized recipes based on user preferences
+- 🔒 **Secure API** - CORS-enabled RESTful endpoints
+- 📝 **Detailed Instructions** - Step-by-step cooking guidance with timing
+- 🌱 **Dietary Support** - Accommodates various dietary restrictions and preferences
+- ⚡ **Fast Response** - Optimized API calls with efficient processing
 
-## 📊 Model Performance
+## 🎯 API Capabilities
 
-- **mAP@50** — 72.2%  
-- **Inference time** — ~6.3 ms (on suitable mobile hardware)  
-- **Training dataset** — 2,229 annotated images across 14 classes
+The backend provides intelligent recipe generation through:
 
-## 🚀 Getting Started
+- **Ingredient-Based Recipe Creation** - Generate recipes from a list of available ingredients
+- **Image Recognition** - Upload photos of ingredients for automatic identification
+- **Dietary Customization** - Filter recipes by dietary preferences (vegetarian, vegan, gluten-free, etc.)
+- **Portion Adjustment** - Scale recipes for different serving sizes
+- **Nutritional Information** - Get estimated calorie and macro breakdowns
+- **Cooking Time Estimates** - Realistic prep and cook time calculations
+
+## 🛠️ Tech Stack
+
+### Core Framework
+- **Flask** - Lightweight WSGI web application framework
+- **Flask-CORS** - Cross-Origin Resource Sharing handling
+- **Python 3.9+** - Backend language
+
+### AI & Machine Learning
+- **OpenAI API** - GPT-4 and GPT-4 Vision models
+- **PIL (Pillow)** - Image processing and manipulation
+- **Base64** - Image encoding for API transmission
+
+### Development Tools
+- **python-dotenv** - Environment variable management
+- **Requests** - HTTP library for API calls
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js ≥ 18
-- npm ≥ 8
-- Python ≥ 3.12
-- Android Studio (for Android builds) or Xcode (for iOS)
-- Supabase account & project
+Ensure you have the following installed:
+- Python 3.9 or higher
+- pip (Python package manager)
+- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
 
 ### Installation
 
-1. Clone the repository
+1. **Clone the repository**
+```bash
+git clone https://github.com/Boredoom17/smartcooking-flask-backend.git
+cd smartcooking-flask-backend
+```
 
-   ```bash
-   git clone https://github.com/Boredoom17/SmartCooking.git
-   cd SmartCooking/SmartAICooking
+2. **Create a virtual environment** (recommended)
+```bash
+python -m venv venv
 
+# On Windows
+venv\Scripts\activate
 
-2. Install frontend dependencies
-   ```bash
-    npm install
-    # or
-    yarn install
-  
-3. Set up environment variables
-   ```bash
-   cp .env.example .env
-  Fill in your Supabase credentials and backend API URL in .env
+# On macOS/Linux
+source venv/bin/activate
+```
 
+3. **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
 
-4. (Optional) Backend setup
-   ```bash
-   cd backend          # or wherever your Flask app lives
-   python -m venv venv
-   source venv/bin/activate    # Windows: venv\Scripts\activate
-   pip install -r requirements.txt
+4. **Configure environment variables**
+   
+   Create a `.env` file in the root directory:
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+FLASK_ENV=development
+FLASK_DEBUG=True
+```
 
-5. Run the mobile app
-   ```bash
-   npm run android
-   # or
-   npm run ios
+   Or copy from the example file:
+```bash
+cp .env.example .env
+# Then edit .env with your actual API key
+```
 
-For detailed build troubleshooting, Supabase integration, or Flask server setup → see SETUP.md
-<br><br>
+5. **Start the development server**
+```bash
+python server.py
+```
+   
+   The API will be available at `http://localhost:5000`
 
+## 📡 API Endpoints
 
-<br><br>
-🤝 Contributing<br><br>
-We welcome contributions of all kinds!<br><br>
+### Generate Recipe from Ingredients
+```http
+POST /generate-recipe
+Content-Type: application/json
 
-1.Fork the repository<br>
-2.Create your feature branch<br>
-     git checkout -b feature/amazing-feature<br>
-3.Commit your changes<br>
-     git commit -m 'Add amazing feature'<br>
-4.Push to the branch<br>
-     git push origin feature/amazing-feature<br>
-5.Open a Pull Request<br>
-<br>
-Please read CONTRIBUTING.md (create if missing) for detailed guidelines.
+{
+  "ingredients": ["chicken breast", "tomatoes", "garlic", "olive oil"],
+  "dietary_preferences": "none",
+  "servings": 2,
+  "cooking_time": "30 minutes"
+}
+```
 
-<br><br><br>
-❤️ Acknowledgments<br><br>
+**Response:**
+```json
+{
+  "recipe": {
+    "title": "Garlic Tomato Chicken",
+    "ingredients": [...],
+    "instructions": [...],
+    "prep_time": "10 minutes",
+    "cook_time": "20 minutes",
+    "servings": 2,
+    "nutrition": {...}
+  }
+}
+```
 
--Supervisor: Mr. Suraj Khattri, Oxford College, Butwal<br>
--Institution: Bachelor of Information Management (BIM), Tribhuvan University, Nepal <br>
--Guidance & Support: Oxford College Butwal and Tribhuvan University<br>
-<br>
+### Generate Recipe from Image
+```http
+POST /generate-recipe-from-image
+Content-Type: application/json
 
-📄 License <br>
-This project is licensed under the MIT License — see the LICENSE file for details. <br>
+{
+  "image": "base64_encoded_image_string",
+  "dietary_preferences": "vegetarian",
+  "servings": 4
+}
+```
 
-Developed with ❤️ by<br>
-Aadarsha Chhetri<br>
-Vipassi Kumar Bajracharya<br>
+**Response:**
+```json
+{
+  "identified_ingredients": ["tomatoes", "onions", "bell peppers"],
+  "recipe": {
+    "title": "Roasted Vegetable Medley",
+    "ingredients": [...],
+    "instructions": [...]
+  }
+}
+```
+
+### Health Check
+```http
+GET /health
+
+Response: { "status": "healthy", "service": "SmartCooking API" }
+```
+
+## 🧪 Testing
+
+Test the API endpoints using the provided test script:
+
+```bash
+# Test recipe generation from ingredients
+python test_api.py
+
+# Test with custom image
+python test_api.py --image ./test_images/ingredients.jpg
+```
+
+### Manual Testing with cURL
+
+```bash
+# Test recipe generation
+curl -X POST http://localhost:5000/generate-recipe \
+  -H "Content-Type: application/json" \
+  -d '{
+    "ingredients": ["pasta", "tomatoes", "basil"],
+    "dietary_preferences": "vegetarian",
+    "servings": 2
+  }'
+```
+
+## 🗂️ Project Structure
+```
+smartcooking-flask-backend/
+├── server.py              # Main Flask application
+├── test_api.py            # API testing script
+├── requirements.txt       # Python dependencies
+├── .env.example          # Environment variables template
+├── .gitignore            # Git ignore rules
+├── test_images/          # Sample images for testing
+│   └── sample.jpg
+└── README.md             # This file
+```
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `OPENAI_API_KEY` | Your OpenAI API key | Yes |
+| `FLASK_ENV` | Flask environment (development/production) | No |
+| `FLASK_DEBUG` | Enable debug mode | No |
+| `PORT` | Server port (default: 5000) | No |
+
+### API Rate Limits
+
+- OpenAI API has rate limits based on your subscription tier
+- Implement caching for frequently requested recipes
+- Consider request throttling for production deployment
+
+## 🚢 Deployment
+
+### Deploy to Production
+
+1. **Set production environment variables**
+```bash
+export FLASK_ENV=production
+export FLASK_DEBUG=False
+```
+
+2. **Use a production WSGI server** (Gunicorn recommended)
+```bash
+pip install gunicorn
+gunicorn --bind 0.0.0.0:5000 server:app
+```
+
+### Deploy to Cloud Platforms
+
+**Heroku:**
+```bash
+# Install Heroku CLI, then:
+heroku create smartcooking-api
+heroku config:set OPENAI_API_KEY=your_key_here
+git push heroku main
+```
+
+**Railway:**
+- Connect your GitHub repository
+- Add `OPENAI_API_KEY` in environment variables
+- Deploy automatically on push
+
+**AWS EC2:**
+- Set up EC2 instance with Python
+- Clone repository and install dependencies
+- Use systemd or supervisor for process management
+- Configure nginx as reverse proxy
+
+## 🔒 Security
+
+- ✅ Environment variables for sensitive credentials
+- ✅ CORS configured for frontend origins only
+- ✅ Input validation on all endpoints
+- ✅ Rate limiting (recommended for production)
+- ✅ HTTPS enforcement (required for production)
+- ✅ API key rotation strategy
+
+**Important:** Never commit your `.env` file or expose your OpenAI API key publicly.
+
+## 🤝 Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository
+2. Create a feature branch
+```bash
+git checkout -b feature/amazing-feature
+```
+3. Commit your changes
+```bash
+git commit -m "Add amazing feature"
+```
+4. Push to your branch
+```bash
+git push origin feature/amazing-feature
+```
+5. Open a Pull Request
+
+## 🐛 Known Issues
+
+- Large images may take longer to process - consider implementing image compression
+- API rate limits may affect concurrent requests during high traffic
+
+Found a bug? [Open an issue](https://github.com/Boredoom17/smartcooking-flask-backend/issues)
+
+## 📈 Future Enhancements
+
+- [ ] Recipe caching with Redis
+- [ ] User authentication and saved recipes
+- [ ] Recipe rating and feedback system
+- [ ] Multi-language support
+- [ ] Ingredient substitution suggestions
+- [ ] Shopping list generation
+- [ ] Meal planning features
+- [ ] Integration with nutrition databases (USDA, etc.)
+- [ ] WebSocket support for real-time updates
+- [ ] Recipe scaling algorithm improvements
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Developer
+
+**Aadarsha Chhetri**
+- GitHub: [@Boredoom17](https://github.com/Boredoom17)
+- Frontend Repository: [SmartCooking Mobile App](https://github.com/Boredoom17/SmartCooking)
+- Backend Repository: [SmartCooking API](https://github.com/Boredoom17/smartcooking-flask-backend)
+
+## 🙏 Acknowledgments
+
+- **OpenAI** - GPT-4 and Vision API
+- **Flask Team** - Excellent web framework
+- **Python Community** - Comprehensive libraries and support
+- All contributors and testers
+
+## 📞 Support
+
+Need help? Here's how to get support:
+
+- 📧 Open an [issue](https://github.com/Boredoom17/smartcooking-flask-backend/issues)
+- 📖 Check the [documentation](https://github.com/Boredoom17/smartcooking-flask-backend#readme)
+- 💬 Frontend repo: [SmartCooking](https://github.com/Boredoom17/SmartCooking)
+
+---
+
+<div align="center">
+
+**⭐ Star this repo if you found it helpful!**
+
+Made with ❤️ for smarter cooking
+
+[🔧 Backend API](https://github.com/Boredoom17/smartcooking-flask-backend) • [📱 Mobile App](https://github.com/Boredoom17/SmartCooking) • [🐛 Report Bug](https://github.com/Boredoom17/smartcooking-flask-backend/issues)
+
+</div>
