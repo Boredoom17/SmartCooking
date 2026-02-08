@@ -231,7 +231,7 @@ smartcooking-flask-backend/
 - Bounding box visualization for detected items
 
 **Supported Ingredients (13 total):**
-The model is trained to recognize common ingredients like vegetables, grains, proteins, and spices frequently used in Nepali cuisine.
+The model is trained to recognize common ingredients like vegetables, fruits that are frequently used in Nepali cuisine.
 
 ### 🎯 Recipe Matching System
 
