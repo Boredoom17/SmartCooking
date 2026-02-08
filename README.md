@@ -6,7 +6,6 @@
 [![React Native](https://img.shields.io/badge/React_Native-0.75-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactnative.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Expo](https://img.shields.io/badge/Expo-SDK_52-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
-[![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)](LICENSE)
 
 **Smart Recipes** • **Ingredient Scanner** • **Personalized Cooking**
 
