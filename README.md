@@ -1,13 +1,15 @@
 <div align="center">
 
 # 🍽️ NUTRISNAP
-### AI-Powered Recipe Generator Mobile App
+### Smart Recipe Finder from Your Ingredients
 
 [![React Native](https://img.shields.io/badge/React_Native-0.75-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactnative.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Expo](https://img.shields.io/badge/Expo-SDK_52-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 
-**Smart Recipes** • **Ingredient Scanner** • **Personalized Cooking**
+**Snap Ingredients** • **Get Recipes** • **Start Cooking**
 
 ---
 
@@ -15,91 +17,88 @@
 
 ## 📖 Overview
 
-SmartCooking is an intelligent mobile application that transforms the way you cook by generating personalized recipes based on ingredients you already have. Simply snap a photo of your ingredients or manually input them, and let AI create delicious recipes tailored to your dietary preferences and available cooking time.
+NUTRISNAP is a mobile application designed for students and individuals living alone who want to make the most of their available ingredients. Simply snap a photo of what you have in your kitchen, and NUTRISNAP will suggest recipes you can make, ranked by how well your ingredients match each recipe.
 
-### ✨ Key Highlights
+Built with a custom-trained YOLOv8n model for ingredient recognition and a curated database of Nepali and Western recipes, NUTRISNAP helps you discover cooking possibilities without the hassle of manual ingredient entry.
 
-- 📸 **Ingredient Scanner** - Take photos of ingredients for instant recipe suggestions
-- 🤖 **AI-Powered Recipes** - GPT-4 generates creative, personalized recipes
-- 🥗 **Dietary Customization** - Support for vegetarian, vegan, gluten-free, and more
-- 💾 **Save Favorites** - Bookmark recipes for quick access later
-- 📊 **Nutritional Info** - View estimated calories and macros for each recipe
-- 🕐 **Time-Based Filtering** - Find recipes that match your available cooking time
-- 📱 **Cross-Platform** - Works seamlessly on iOS and Android
-- 🌙 **Beautiful UI** - Modern, intuitive interface with smooth animations
+### ✨ Key Features
+
+- 📸 **Ingredient Recognition** - Snap photos to automatically identify ingredients
+- 🎯 **Smart Recipe Matching** - Recipes ranked by ingredient match percentage
+- 🍲 **Curated Recipe Database** - 30-40 Nepali and Western recipes
+- ✏️ **Editable Results** - Refine recognized ingredients before searching
+- 📜 **Scan History** - View your last 10-15 ingredient scans
+- 📱 **Cross-Platform** - Works on both iOS and Android
+- ⚡ **Fast & Lightweight** - Optimized for quick results
 
 ## 🎯 How It Works
 
 ```mermaid
 graph LR
-    A[Take Photo] --> B[AI Identifies Ingredients]
-    C[Manual Input] --> B
-    B --> D[Select Preferences]
-    D --> E[Generate Recipe]
-    E --> F[View & Save]
-    F --> G[Start Cooking!]
+    A[Take Photo] --> B[YOLOv8n Recognition]
+    B --> C[Edit Ingredients]
+    C --> D[Match Recipes]
+    D --> E[View Results]
+    E --> F[Start Cooking!]
 ```
 
 ### User Flow
 
-1. **Add Ingredients**
-   - Scan ingredients using your camera
-   - Or manually enter what you have
+1. **Capture Ingredients**
+   - Open the app and tap the camera button
+   - Snap a photo of your ingredients
+   - AI identifies what's in the image
 
-2. **Set Your Preferences**
-   - Choose dietary restrictions
-   - Set number of servings
-   - Select available cooking time
+2. **Review & Refine**
+   - Check recognized ingredients
+   - Edit or remove any incorrect items
+   - Add missing ingredients if needed
 
-3. **Generate Recipe**
-   - AI analyzes your inputs
-   - Creates a custom recipe just for you
+3. **Get Recipe Suggestions**
+   - View recipes sorted by match percentage
+   - Recipes requiring your ingredients appear first
+   - Partial matches shown below
 
-4. **Cook & Enjoy**
+4. **Cook Your Meal**
    - Follow step-by-step instructions
-   - Save recipes you love
-   - Share with friends and family
+   - Access your scan history anytime
 
 ## 🛠️ Tech Stack
 
 ### Frontend
 - **React Native** - Cross-platform mobile framework
-- **TypeScript** - Type-safe JavaScript
-- **Expo** - Development and build tooling
-- **React Navigation** - Screen routing and navigation
+- **TypeScript** - Type-safe development
+- **Expo (SDK 52)** - Build and deployment tools
+- **React Navigation** - Screen navigation
+- **Expo ImagePicker** - Camera and gallery access
 
-### State Management & Storage
-- **React Context API** - Global state management
-- **AsyncStorage** - Local data persistence
-- **Expo SecureStore** - Secure credential storage
+### Backend
+- **Flask** - Python web framework
+- **YOLOv8n** - Custom-trained object detection model
+- **OpenCV** - Image processing
+- **NumPy** - Numerical computations
 
-### Media & Camera
-- **Expo Camera** - Camera access and photo capture
-- **Expo ImagePicker** - Gallery access
-- **Expo FileSystem** - File management
+### Data & Storage
+- **JSON** - Recipe database storage
+- **AsyncStorage** - Local history persistence
+- **Custom ML Model** - 13 ingredient classes (custom-annotated dataset)
 
-### Backend Integration
+### API Communication
 - **Axios** - HTTP client for API requests
-- **REST API** - Communication with Flask backend
-- Custom API wrapper with error handling
-
-### UI/UX
-- **React Native Paper** - Material Design components
-- **Vector Icons** - Icon library
-- **Custom Animations** - Smooth transitions and effects
+- **RESTful API** - Flask backend endpoints
+- **Base64 Encoding** - Image transfer format
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-Ensure you have the following installed:
 - Node.js (v16 or higher)
 - npm or yarn
 - Expo CLI (`npm install -g expo-cli`)
-- iOS Simulator (Mac only) or Android Studio
-- Git
+- iOS Simulator (Mac) or Android Studio
+- Python 3.11+ (for backend)
 
-### Installation
+### Frontend Setup
 
 1. **Clone the repository**
 ```bash
@@ -116,283 +115,241 @@ yarn install
 
 3. **Configure environment variables**
    
-   Create a `.env` file in the root directory:
+   Create a `.env` file:
 ```env
 API_URL=http://your-backend-url:5000
 EXPO_PUBLIC_API_URL=http://your-backend-url:5000
 ```
 
-4. **Start the development server**
+4. **Start the app**
 ```bash
 npm start
 # or
 expo start
 ```
 
-5. **Run on your device**
-   - **iOS**: Press `i` in the terminal or scan QR code with Camera app
-   - **Android**: Press `a` in the terminal or scan QR code with Expo Go app
-   - **Web**: Press `w` (limited functionality)
+5. **Run on device**
+   - Scan QR code with Expo Go app (iOS/Android)
+   - Press `i` for iOS Simulator
+   - Press `a` for Android Emulator
 
-## 📱 Running on Physical Devices
+### Backend Setup
 
-### iOS (Requires Mac)
-
-1. **Install Expo Go** from the App Store
-2. **Scan the QR code** displayed in the terminal with your Camera app
-3. **Open in Expo Go** when prompted
-
-### Android
-
-1. **Install Expo Go** from the Play Store
-2. **Scan the QR code** displayed in the terminal with the Expo Go app
-3. **App will load** automatically
-
-### Development Build (Recommended for Full Features)
-
+1. **Clone the backend repository**
 ```bash
-# For iOS
-eas build --profile development --platform ios
+git clone https://github.com/Boredoom17/smartcooking-flask-backend.git
+cd smartcooking-flask-backend
+```
 
-# For Android
-eas build --profile development --platform android
+2. **Create virtual environment**
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. **Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Configure environment**
+   
+   Create a `.env` file:
+```env
+FLASK_ENV=development
+PORT=5000
+```
+
+5. **Run the server**
+```bash
+python server.py
+```
+
+The backend will start on `http://localhost:5000`
+
+## 📱 Running the App
+
+### Development Mode
+
+**With Expo Go:**
+```bash
+npm start
+```
+- Install Expo Go from App Store (iOS) or Play Store (Android)
+- Scan the QR code to launch the app
+
+**Note:** Ensure your mobile device and development machine are on the same network.
+
+### Testing API Connection
+
+Test if the backend is accessible:
+```bash
+cd smartcooking-flask-backend
+python test_api.py
 ```
 
 ## 🗂️ Project Structure
+
 ```
 SmartCooking/
-├── SmartCookingStable/
-│   ├── app/                    # App screens and navigation
-│   │   ├── (tabs)/            # Tab-based navigation
-│   │   │   ├── index.tsx      # Home screen
-│   │   │   ├── recipes.tsx    # Saved recipes
-│   │   │   └── profile.tsx    # User profile
-│   │   ├── recipe/            # Recipe details
-│   │   └── _layout.tsx        # Root layout
-│   ├── components/             # Reusable components
+├── SmartCookingStable/          # Frontend application
+│   ├── app/                     # App screens
+│   │   ├── (tabs)/             # Tab navigation
+│   │   │   ├── index.tsx       # Home/Camera screen
+│   │   │   └── history.tsx     # Scan history
+│   │   ├── recipe/             # Recipe details
+│   │   └── _layout.tsx         # Root layout
+│   ├── components/              # Reusable components
+│   │   ├── CameraView.tsx
 │   │   ├── RecipeCard.tsx
-│   │   ├── IngredientInput.tsx
-│   │   └── CameraScanner.tsx
-│   ├── services/              # API and utilities
-│   │   ├── api.ts             # Backend integration
-│   │   └── storage.ts         # Local storage
-│   ├── types/                 # TypeScript definitions
-│   ├── assets/                # Images, fonts, etc.
-│   ├── constants/             # App constants
-│   ├── hooks/                 # Custom React hooks
+│   │   └── IngredientList.tsx
+│   ├── services/               # API integration
+│   │   └── api.ts             # Backend communication
+│   ├── types/                  # TypeScript types
+│   ├── assets/                 # Images and resources
 │   ├── app.json               # Expo configuration
 │   ├── package.json           # Dependencies
-│   ├── tsconfig.json          # TypeScript config
-│   └── .env.example           # Environment template
-└── README.md                  # This file
+│   └── .env                   # Environment config
+└── README.md
+
+smartcooking-flask-backend/
+├── server.py                   # Flask application
+├── test_api.py                # API testing script
+├── requirements.txt           # Python dependencies
+├── .env                       # Backend configuration
+└── test_images/              # Sample test images
 ```
 
-## 🎨 Key Features in Detail
+## 🎨 Core Features in Detail
 
-### 📸 Ingredient Scanner
-- Uses device camera to capture ingredient photos
-- AI-powered image recognition identifies ingredients
-- Automatic addition to ingredient list
-- Manual editing and refinement options
+### 📸 Ingredient Recognition
 
-### 🤖 Smart Recipe Generation
-- GPT-4 analyzes available ingredients
-- Considers dietary restrictions and preferences
-- Provides detailed cooking instructions
-- Includes prep time, cook time, and serving sizes
+- Powered by **YOLOv8n** (You Only Look Once v8 Nano)
+- Custom-trained on **13 ingredient categories**
+- Recognizes common Nepali and Western cooking ingredients
+- Fast inference time (~200ms average)
+- Bounding box visualization for detected items
 
-### 💾 Recipe Management
-- Save favorite recipes locally
-- Quick access to saved recipes
-- Delete unwanted recipes
-- Share recipes with friends
+**Supported Ingredients (13 total):**
+The model is trained to recognize common ingredients like vegetables, grains, proteins, and spices frequently used in Nepali cuisine.
 
-### 🥗 Dietary Preferences
-- Vegetarian
-- Vegan
-- Gluten-Free
-- Dairy-Free
-- Keto
-- Low-Carb
-- Custom restrictions
+### 🎯 Recipe Matching System
 
-### 📊 Nutritional Information
-- Estimated calories per serving
-- Macronutrient breakdown (protein, carbs, fats)
-- Dietary fiber content
-- Allergen warnings
+- **Percentage-based ranking** - Recipes sorted by ingredient match
+- **Flexible matching** - Shows recipes even with partial ingredient lists
+- **Prioritized display** - Best matches appear first
+- **Recipe database** - 30-40 curated recipes (Nepali and Western fusion)
+
+### 📜 History Tracking
+
+- Stores last **10-15 scans** locally
+- Quick access to previous ingredient searches
+- View what ingredients were detected in each scan
+- Persistent across app sessions
 
 ## ⚙️ Configuration
 
-### Backend Connection
+### Adjusting API Endpoint
 
-Update your API URL in `.env`:
+If running backend on a different device or network:
+
+**For local network (device testing):**
 ```env
-API_URL=https://your-production-backend.com
+# Use your computer's local IP
+API_URL=http://192.168.1.100:5000
+```
+
+**For production deployment:**
+```env
+API_URL=https://your-domain.com
 ```
 
 ### Camera Permissions
 
-The app requires camera permissions for ingredient scanning. These are requested at runtime.
+The app automatically requests camera permissions on first use. Make sure to allow camera access when prompted.
 
-**iOS:** Permissions are handled automatically
-**Android:** Permissions are declared in `app.json`
+## 📊 Supported Ingredients
 
-### Build Configuration
+The current model supports **13 ingredient categories**. This is a demo version with limited ingredient recognition. The model can be expanded with additional training data to support more ingredients.
 
-Edit `app.json` for build settings:
-```json
-{
-  "expo": {
-    "name": "SmartCooking",
-    "slug": "smart-cooking",
-    "version": "1.0.0",
-    "ios": {
-      "bundleIdentifier": "com.yourname.smartcooking"
-    },
-    "android": {
-      "package": "com.yourname.smartcooking"
-    }
-  }
-}
-```
+> **Note:** Ingredient recognition accuracy depends on image quality, lighting conditions, and how clearly ingredients are visible in the photo.
 
-## 🚢 Building for Production
+## 🔒 Privacy & Data
 
-### Create Production Builds
+- **No cloud storage** - All ingredient scans processed in real-time
+- **No personal data collection** - App doesn't collect user information
+- **Local history only** - Scan history stored on device
+- **Temporary image processing** - Photos not permanently stored on servers
 
-1. **Set up EAS Build**
-```bash
-npm install -g eas-cli
-eas login
-eas build:configure
-```
+## 🐛 Known Limitations
 
-2. **Build for iOS**
-```bash
-eas build --platform ios --profile production
-```
+- Limited to 13 ingredient categories
+- Recognition accuracy varies with lighting and image quality
+- Recipe database is relatively small (30-40 recipes)
+- No user accounts or cloud synchronization
+- History limited to last 10-15 scans
+- Requires active internet connection for ingredient recognition
 
-3. **Build for Android**
-```bash
-eas build --platform android --profile production
-```
+## 🚧 Current Status
 
-### Submit to App Stores
+**Version:** Demo.Final (v0.9.0)
 
-```bash
-# iOS App Store
-eas submit --platform ios
+This is a **demonstration version** developed as a student project. The app showcases core functionality with a limited ingredient database and recipe collection. With additional resources and time, the system can be significantly expanded.
 
-# Google Play Store
-eas submit --platform android
-```
-
-## 📲 App Store Presence
-
-### iOS App Store
-- Coming soon!
-
-### Google Play Store
-- Coming soon!
-
-## 🔒 Security & Privacy
-
-- ✅ Secure API communication (HTTPS in production)
-- ✅ No personal data collected without consent
-- ✅ Camera access only when needed
-- ✅ Local storage for saved recipes
-- ✅ No third-party analytics by default
-- ✅ Open source and transparent
-
-**Privacy First:** Your ingredient photos are processed only for recipe generation and not stored on servers.
+### Potential Improvements
+- Expand ingredient recognition to 50+ categories
+- Larger recipe database (100+ recipes)
+- User accounts and cloud sync
+- Recipe ratings and favorites
+- Shopping list generation
+- Offline ingredient recognition
+- Nutritional information
+- Dietary preference filters
 
 ## 🤝 Contributing
 
-Contributions are welcome! To contribute:
+This is a student demonstration project. Contributions, suggestions, and feedback are welcome!
 
 1. Fork the repository
-2. Create a feature branch
-```bash
-git checkout -b feature/amazing-feature
-```
-3. Commit your changes
-```bash
-git commit -m "Add amazing feature"
-```
-4. Push to your branch
-```bash
-git push origin feature/amazing-feature
-```
+2. Create a feature branch (`git checkout -b feature/improvement`)
+3. Commit your changes (`git commit -m "Add improvement"`)
+4. Push to the branch (`git push origin feature/improvement`)
 5. Open a Pull Request
-
-## 🐛 Known Issues
-
-- Camera may not work on iOS Simulator (use physical device)
-- Some fonts may not load on first app start
-- Image scanning requires good lighting for best results
-
-Found a bug? [Open an issue](https://github.com/Boredoom17/SmartCooking/issues)
-
-## 📈 Roadmap
-
-- [ ] **v1.1** - Meal planning calendar
-- [ ] **v1.2** - Shopping list generation
-- [ ] **v1.3** - Recipe sharing community
-- [ ] **v2.0** - Video cooking tutorials
-- [ ] **v2.1** - Voice-guided cooking mode
-- [ ] **v2.2** - Integration with smart kitchen devices
-- [ ] **v2.3** - Multi-language support
-- [ ] **v3.0** - Social features and recipe ratings
-
-## 🧪 Testing
-
-### Run Tests
-```bash
-npm test
-# or
-yarn test
-```
-
-### E2E Testing
-```bash
-# Coming soon - Detox integration planned
-```
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is open source and available under the MIT License.
 
-## 👨‍💻 Developer
+## 👨‍💻 Developers
 
-**Aadarsha Chhetri**
-- GitHub: [@Boredoom17](https://github.com/Boredoom17)
-- Frontend Repository: [SmartCooking Mobile App](https://github.com/Boredoom17/SmartCooking)
-- Backend Repository: [SmartCooking API](https://github.com/Boredoom17/smartcooking-flask-backend)
+**Frontend Developer**
+- **Aadarsha Chhetri** - [@Boredoom17](https://github.com/Boredoom17)
+- Repository: [SmartCooking Mobile App](https://github.com/Boredoom17/SmartCooking)
+
+**Backend Developer**
+- **[Backend Developer Name]**
+- Repository: [SmartCooking Flask Backend](https://github.com/Boredoom17/smartcooking-flask-backend)
 
 ## 🙏 Acknowledgments
 
-- **OpenAI** - GPT-4 and Vision API
-- **Expo Team** - Excellent development tools
-- **React Native Community** - Comprehensive libraries
-- **All beta testers** - Valuable feedback and support
+- YOLOv8 by Ultralytics for object detection framework
+- React Native and Expo teams for excellent mobile development tools
+- Flask community for lightweight backend framework
+- All testers who provided valuable feedback
 
 ## 📞 Support
 
-Need help? Here's how to get support:
+Need help or found a bug?
 
-- 📧 Open an [issue](https://github.com/Boredoom17/SmartCooking/issues)
-- 📖 Check the [documentation](https://github.com/Boredoom17/SmartCooking#readme)
-- 🔧 Backend API: [Flask Backend](https://github.com/Boredoom17/smartcooking-flask-backend)
-- 💬 Reach out via GitHub Discussions
+- 📧 [Open an issue](https://github.com/Boredoom17/SmartCooking/issues) on GitHub
+- 📖 Check the [backend repository](https://github.com/Boredoom17/smartcooking-flask-backend) for API documentation
+- 💬 Review closed issues for common solutions
 
-## 🌟 Star History
+## 🎓 About This Project
 
-If you find this project helpful, please consider giving it a star! ⭐
+NUTRISNAP was created as a demonstration project to showcase practical machine learning applications in everyday cooking. It addresses the common problem faced by students and individuals living alone: "What can I cook with what I have?"
 
-## 📸 Screenshots
-
-*Coming soon - App screenshots will be added here*
+The project combines computer vision, mobile development, and recipe recommendation to create a simple yet effective cooking assistant. While currently limited in scope, it demonstrates the potential for smart kitchen applications.
 
 ---
 
@@ -400,8 +357,10 @@ If you find this project helpful, please consider giving it a star! ⭐
 
 **⭐ Star this repo if you found it helpful!**
 
-Made with ❤️ for smarter, easier cooking
+Made with ❤️ for smarter cooking decisions
 
-[📱 Mobile App](https://github.com/Boredoom17/SmartCooking) • [🔧 Backend API](https://github.com/Boredoom17/smartcooking-flask-backend) • [🐛 Report Bug](https://github.com/Boredoom17/SmartCooking/issues) • [✨ Request Feature](https://github.com/Boredoom17/SmartCooking/issues)
+[📱 Frontend Repo](https://github.com/Boredoom17/SmartCooking) • [🔧 Backend Repo](https://github.com/Boredoom17/smartcooking-flask-backend) • [🐛 Report Bug](https://github.com/Boredoom17/SmartCooking/issues)
+
+**Demo Version** • Built by Students • Open for Expansion
 
 </div>
