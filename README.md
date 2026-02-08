@@ -8,6 +8,7 @@
 [![Expo](https://img.shields.io/badge/Expo-SDK_52-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 
 **Snap Ingredients** • **Get Recipes** • **Start Cooking**
 
@@ -23,6 +24,7 @@ Built with a custom-trained YOLOv8n model for ingredient recognition and a curat
 
 ### ✨ Key Features
 
+- 🔐 **User Authentication** - Secure login and session management with Supabase
 - 📸 **Ingredient Recognition** - Snap photos to automatically identify ingredients
 - 🎯 **Smart Recipe Matching** - Recipes ranked by ingredient match percentage
 - 🍲 **Curated Recipe Database** - 30-40 Nepali and Western recipes
@@ -35,31 +37,36 @@ Built with a custom-trained YOLOv8n model for ingredient recognition and a curat
 
 ```mermaid
 graph LR
-    A[Take Photo] --> B[YOLOv8n Recognition]
-    B --> C[Edit Ingredients]
-    C --> D[Match Recipes]
-    D --> E[View Results]
-    E --> F[Start Cooking!]
+    A[Sign In] --> B[Take Photo]
+    B --> C[YOLOv8n Recognition]
+    C --> D[Edit Ingredients]
+    D --> E[Match Recipes]
+    E --> F[View Results]
+    F --> G[Start Cooking!]
 ```
 
 ### User Flow
 
-1. **Capture Ingredients**
+1. **Sign In**
+   - Create an account or log in with existing credentials
+   - Secure authentication via Supabase
+
+2. **Capture Ingredients**
    - Open the app and tap the camera button
    - Snap a photo of your ingredients
    - AI identifies what's in the image
 
-2. **Review & Refine**
+3. **Review & Refine**
    - Check recognized ingredients
    - Edit or remove any incorrect items
    - Add missing ingredients if needed
 
-3. **Get Recipe Suggestions**
+4. **Get Recipe Suggestions**
    - View recipes sorted by match percentage
    - Recipes requiring your ingredients appear first
    - Partial matches shown below
 
-4. **Cook Your Meal**
+5. **Cook Your Meal**
    - Follow step-by-step instructions
    - Access your scan history anytime
 
@@ -74,12 +81,13 @@ graph LR
 
 ### Backend
 - **Flask** - Python web framework
+- **Supabase** - Database and authentication service
 - **YOLOv8n** - Custom-trained object detection model
 - **OpenCV** - Image processing
 - **NumPy** - Numerical computations
 
 ### Data & Storage
-- **JSON** - Recipe database storage
+- **Supabase** - PostgreSQL database for user data, recipes, and authentication
 - **AsyncStorage** - Local history persistence
 - **Custom ML Model** - 13 ingredient classes (custom-annotated dataset)
 
@@ -97,6 +105,7 @@ graph LR
 - Expo CLI (`npm install -g expo-cli`)
 - iOS Simulator (Mac) or Android Studio
 - Python 3.11+ (for backend)
+- Supabase account (for database and authentication)
 
 ### Frontend Setup
 
@@ -119,6 +128,8 @@ yarn install
 ```env
 API_URL=http://your-backend-url:5000
 EXPO_PUBLIC_API_URL=http://your-backend-url:5000
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 4. **Start the app**
@@ -158,6 +169,8 @@ pip install -r requirements.txt
 ```env
 FLASK_ENV=development
 PORT=5000
+SUPABASE_URL=your_supabase_project_url
+SUPABASE_KEY=your_supabase_service_key
 ```
 
 5. **Run the server**
@@ -197,6 +210,7 @@ SmartCooking/
 │   │   ├── (tabs)/             # Tab navigation
 │   │   │   ├── index.tsx       # Home/Camera screen
 │   │   │   └── history.tsx     # Scan history
+│   │   ├── auth/               # Authentication screens
 │   │   ├── recipe/             # Recipe details
 │   │   └── _layout.tsx         # Root layout
 │   ├── components/              # Reusable components
@@ -204,7 +218,8 @@ SmartCooking/
 │   │   ├── RecipeCard.tsx
 │   │   └── IngredientList.tsx
 │   ├── services/               # API integration
-│   │   └── api.ts             # Backend communication
+│   │   ├── api.ts             # Backend communication
+│   │   └── supabase.ts        # Supabase client
 │   ├── types/                  # TypeScript types
 │   ├── assets/                 # Images and resources
 │   ├── app.json               # Expo configuration
@@ -221,6 +236,13 @@ smartcooking-flask-backend/
 ```
 
 ## 🎨 Core Features in Detail
+
+### 🔐 User Authentication & Sessions
+
+- **Supabase Authentication** - Secure user registration and login
+- **Session Management** - Persistent user sessions across app restarts
+- **User Data Isolation** - Each user's scan history stored separately
+- **Secure Token Storage** - Authentication tokens encrypted locally
 
 ### 📸 Ingredient Recognition
 
@@ -242,10 +264,10 @@ The model is trained to recognize common ingredients like vegetables, fruits tha
 
 ### 📜 History Tracking
 
-- Stores last **10-15 scans** locally
+- Stores last **10-15 scans** per user
 - Quick access to previous ingredient searches
 - View what ingredients were detected in each scan
-- Persistent across app sessions
+- Persistent across app sessions and devices
 
 ## ⚙️ Configuration
 
@@ -264,6 +286,13 @@ API_URL=http://192.168.1.100:5000
 API_URL=https://your-domain.com
 ```
 
+### Setting Up Supabase
+
+1. Create a new project at [supabase.com](https://supabase.com)
+2. Create the necessary tables for users, recipes, and scan history
+3. Enable authentication in the Supabase dashboard
+4. Copy your project URL and keys to the `.env` file
+
 ### Camera Permissions
 
 The app automatically requests camera permissions on first use. Make sure to allow camera access when prompted.
@@ -276,19 +305,19 @@ The current model supports **13 ingredient categories**. This is a demo version 
 
 ## 🔒 Privacy & Data
 
-- **No cloud storage** - All ingredient scans processed in real-time
-- **No personal data collection** - App doesn't collect user information
-- **Local history only** - Scan history stored on device
-- **Temporary image processing** - Photos not permanently stored on servers
+- **Secure Authentication** - User credentials managed by Supabase with industry-standard encryption
+- **User Data Isolation** - Each user's data (scan history, preferences) stored separately
+- **No cloud storage of images** - Ingredient photos processed in real-time, not stored
+- **Local session tokens** - Authentication tokens encrypted and stored on device
+- **No third-party tracking** - No analytics or data sharing with external services
 
 ## 🐛 Known Limitations
 
 - Limited to 13 ingredient categories
 - Recognition accuracy varies with lighting and image quality
 - Recipe database is relatively small (30-40 recipes)
-- No user accounts or cloud synchronization
-- History limited to last 10-15 scans
-- Requires active internet connection for ingredient recognition
+- History limited to last 10-15 scans per user
+- Requires active internet connection for ingredient recognition and authentication
 
 ## 🚧 Current Status
 
@@ -299,12 +328,13 @@ This is a **demonstration version** developed as a student project. The app show
 ### Potential Improvements
 - Expand ingredient recognition to 50+ categories
 - Larger recipe database (100+ recipes)
-- User accounts and cloud sync
+- Cloud sync for cross-device history
 - Recipe ratings and favorites
 - Shopping list generation
 - Offline ingredient recognition
 - Nutritional information
 - Dietary preference filters
+- Social features and recipe sharing
 
 ## 🤝 Contributing
 
@@ -322,17 +352,20 @@ This project is open source and available under the MIT License.
 
 ## 👨‍💻 Developers
 
-**Frontend Developer**
-- **Aadarsha Chhetri** - [@Boredoom17](https://github.com/Boredoom17)
-- Repository: [SmartCooking Mobile App](https://github.com/Boredoom17/SmartCooking)
+**Development Team**
+- **Aadarsha Chhetri** - [@Boredoom17](https://github.com/Boredoom17) - Frontend Lead & Backend Contributor
+- **Vipassi V** - [@Vipassi-V](https://github.com/Vipassi-V) - Backend Lead & Frontend Contributor
 
-**Backend Developer**
-- **[Backend Developer Name]**
-- Repository: [SmartCooking Flask Backend](https://github.com/Boredoom17/smartcooking-flask-backend)
+Both developers worked collaboratively on the entire project, contributing to both frontend and backend development.
+
+**Repositories:**
+- Frontend: [SmartCooking Mobile App](https://github.com/Boredoom17/SmartCooking)
+- Backend: [SmartCooking Flask Backend](https://github.com/Boredoom17/smartcooking-flask-backend)
 
 ## 🙏 Acknowledgments
 
 - YOLOv8 by Ultralytics for object detection framework
+- Supabase for providing excellent backend infrastructure
 - React Native and Expo teams for excellent mobile development tools
 - Flask community for lightweight backend framework
 - All testers who provided valuable feedback
