@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🍽️ SmartCooking
+# 🍽️ NUTRISNAP
 ### AI-Powered Recipe Generator Mobile App
 
 [![React Native](https://img.shields.io/badge/React_Native-0.75-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactnative.dev/)
