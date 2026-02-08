@@ -353,8 +353,8 @@ This project is open source and available under the MIT License.
 ## 👨‍💻 Developers
 
 **Development Team**
-- **Aadarsha Chhetri** - [@Boredoom17](https://github.com/Boredoom17) - Frontend Lead & Backend Contributor
-- **Vipassi V** - [@Vipassi-V](https://github.com/Vipassi-V) - Backend Lead & Frontend Contributor
+- **Aadarsha Chhetri** - [@Boredoom17](https://github.com/Boredoom17) 
+- **Vipassi V** - [@Vipassi-V](https://github.com/Vipassi-V) 
 
 Both developers worked collaboratively on the entire project, contributing to both frontend and backend development.
 
