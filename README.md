@@ -1,14 +1,14 @@
 <div align="center">
 
-# 🍳 SmartCooking Backend
-### AI-Powered Recipe API with Vision Intelligence
+# 🍽️ SmartCooking
+### AI-Powered Recipe Generator Mobile App
 
-[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-412991?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
+[![React Native](https://img.shields.io/badge/React_Native-0.75-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactnative.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Expo](https://img.shields.io/badge/Expo-SDK_52-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
 [![License](https://img.shields.io/badge/License-MIT-success?style=for-the-badge)](LICENSE)
 
-**Smart Recipe Generation** • **Image Recognition** • **RESTful API**
+**Smart Recipes** • **Ingredient Scanner** • **Personalized Cooking**
 
 ---
 
@@ -16,263 +16,297 @@
 
 ## 📖 Overview
 
-A Flask-based backend service that powers the SmartCooking mobile app with intelligent recipe generation capabilities. Uses OpenAI's GPT-4 Vision API to analyze ingredient images and generate personalized recipes based on available ingredients, dietary preferences, and cooking constraints.
+SmartCooking is an intelligent mobile application that transforms the way you cook by generating personalized recipes based on ingredients you already have. Simply snap a photo of your ingredients or manually input them, and let AI create delicious recipes tailored to your dietary preferences and available cooking time.
 
-### ✨ Key Features
+### ✨ Key Highlights
 
-- 🤖 **AI Recipe Generation** - Leverages GPT-4 for intelligent recipe creation
-- 📸 **Image Analysis** - Computer vision for ingredient identification from photos
-- 🎯 **Smart Recommendations** - Personalized recipes based on user preferences
-- 🔒 **Secure API** - CORS-enabled RESTful endpoints
-- 📝 **Detailed Instructions** - Step-by-step cooking guidance with timing
-- 🌱 **Dietary Support** - Accommodates various dietary restrictions and preferences
-- ⚡ **Fast Response** - Optimized API calls with efficient processing
+- 📸 **Ingredient Scanner** - Take photos of ingredients for instant recipe suggestions
+- 🤖 **AI-Powered Recipes** - GPT-4 generates creative, personalized recipes
+- 🥗 **Dietary Customization** - Support for vegetarian, vegan, gluten-free, and more
+- 💾 **Save Favorites** - Bookmark recipes for quick access later
+- 📊 **Nutritional Info** - View estimated calories and macros for each recipe
+- 🕐 **Time-Based Filtering** - Find recipes that match your available cooking time
+- 📱 **Cross-Platform** - Works seamlessly on iOS and Android
+- 🌙 **Beautiful UI** - Modern, intuitive interface with smooth animations
 
-## 🎯 API Capabilities
+## 🎯 How It Works
 
-The backend provides intelligent recipe generation through:
+```mermaid
+graph LR
+    A[Take Photo] --> B[AI Identifies Ingredients]
+    C[Manual Input] --> B
+    B --> D[Select Preferences]
+    D --> E[Generate Recipe]
+    E --> F[View & Save]
+    F --> G[Start Cooking!]
+```
 
-- **Ingredient-Based Recipe Creation** - Generate recipes from a list of available ingredients
-- **Image Recognition** - Upload photos of ingredients for automatic identification
-- **Dietary Customization** - Filter recipes by dietary preferences (vegetarian, vegan, gluten-free, etc.)
-- **Portion Adjustment** - Scale recipes for different serving sizes
-- **Nutritional Information** - Get estimated calorie and macro breakdowns
-- **Cooking Time Estimates** - Realistic prep and cook time calculations
+### User Flow
+
+1. **Add Ingredients**
+   - Scan ingredients using your camera
+   - Or manually enter what you have
+
+2. **Set Your Preferences**
+   - Choose dietary restrictions
+   - Set number of servings
+   - Select available cooking time
+
+3. **Generate Recipe**
+   - AI analyzes your inputs
+   - Creates a custom recipe just for you
+
+4. **Cook & Enjoy**
+   - Follow step-by-step instructions
+   - Save recipes you love
+   - Share with friends and family
 
 ## 🛠️ Tech Stack
 
-### Core Framework
-- **Flask** - Lightweight WSGI web application framework
-- **Flask-CORS** - Cross-Origin Resource Sharing handling
-- **Python 3.9+** - Backend language
+### Frontend
+- **React Native** - Cross-platform mobile framework
+- **TypeScript** - Type-safe JavaScript
+- **Expo** - Development and build tooling
+- **React Navigation** - Screen routing and navigation
 
-### AI & Machine Learning
-- **OpenAI API** - GPT-4 and GPT-4 Vision models
-- **PIL (Pillow)** - Image processing and manipulation
-- **Base64** - Image encoding for API transmission
+### State Management & Storage
+- **React Context API** - Global state management
+- **AsyncStorage** - Local data persistence
+- **Expo SecureStore** - Secure credential storage
 
-### Development Tools
-- **python-dotenv** - Environment variable management
-- **Requests** - HTTP library for API calls
+### Media & Camera
+- **Expo Camera** - Camera access and photo capture
+- **Expo ImagePicker** - Gallery access
+- **Expo FileSystem** - File management
+
+### Backend Integration
+- **Axios** - HTTP client for API requests
+- **REST API** - Communication with Flask backend
+- Custom API wrapper with error handling
+
+### UI/UX
+- **React Native Paper** - Material Design components
+- **Vector Icons** - Icon library
+- **Custom Animations** - Smooth transitions and effects
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
 Ensure you have the following installed:
-- Python 3.9 or higher
-- pip (Python package manager)
-- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- Node.js (v16 or higher)
+- npm or yarn
+- Expo CLI (`npm install -g expo-cli`)
+- iOS Simulator (Mac only) or Android Studio
+- Git
 
 ### Installation
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/Boredoom17/smartcooking-flask-backend.git
-cd smartcooking-flask-backend
+git clone https://github.com/Boredoom17/SmartCooking.git
+cd SmartCooking/SmartCookingStable
 ```
 
-2. **Create a virtual environment** (recommended)
+2. **Install dependencies**
 ```bash
-python -m venv venv
-
-# On Windows
-venv\Scripts\activate
-
-# On macOS/Linux
-source venv/bin/activate
+npm install
+# or
+yarn install
 ```
 
-3. **Install dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-4. **Configure environment variables**
+3. **Configure environment variables**
    
    Create a `.env` file in the root directory:
 ```env
-OPENAI_API_KEY=your_openai_api_key_here
-FLASK_ENV=development
-FLASK_DEBUG=True
+API_URL=http://your-backend-url:5000
+EXPO_PUBLIC_API_URL=http://your-backend-url:5000
 ```
 
-   Or copy from the example file:
+4. **Start the development server**
 ```bash
-cp .env.example .env
-# Then edit .env with your actual API key
+npm start
+# or
+expo start
 ```
 
-5. **Start the development server**
-```bash
-python server.py
-```
-   
-   The API will be available at `http://localhost:5000`
+5. **Run on your device**
+   - **iOS**: Press `i` in the terminal or scan QR code with Camera app
+   - **Android**: Press `a` in the terminal or scan QR code with Expo Go app
+   - **Web**: Press `w` (limited functionality)
 
-## 📡 API Endpoints
+## 📱 Running on Physical Devices
 
-### Generate Recipe from Ingredients
-```http
-POST /generate-recipe
-Content-Type: application/json
+### iOS (Requires Mac)
 
-{
-  "ingredients": ["chicken breast", "tomatoes", "garlic", "olive oil"],
-  "dietary_preferences": "none",
-  "servings": 2,
-  "cooking_time": "30 minutes"
-}
-```
+1. **Install Expo Go** from the App Store
+2. **Scan the QR code** displayed in the terminal with your Camera app
+3. **Open in Expo Go** when prompted
 
-**Response:**
-```json
-{
-  "recipe": {
-    "title": "Garlic Tomato Chicken",
-    "ingredients": [...],
-    "instructions": [...],
-    "prep_time": "10 minutes",
-    "cook_time": "20 minutes",
-    "servings": 2,
-    "nutrition": {...}
-  }
-}
-```
+### Android
 
-### Generate Recipe from Image
-```http
-POST /generate-recipe-from-image
-Content-Type: application/json
+1. **Install Expo Go** from the Play Store
+2. **Scan the QR code** displayed in the terminal with the Expo Go app
+3. **App will load** automatically
 
-{
-  "image": "base64_encoded_image_string",
-  "dietary_preferences": "vegetarian",
-  "servings": 4
-}
-```
-
-**Response:**
-```json
-{
-  "identified_ingredients": ["tomatoes", "onions", "bell peppers"],
-  "recipe": {
-    "title": "Roasted Vegetable Medley",
-    "ingredients": [...],
-    "instructions": [...]
-  }
-}
-```
-
-### Health Check
-```http
-GET /health
-
-Response: { "status": "healthy", "service": "SmartCooking API" }
-```
-
-## 🧪 Testing
-
-Test the API endpoints using the provided test script:
+### Development Build (Recommended for Full Features)
 
 ```bash
-# Test recipe generation from ingredients
-python test_api.py
+# For iOS
+eas build --profile development --platform ios
 
-# Test with custom image
-python test_api.py --image ./test_images/ingredients.jpg
-```
-
-### Manual Testing with cURL
-
-```bash
-# Test recipe generation
-curl -X POST http://localhost:5000/generate-recipe \
-  -H "Content-Type: application/json" \
-  -d '{
-    "ingredients": ["pasta", "tomatoes", "basil"],
-    "dietary_preferences": "vegetarian",
-    "servings": 2
-  }'
+# For Android
+eas build --profile development --platform android
 ```
 
 ## 🗂️ Project Structure
 ```
-smartcooking-flask-backend/
-├── server.py              # Main Flask application
-├── test_api.py            # API testing script
-├── requirements.txt       # Python dependencies
-├── .env.example          # Environment variables template
-├── .gitignore            # Git ignore rules
-├── test_images/          # Sample images for testing
-│   └── sample.jpg
-└── README.md             # This file
+SmartCooking/
+├── SmartCookingStable/
+│   ├── app/                    # App screens and navigation
+│   │   ├── (tabs)/            # Tab-based navigation
+│   │   │   ├── index.tsx      # Home screen
+│   │   │   ├── recipes.tsx    # Saved recipes
+│   │   │   └── profile.tsx    # User profile
+│   │   ├── recipe/            # Recipe details
+│   │   └── _layout.tsx        # Root layout
+│   ├── components/             # Reusable components
+│   │   ├── RecipeCard.tsx
+│   │   ├── IngredientInput.tsx
+│   │   └── CameraScanner.tsx
+│   ├── services/              # API and utilities
+│   │   ├── api.ts             # Backend integration
+│   │   └── storage.ts         # Local storage
+│   ├── types/                 # TypeScript definitions
+│   ├── assets/                # Images, fonts, etc.
+│   ├── constants/             # App constants
+│   ├── hooks/                 # Custom React hooks
+│   ├── app.json               # Expo configuration
+│   ├── package.json           # Dependencies
+│   ├── tsconfig.json          # TypeScript config
+│   └── .env.example           # Environment template
+└── README.md                  # This file
 ```
+
+## 🎨 Key Features in Detail
+
+### 📸 Ingredient Scanner
+- Uses device camera to capture ingredient photos
+- AI-powered image recognition identifies ingredients
+- Automatic addition to ingredient list
+- Manual editing and refinement options
+
+### 🤖 Smart Recipe Generation
+- GPT-4 analyzes available ingredients
+- Considers dietary restrictions and preferences
+- Provides detailed cooking instructions
+- Includes prep time, cook time, and serving sizes
+
+### 💾 Recipe Management
+- Save favorite recipes locally
+- Quick access to saved recipes
+- Delete unwanted recipes
+- Share recipes with friends
+
+### 🥗 Dietary Preferences
+- Vegetarian
+- Vegan
+- Gluten-Free
+- Dairy-Free
+- Keto
+- Low-Carb
+- Custom restrictions
+
+### 📊 Nutritional Information
+- Estimated calories per serving
+- Macronutrient breakdown (protein, carbs, fats)
+- Dietary fiber content
+- Allergen warnings
 
 ## ⚙️ Configuration
 
-### Environment Variables
+### Backend Connection
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `OPENAI_API_KEY` | Your OpenAI API key | Yes |
-| `FLASK_ENV` | Flask environment (development/production) | No |
-| `FLASK_DEBUG` | Enable debug mode | No |
-| `PORT` | Server port (default: 5000) | No |
-
-### API Rate Limits
-
-- OpenAI API has rate limits based on your subscription tier
-- Implement caching for frequently requested recipes
-- Consider request throttling for production deployment
-
-## 🚢 Deployment
-
-### Deploy to Production
-
-1. **Set production environment variables**
-```bash
-export FLASK_ENV=production
-export FLASK_DEBUG=False
+Update your API URL in `.env`:
+```env
+API_URL=https://your-production-backend.com
 ```
 
-2. **Use a production WSGI server** (Gunicorn recommended)
-```bash
-pip install gunicorn
-gunicorn --bind 0.0.0.0:5000 server:app
+### Camera Permissions
+
+The app requires camera permissions for ingredient scanning. These are requested at runtime.
+
+**iOS:** Permissions are handled automatically
+**Android:** Permissions are declared in `app.json`
+
+### Build Configuration
+
+Edit `app.json` for build settings:
+```json
+{
+  "expo": {
+    "name": "SmartCooking",
+    "slug": "smart-cooking",
+    "version": "1.0.0",
+    "ios": {
+      "bundleIdentifier": "com.yourname.smartcooking"
+    },
+    "android": {
+      "package": "com.yourname.smartcooking"
+    }
+  }
+}
 ```
 
-### Deploy to Cloud Platforms
+## 🚢 Building for Production
 
-**Heroku:**
+### Create Production Builds
+
+1. **Set up EAS Build**
 ```bash
-# Install Heroku CLI, then:
-heroku create smartcooking-api
-heroku config:set OPENAI_API_KEY=your_key_here
-git push heroku main
+npm install -g eas-cli
+eas login
+eas build:configure
 ```
 
-**Railway:**
-- Connect your GitHub repository
-- Add `OPENAI_API_KEY` in environment variables
-- Deploy automatically on push
+2. **Build for iOS**
+```bash
+eas build --platform ios --profile production
+```
 
-**AWS EC2:**
-- Set up EC2 instance with Python
-- Clone repository and install dependencies
-- Use systemd or supervisor for process management
-- Configure nginx as reverse proxy
+3. **Build for Android**
+```bash
+eas build --platform android --profile production
+```
 
-## 🔒 Security
+### Submit to App Stores
 
-- ✅ Environment variables for sensitive credentials
-- ✅ CORS configured for frontend origins only
-- ✅ Input validation on all endpoints
-- ✅ Rate limiting (recommended for production)
-- ✅ HTTPS enforcement (required for production)
-- ✅ API key rotation strategy
+```bash
+# iOS App Store
+eas submit --platform ios
 
-**Important:** Never commit your `.env` file or expose your OpenAI API key publicly.
+# Google Play Store
+eas submit --platform android
+```
+
+## 📲 App Store Presence
+
+### iOS App Store
+- Coming soon!
+
+### Google Play Store
+- Coming soon!
+
+## 🔒 Security & Privacy
+
+- ✅ Secure API communication (HTTPS in production)
+- ✅ No personal data collected without consent
+- ✅ Camera access only when needed
+- ✅ Local storage for saved recipes
+- ✅ No third-party analytics by default
+- ✅ Open source and transparent
+
+**Privacy First:** Your ingredient photos are processed only for recipe generation and not stored on servers.
 
 ## 🤝 Contributing
 
@@ -295,23 +329,36 @@ git push origin feature/amazing-feature
 
 ## 🐛 Known Issues
 
-- Large images may take longer to process - consider implementing image compression
-- API rate limits may affect concurrent requests during high traffic
+- Camera may not work on iOS Simulator (use physical device)
+- Some fonts may not load on first app start
+- Image scanning requires good lighting for best results
 
-Found a bug? [Open an issue](https://github.com/Boredoom17/smartcooking-flask-backend/issues)
+Found a bug? [Open an issue](https://github.com/Boredoom17/SmartCooking/issues)
 
-## 📈 Future Enhancements
+## 📈 Roadmap
 
-- [ ] Recipe caching with Redis
-- [ ] User authentication and saved recipes
-- [ ] Recipe rating and feedback system
-- [ ] Multi-language support
-- [ ] Ingredient substitution suggestions
-- [ ] Shopping list generation
-- [ ] Meal planning features
-- [ ] Integration with nutrition databases (USDA, etc.)
-- [ ] WebSocket support for real-time updates
-- [ ] Recipe scaling algorithm improvements
+- [ ] **v1.1** - Meal planning calendar
+- [ ] **v1.2** - Shopping list generation
+- [ ] **v1.3** - Recipe sharing community
+- [ ] **v2.0** - Video cooking tutorials
+- [ ] **v2.1** - Voice-guided cooking mode
+- [ ] **v2.2** - Integration with smart kitchen devices
+- [ ] **v2.3** - Multi-language support
+- [ ] **v3.0** - Social features and recipe ratings
+
+## 🧪 Testing
+
+### Run Tests
+```bash
+npm test
+# or
+yarn test
+```
+
+### E2E Testing
+```bash
+# Coming soon - Detox integration planned
+```
 
 ## 📄 License
 
@@ -327,17 +374,26 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - **OpenAI** - GPT-4 and Vision API
-- **Flask Team** - Excellent web framework
-- **Python Community** - Comprehensive libraries and support
-- All contributors and testers
+- **Expo Team** - Excellent development tools
+- **React Native Community** - Comprehensive libraries
+- **All beta testers** - Valuable feedback and support
 
 ## 📞 Support
 
 Need help? Here's how to get support:
 
-- 📧 Open an [issue](https://github.com/Boredoom17/smartcooking-flask-backend/issues)
-- 📖 Check the [documentation](https://github.com/Boredoom17/smartcooking-flask-backend#readme)
-- 💬 Frontend repo: [SmartCooking](https://github.com/Boredoom17/SmartCooking)
+- 📧 Open an [issue](https://github.com/Boredoom17/SmartCooking/issues)
+- 📖 Check the [documentation](https://github.com/Boredoom17/SmartCooking#readme)
+- 🔧 Backend API: [Flask Backend](https://github.com/Boredoom17/smartcooking-flask-backend)
+- 💬 Reach out via GitHub Discussions
+
+## 🌟 Star History
+
+If you find this project helpful, please consider giving it a star! ⭐
+
+## 📸 Screenshots
+
+*Coming soon - App screenshots will be added here*
 
 ---
 
@@ -345,8 +401,8 @@ Need help? Here's how to get support:
 
 **⭐ Star this repo if you found it helpful!**
 
-Made with ❤️ for smarter cooking
+Made with ❤️ for smarter, easier cooking
 
-[🔧 Backend API](https://github.com/Boredoom17/smartcooking-flask-backend) • [📱 Mobile App](https://github.com/Boredoom17/SmartCooking) • [🐛 Report Bug](https://github.com/Boredoom17/smartcooking-flask-backend/issues)
+[📱 Mobile App](https://github.com/Boredoom17/SmartCooking) • [🔧 Backend API](https://github.com/Boredoom17/smartcooking-flask-backend) • [🐛 Report Bug](https://github.com/Boredoom17/SmartCooking/issues) • [✨ Request Feature](https://github.com/Boredoom17/SmartCooking/issues)
 
 </div>
