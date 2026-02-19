@@ -20,7 +20,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { COLORS, TAB_BAR_HEIGHT } from '../constants';
-import { supabase } from '../api/supabase'; // ✅ USE SHARED INSTANCE
+import { supabase } from '../api/supabase'; 
 
 interface ScanHistory {
   id: string;
@@ -46,12 +46,10 @@ export default function ProfileScreen() {
   const [editUsername, setEditUsername] = useState('');
   const [totalScans, setTotalScans] = useState(0);
 
-  // Check if user is already logged in
   useEffect(() => {
     checkUser();
   }, []);
 
-  // Fetch scan history when logged in
   useEffect(() => {
     if (isLoggedIn && userData?.id) {
       fetchScanHistory();
@@ -268,7 +266,6 @@ export default function ProfileScreen() {
     });
   };
 
-  // Loading state
   if (isLoading && !isLoggedIn) {
     return (
       <View style={styles.loadingContainer}>
