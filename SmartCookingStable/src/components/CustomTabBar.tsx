@@ -8,7 +8,7 @@ function ScanScreen() {
   const takePhoto = () => {
     launchCamera({
       mediaType: 'photo',
-      includeBase64: false, // set to true if you need base64 for backend
+      includeBase64: false, 
       quality: 0.8,  // 0-1 scale
     }, (response) => {
       if (response.didCancel) {
@@ -17,11 +17,10 @@ function ScanScreen() {
         console.log('Error: ', response.errorMessage);
       } else {
         if (response.assets && response.assets.length > 0 && response.assets[0].uri) {
-          setPhoto(response.assets[0].uri);  // the photo URI for display/upload
+          setPhoto(response.assets[0].uri);  
         } else {
           setPhoto(null);
         }
-        // Tomorrow: send to backend for nutrition analysis
       }
     });
   };
