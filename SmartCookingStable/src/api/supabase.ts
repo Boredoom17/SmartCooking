@@ -1,7 +1,5 @@
-// Import the supabase client from root directory
 import { supabase } from '../../supabaseClient';
 
-// Type definitions
 export interface RecipeIngredient {
   quantity: string;
   is_essential: boolean;
@@ -40,7 +38,7 @@ export const getRecipeDetails = async (recipeId: number): Promise<RecipeDetail> 
   try {
     console.log('📖 Fetching recipe details for ID:', recipeId);
 
-    // 1️⃣ Fetch recipe basic info
+    // Fetch recipe basic info
     const { data: recipeData, error: recipeError } = await supabase
       .from('recipes')
       .select('*')
@@ -58,7 +56,7 @@ export const getRecipeDetails = async (recipeId: number): Promise<RecipeDetail> 
 
     console.log('✅ Recipe fetched:', recipeData.name);
 
-    // 2️⃣ Fetch recipe ingredients
+    // Fetch recipe ingredients
     const { data: ingredientsData, error: ingredientsError } = await supabase
       .from('recipe_ingredients')
       .select(`
@@ -75,7 +73,7 @@ export const getRecipeDetails = async (recipeId: number): Promise<RecipeDetail> 
 
     console.log('📦 Ingredients fetched:', ingredientsData?.length || 0);
 
-    // 3️⃣ Map ingredients to expected format
+    // Map ingredients to expected format
     const recipeIngredients: RecipeIngredient[] = (ingredientsData || []).map(
       (item: any) => ({
         quantity: item.quantity || '',
@@ -86,7 +84,7 @@ export const getRecipeDetails = async (recipeId: number): Promise<RecipeDetail> 
       })
     );
 
-    // 4️⃣ Return formatted recipe detail
+    //  Return formatted recipe detail
     return {
       id: recipeData.id,
       name: recipeData.name || 'Unnamed Recipe',
