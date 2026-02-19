@@ -9,7 +9,7 @@ import ProfileScreen from './ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
-// Export this constant so all screens can use it
+// this constant so all screens can use it
 import { TAB_BAR_HEIGHT } from '../constants';
 
 function CustomTabBar({ state, navigation }: any) {
@@ -20,10 +20,9 @@ function CustomTabBar({ state, navigation }: any) {
         
         // Generic emoji icons
         const emojiIcon =
-          route.name === 'Home' ? '🏠︎' :           // House for Home
-          route.name === 'Scan' ? '⛶' :          // Camera for Scan
-          '👤';                                   // Person for Profile
-
+          route.name === 'Home' ? '🏠︎' :
+          route.name === 'Scan' ? '⛶' :          
+          '👤';                                  
         const onPress = () => {
           navigation.navigate(route.name);
         };
