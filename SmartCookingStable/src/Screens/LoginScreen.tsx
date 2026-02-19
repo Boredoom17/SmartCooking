@@ -21,7 +21,7 @@ const LoginScreen: React.FC = () => {
       Alert.alert('Error', 'Please fill in all fields');
       return;
     }
-    // Logic for authentication goes here
+    // authentication
     console.log('Logging in with:', email, password);
   };
 
