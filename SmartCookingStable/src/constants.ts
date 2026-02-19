@@ -1,6 +1,3 @@
-// constants.ts
-// Create this file in your root directory or Screens folder
-
 export const TAB_BAR_HEIGHT = 80;
 
 // Spacing constants for consistent padding across all screens
@@ -13,10 +10,8 @@ export const SPACING = {
   xxl: 32,
 };
 
-// Use this in ScrollView contentContainerStyle for all screens
 export const SCREEN_PADDING_BOTTOM = TAB_BAR_HEIGHT + 20;
 
-// Colors
 export const COLORS = {
   primary: '#FDB813',
   secondary: '#48BB78',
