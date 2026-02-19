@@ -35,7 +35,6 @@ const ScanScreen: React.FC<ScanScreenProps> = ({ navigation }) => {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
-  // Simplified emoji cleaner - more efficient
   const cleanText = useCallback((text: string): string => {
     if (!text || typeof text !== 'string') return '';
     
