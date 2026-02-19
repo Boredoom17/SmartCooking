@@ -1,9 +1,5 @@
-// src/types/navigation.ts
-// Create this file to define your navigation structure
-
 import { RecipeMatch } from '../api/supabase';
 
-// Root Stack Navigator (contains Tab Navigator and modal screens)
 export type RootStackParamList = {
   MainTabs: undefined;
   RecipesList: {
