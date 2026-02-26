@@ -378,13 +378,7 @@ Need help or found a bug?
 - 📖 Check the [backend repository](https://github.com/Boredoom17/smartcooking-flask-backend) for API documentation
 - 💬 Review closed issues for common solutions
 
-## 🎓 About This Project
 
-NUTRISNAP was created as a demonstration project to showcase practical machine learning applications in everyday cooking. It addresses the common problem faced by students and individuals living alone: "What can I cook with what I have?"
-
-The project combines computer vision, mobile development, and recipe recommendation to create a simple yet effective cooking assistant. While currently limited in scope, it demonstrates the potential for smart kitchen applications.
-
----
 
 <div align="center">
 
