@@ -379,7 +379,7 @@ Need help or found a bug?
 - 💬 Review closed issues for common solutions
 
 
-
+<br><br>
 <div align="center">
 
 **⭐ Star this repo if you found it helpful!**
